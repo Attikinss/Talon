@@ -10,6 +10,12 @@ workspace "Talon"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDirs = {}
+IncludeDirs["GLAD"] = "Engine/Vendor/GLAD/include"
+IncludeDirs["GLFW"] = "Engine/Vendor/GLFW/include"
+
+include "Engine/Vendor/GLAD"
+
 project "Engine"
     location "Engine"
     kind "StaticLib"
@@ -24,6 +30,24 @@ project "Engine"
     {
         "%{prj.name}/Source/**.h",
         "%{prj.name}/Source/**.cpp",
+    }
+
+    includedirs
+    {
+        "%{IncludeDirs.GLAD}",
+        "%{IncludeDirs.GLFW}",
+    }
+
+    libdirs
+    {
+        "%{prj.name}/Vendor/GLFW/lib",
+    }
+
+    links
+    {
+        "GLAD",
+        "glfw3_mt.lib",
+        "opengl32.lib",
     }
 
     filter "system:windows"

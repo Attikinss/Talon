@@ -1,4 +1,5 @@
 #pragma once
+#include "Window.h"
 
 namespace Talon
 {
@@ -13,7 +14,8 @@ namespace Talon
 
 		void Run();
 
-	protected:
+	private:
+		Window* m_Window = nullptr;
 		bool m_Running = false;
 	};
 }

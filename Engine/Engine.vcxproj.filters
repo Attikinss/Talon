@@ -9,11 +9,17 @@
     <ClInclude Include="Source\Core\Application.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TalonEngine.h" />
+    <ClInclude Include="Source\Core\Window.h">
+      <Filter>Core</Filter>
+    </ClInclude>
     <ClInclude Include="Source\EntryPoint.h" />
+    <ClInclude Include="Source\TalonEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Window.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
