@@ -4,6 +4,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Application.h">
@@ -13,6 +16,9 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntryPoint.h" />
+    <ClInclude Include="Source\Renderer\RenderContext.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\TalonEngine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -21,6 +27,9 @@
     </ClCompile>
     <ClCompile Include="Source\Core\Window.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\RenderContext.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -34,6 +34,7 @@ project "Engine"
 
     includedirs
     {
+        "%{prj.name}/Source",
         "%{IncludeDirs.GLAD}",
         "%{IncludeDirs.GLFW}",
     }

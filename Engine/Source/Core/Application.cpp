@@ -4,12 +4,21 @@ namespace Talon
 {
 	Application::Application()
 	{
+		// Specify render context creation details
+		RenderContextCreateInfo contextCreateInfo;
+		contextCreateInfo.ContextVersionMajor = 4;
+		contextCreateInfo.ContextVersionMinor = 5;
+		contextCreateInfo.Fullscreen = false;
+		contextCreateInfo.Width = 1280;
+		contextCreateInfo.Height = 720;
+		contextCreateInfo.Title = "Talon";
+		contextCreateInfo.VSync = true;
+
+		RenderContext* context = RenderContext::Create(contextCreateInfo, true);
+
+		// Specify window creation details
 		WindowCreateInfo winCreateInfo;
-		winCreateInfo.Fullscreen = false;
-		winCreateInfo.Width = 1280;
-		winCreateInfo.Height = 720;
-		winCreateInfo.Title = "Talon";
-		winCreateInfo.VSync = true;
+		winCreateInfo.Context = context;
 
 		m_Window = Window::Create(winCreateInfo);
 
@@ -25,11 +34,14 @@ namespace Talon
 	{
 		while (m_Running)
 		{
-			m_Running = !m_Window->ShouldClose();
+			m_Window->GetContext().ProcessEvents();
 
-			m_Window->ProcessEvents();
-
-			m_Window->SwapBuffers();
+			m_Window->GetContext().SwapBuffers();
 		}
+	}
+
+	Window& Application::GetWindow() const
+	{
+		return *m_Window;
 	}
 }
