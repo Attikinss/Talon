@@ -1,5 +1,6 @@
 #include "RenderContext.h"
 
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 namespace Talon
@@ -74,6 +75,9 @@ namespace Talon
 			s_Current = context;
 			glfwMakeContextCurrent(context->m_WindowHandle);
 		}
+
+		int gladStatus = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
+		_ASSERT(gladStatus);
 
 		return context;
 	}
