@@ -1,9 +1,12 @@
 #include "Application.h"
+#include "Logger.h"
 
 namespace Talon
 {
 	Application::Application()
 	{
+		Logger::Initialise();
+
 		// Specify window creation details
 		WindowCreateInfo winCreateInfo;
 		winCreateInfo.Fullscreen = false;

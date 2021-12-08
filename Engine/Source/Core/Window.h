@@ -8,9 +8,9 @@ namespace Talon
 {
 	struct WindowCreateInfo
 	{
-		bool Fullscreen;
-		uint16_t Width, Height;
 		std::string Title;
+		uint16_t Width, Height;
+		bool Fullscreen;
 		bool VSync;
 	};
 

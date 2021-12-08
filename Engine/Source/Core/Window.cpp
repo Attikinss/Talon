@@ -1,4 +1,6 @@
 #include "Window.h"
+#include "Logger.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Talon
@@ -10,7 +12,7 @@ namespace Talon
 		// termination will return `GLFW_TRUE` immediately."
 		if (!glfwInit())
 		{
-			// TODO: Freak out
+			Logger::Critical("Failed to initialise GLFW!");
 			return nullptr;
 		}
 
@@ -32,12 +34,18 @@ namespace Talon
 			windowHandle = glfwCreateWindow(width, height, title, nullptr, nullptr);
 		}
 
+		if (windowHandle)
+			Logger::Trace("Window Created...");
+		else
+			Logger::Critical("Failed to create window!");
+
 		return windowHandle;
 	}
 
 	Window* Window::Create(const WindowCreateInfo& createInfo)
 	{
 		GLFWwindow* windowHandle = CreateWindowHandle(createInfo.Title.c_str(), createInfo.Width, createInfo.Height, createInfo.Fullscreen);
+		glfwMakeContextCurrent(windowHandle);
 
 		// Specify render context creation details
 		RenderContextCreateInfo contextCreateInfo;
@@ -48,6 +56,7 @@ namespace Talon
 		// Create render context for the window
 		Window* window = new Window();
 		window->m_Context = RenderContext::Create(contextCreateInfo);
+		window->m_Context->MakeCurrent();
 
 		window->m_WindowHandle = windowHandle;
 		window->m_PtrData.Fullscreen = createInfo.Fullscreen;

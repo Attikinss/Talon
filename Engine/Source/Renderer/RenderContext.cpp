@@ -1,4 +1,5 @@
 #include "RenderContext.h"
+#include "Core/Logger.h"
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
@@ -18,9 +19,10 @@ namespace Talon
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		int gladStatus = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
-		_ASSERT((gladStatus == 0));
+		_ASSERT(gladStatus);
 
-		// TODO: Do GPU info dump here
+		Logger::Trace("Rendering Context created...");
+		Logger::Info("OpenGL Info:\n\tVersion: {0}\n\tVendor: {1}\n\tDevice: {2}", glGetString(GL_VERSION), glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 
 		return context;
 	}
