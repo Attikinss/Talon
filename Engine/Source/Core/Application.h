@@ -1,6 +1,7 @@
 #pragma once
-#include "Window.h"
 #include "Events/ApplicationEvent.h"
+#include "LayerStack.h"
+#include "Window.h"
 
 namespace Talon
 {
@@ -22,6 +23,7 @@ namespace Talon
 		bool OnWindowClose(WindowCloseEvent& evt);
 
 	private:
+		LayerStack* m_LayerStack = nullptr;
 		Window* m_Window = nullptr;
 		bool m_Running = false;
 	};

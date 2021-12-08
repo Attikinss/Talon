@@ -28,6 +28,8 @@
     <ClInclude Include="Source\Core\Events\ApplicationEvent.h" />
     <ClInclude Include="Source\Core\Events\KeyboardEvent.h" />
     <ClInclude Include="Source\Core\Events\MouseEvent.h" />
+    <ClInclude Include="Source\Core\LayerStack.h" />
+    <ClInclude Include="Source\Core\Layer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Application.cpp">
@@ -42,5 +44,6 @@
     <ClCompile Include="Source\Renderer\RenderContext.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\LayerStack.cpp" />
   </ItemGroup>
 </Project>

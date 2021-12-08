@@ -22,11 +22,14 @@ namespace Talon
 		m_Window = Window::Create(winCreateInfo);
 		m_Window->SetEventCallback(BIND_FUNCTION(Application::ProcessEvents));
 
+		m_LayerStack = new LayerStack();
+
 		m_Running = true;
 	}
 
 	Application::~Application()
 	{
+		delete m_LayerStack;
 		delete m_Window;
 	}
 
@@ -36,6 +39,10 @@ namespace Talon
 		{
 			m_Window->GetContext().ProcessEvents();
 
+			// Update all layers
+			for (Layer* layer : *m_LayerStack)
+				layer->Update();
+
 			m_Window->GetContext().SwapBuffers();
 		}
 	}
@@ -44,6 +51,17 @@ namespace Talon
 	{
 		EventDispatcher dispatcher(evt);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_FUNCTION(Application::OnWindowClose));
+
+		// Iterate back to front passing the event to each layer
+		for (auto it = m_LayerStack->rend(); it != m_LayerStack->rbegin();)
+		{
+			// Bail once the event has been handled
+			if (evt.m_Used)
+				break;
+
+			// Process the event on the current layer
+			(*--it)->ProcessEvents(evt);
+		}
 	}
 
 	Window& Application::GetWindow() const
