@@ -7,6 +7,7 @@ namespace Talon
 		for (Layer* layer : m_Layers)
 		{
 			// Shut down each layer before deleting
+			layer->Detach();
 			layer->Shutdown();
 			delete layer;
 		}
@@ -30,7 +31,7 @@ namespace Talon
 		std::vector<Layer*>::iterator it = std::find(m_Layers.begin(), m_Layers.end(), layer);
 		if (it != m_Layers.end())
 		{
-			layer->Shutdown();
+			layer->Detach();
 			m_Layers.erase(it);
 			m_LayerInsert--;
 		}
@@ -41,7 +42,7 @@ namespace Talon
 		std::vector<Layer*>::iterator it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end())
 		{
-			overlay->Shutdown();
+			overlay->Detach();
 			m_Layers.erase(it);
 		}
 	}

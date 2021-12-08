@@ -35,6 +35,9 @@ namespace Talon
 
 	void Application::Run()
 	{
+		for (Layer* layer : *m_LayerStack)
+			layer->Initialise();
+
 		while (m_Running)
 		{
 			m_Window->GetContext().ProcessEvents();
@@ -62,6 +65,16 @@ namespace Talon
 			// Process the event on the current layer
 			(*--it)->ProcessEvents(evt);
 		}
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack->PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* layer)
+	{
+		m_LayerStack->PushOverlay(layer);
 	}
 
 	Window& Application::GetWindow() const

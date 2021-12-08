@@ -16,6 +16,8 @@ namespace Talon
 
 		void Run();
 		void ProcessEvents(Event& evt);
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* layer);
 
 		Window& GetWindow() const;
 

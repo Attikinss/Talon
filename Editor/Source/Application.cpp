@@ -2,5 +2,5 @@
 
 Talon::Application* Talon::Application::Create()
 {
-	return new Application();
+	return new EditorApplication();
 }
