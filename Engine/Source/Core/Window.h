@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Renderer/RenderContext.h"
+#include "Events/Event.h"
 
 struct GLFWwindow;
 
@@ -17,12 +18,16 @@ namespace Talon
 	class Window
 	{
 	private:
+		using EventCallback = std::function<void(Event&)>;
+
 		struct WindowPtrData
 		{
 			std::string Title;
 			uint16_t Width, Height;
 			bool Fullscreen;
 			bool VSync;
+
+			EventCallback Callback;
 		};
 
 	public:
@@ -30,6 +35,8 @@ namespace Talon
 
 		static Window* Create(const WindowCreateInfo& createInfo);
 		void Destroy();
+
+		void SetEventCallback(const EventCallback& callback) { m_PtrData.Callback = callback; }
 
 		bool VSyncEnabled() const;
 		uint16_t GetWidth() const;
@@ -42,6 +49,7 @@ namespace Talon
 
 	private:
 		Window() = default;
+		void SetCallbacks();
 
 	private:
 		WindowPtrData m_PtrData;

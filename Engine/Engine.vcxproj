@@ -98,6 +98,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Application.h" />
+    <ClInclude Include="Source\Core\Defines.h" />
+    <ClInclude Include="Source\Core\Events\ApplicationEvent.h" />
+    <ClInclude Include="Source\Core\Events\Event.h" />
+    <ClInclude Include="Source\Core\Events\KeyboardEvent.h" />
+    <ClInclude Include="Source\Core\Events\MouseEvent.h" />
     <ClInclude Include="Source\Core\Logger.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EntryPoint.h" />

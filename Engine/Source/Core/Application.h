@@ -1,5 +1,6 @@
 #pragma once
 #include "Window.h"
+#include "Events/ApplicationEvent.h"
 
 namespace Talon
 {
@@ -13,8 +14,12 @@ namespace Talon
 		virtual ~Application();
 
 		void Run();
+		void ProcessEvents(Event& evt);
 
 		Window& GetWindow() const;
+
+	private:
+		bool OnWindowClose(WindowCloseEvent& evt);
 
 	private:
 		Window* m_Window = nullptr;

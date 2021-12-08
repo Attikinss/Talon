@@ -1,6 +1,10 @@
 #include "Application.h"
 #include "Logger.h"
 
+#include "Defines.h"
+
+#include "Events/ApplicationEvent.h"
+
 namespace Talon
 {
 	Application::Application()
@@ -16,6 +20,7 @@ namespace Talon
 		winCreateInfo.VSync = true;
 
 		m_Window = Window::Create(winCreateInfo);
+		m_Window->SetEventCallback(BIND_FUNCTION(Application::ProcessEvents));
 
 		m_Running = true;
 	}
@@ -35,8 +40,20 @@ namespace Talon
 		}
 	}
 
+	void Application::ProcessEvents(Event& evt)
+	{
+		EventDispatcher dispatcher(evt);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_FUNCTION(Application::OnWindowClose));
+	}
+
 	Window& Application::GetWindow() const
 	{
 		return *m_Window;
+	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& evt)
+	{
+		m_Running = false;
+		return false;
 	}
 }
