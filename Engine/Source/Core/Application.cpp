@@ -1,9 +1,9 @@
 #include "Application.h"
-#include "Logger.h"
-
 #include "Defines.h"
-
+#include "Logger.h"
 #include "Events/ApplicationEvent.h"
+
+#include "Renderer/Renderer.h"
 
 namespace Talon
 {
@@ -22,6 +22,8 @@ namespace Talon
 		m_Window = Window::Create(winCreateInfo);
 		m_Window->SetEventCallback(BIND_FUNCTION(Application::ProcessEvents));
 
+		Renderer::Initialise();
+
 		m_LayerStack = new LayerStack();
 
 		m_Running = true;
@@ -29,6 +31,8 @@ namespace Talon
 
 	Application::~Application()
 	{
+		Renderer::Shutdown();
+
 		delete m_LayerStack;
 		delete m_Window;
 	}
@@ -42,9 +46,14 @@ namespace Talon
 		{
 			m_Window->GetContext().ProcessEvents();
 
+			RendererCommand::Clear(0.15f, 0.15f, 0.15f);
+			RendererCommand::BeginFrame();
+
 			// Update all layers
 			for (Layer* layer : *m_LayerStack)
 				layer->Update();
+
+			RendererCommand::EndFrame();
 
 			m_Window->GetContext().SwapBuffers();
 		}

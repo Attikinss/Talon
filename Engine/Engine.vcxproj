@@ -109,6 +109,7 @@
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EntryPoint.h" />
     <ClInclude Include="Source\Renderer\RenderContext.h" />
+    <ClInclude Include="Source\Renderer\Renderer.h" />
     <ClInclude Include="Source\TalonEngine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +118,7 @@
     <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
     <ClCompile Include="Source\Renderer\RenderContext.cpp" />
+    <ClCompile Include="Source\Renderer\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Vendor\GLAD\GLAD.vcxproj">

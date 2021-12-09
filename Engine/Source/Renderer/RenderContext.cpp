@@ -18,11 +18,7 @@ namespace Talon
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, createInfo.ContextVersionMinor);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		int gladStatus = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
-		_ASSERT(gladStatus);
-
 		Logger::Trace("Rendering Context created...");
-		Logger::Info("OpenGL Info:\n\tVersion: {0}\n\tVendor: {1}\n\tDevice: {2}", glGetString(GL_VERSION), glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 
 		return context;
 	}

@@ -47,6 +47,7 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\TalonEngine.h" />
+    <ClInclude Include="Source\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Application.cpp">
@@ -64,5 +65,6 @@
     <ClCompile Include="Source\Renderer\RenderContext.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>
