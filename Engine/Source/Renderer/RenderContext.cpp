@@ -13,11 +13,6 @@ namespace Talon
 		RenderContext* context = new RenderContext();
 		context->m_WindowHandle = createInfo.WindowHandle;
 
-		// Set up profile and version
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, createInfo.ContextVersionMajor);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, createInfo.ContextVersionMinor);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
 		Logger::Trace("Rendering Context created...");
 
 		return context;
@@ -34,6 +29,7 @@ namespace Talon
 			s_Current = nullptr;
 
 		glfwDestroyWindow(m_WindowHandle);
+		m_WindowHandle = nullptr;
 	}
 
 	void RenderContext::MakeCurrent()

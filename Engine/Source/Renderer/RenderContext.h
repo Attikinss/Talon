@@ -7,9 +7,6 @@ namespace Talon
 {
 	struct RenderContextCreateInfo
 	{
-		int ContextVersionMajor;
-		int ContextVersionMinor;
-
 		GLFWwindow* WindowHandle;
 	};
 
