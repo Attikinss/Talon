@@ -4,12 +4,36 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Events">
+      <UniqueIdentifier>{52201B74-BED5-9369-47CA-8D40B37E8A6D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Defines.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Events\ApplicationEvent.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Events\Event.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Events\KeyboardEvent.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Events\MouseEvent.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Layer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\LayerStack.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Logger.h">
@@ -23,16 +47,12 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\TalonEngine.h" />
-    <ClInclude Include="Source\Core\Events\Event.h" />
-    <ClInclude Include="Source\Core\Defines.h" />
-    <ClInclude Include="Source\Core\Events\ApplicationEvent.h" />
-    <ClInclude Include="Source\Core\Events\KeyboardEvent.h" />
-    <ClInclude Include="Source\Core\Events\MouseEvent.h" />
-    <ClInclude Include="Source\Core\LayerStack.h" />
-    <ClInclude Include="Source\Core\Layer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\LayerStack.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Logger.cpp">
@@ -44,6 +64,5 @@
     <ClCompile Include="Source\Renderer\RenderContext.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\LayerStack.cpp" />
   </ItemGroup>
 </Project>

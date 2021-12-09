@@ -11,7 +11,8 @@ namespace Talon
 		TypeNone = 0,
 		WindowClose, WindowResize, WindowMoved,
 		KeyPressed, KeyReleased, KeyTyped,
-		MousePressed, MouseReleased, MouseMoved, MouseScrolled
+		MousePressed, MouseReleased, MouseMoved, MouseScrolled,
+		FileDrop,
 	};
 
 	enum EventCategory

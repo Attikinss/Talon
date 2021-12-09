@@ -142,13 +142,13 @@ namespace Talon
 
 	void Window::SetCallbacks()
 	{
-		// Window resizing callback
+		// Window resizing and minimising callback
 		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* window, int width, int height)
 			{
 				auto& data = *((WindowPtrData*)glfwGetWindowUserPointer(window));
 
-				WindowResizeEvent event((uint32_t)width, (uint32_t)height);
-				data.Callback(event);
+				WindowResizeEvent evt((uint32_t)width, (uint32_t)height);
+				data.Callback(evt);
 				data.Width = width;
 				data.Height = height;
 			});
@@ -158,8 +158,8 @@ namespace Talon
 			{
 				auto& data = *((WindowPtrData*)glfwGetWindowUserPointer(window));
 
-				WindowCloseEvent event;
-				data.Callback(event);
+				WindowCloseEvent evt;
+				data.Callback(evt);
 			});
 
 		// Key interaction callack
@@ -169,33 +169,33 @@ namespace Talon
 
 				switch (action)
 				{
-				case GLFW_PRESS:
-				{
-					KeyPressedEvent event(key, 0);
-					data.Callback(event);
-					break;
-				}
-				case GLFW_RELEASE:
-				{
-					KeyReleasedEvent event(key);
-					data.Callback(event);
-					break;
-				}
-				case GLFW_REPEAT:
-				{
-					KeyPressedEvent event(key, 1);
-					data.Callback(event);
-					break;
-				}
+					case GLFW_PRESS:
+					{
+						KeyPressedEvent evt(key, 0);
+						data.Callback(evt);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						KeyReleasedEvent evt(key);
+						data.Callback(evt);
+						break;
+					}
+					case GLFW_REPEAT:
+					{
+						KeyPressedEvent evt(key, 1);
+						data.Callback(evt);
+						break;
+					}
 				}
 			});
 
-		// Character type cllback
+		// Unicode character typing callback
 		glfwSetCharCallback(m_WindowHandle, [](GLFWwindow* window, uint32_t keycode)
 			{
 				auto& data = *(WindowPtrData*)glfwGetWindowUserPointer(window);
-				KeyTypedEvent typed(keycode);
-				data.Callback(typed);
+				KeyTypedEvent evt(keycode);
+				data.Callback(evt);
 			});
 
 		// Mouse button interaction callback
@@ -207,14 +207,14 @@ namespace Talon
 				{
 				case GLFW_PRESS:
 				{
-					MouseButtonPressedEvent event(button);
-					data.Callback(event);
+					MouseButtonPressedEvent evt(button);
+					data.Callback(evt);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					MouseButtonReleasedEvent event(button);
-					data.Callback(event);
+					MouseButtonReleasedEvent evt(button);
+					data.Callback(evt);
 					break;
 				}
 				}
@@ -225,16 +225,26 @@ namespace Talon
 			{
 				auto& data = *((WindowPtrData*)glfwGetWindowUserPointer(window));
 
-				MouseScrolledEvent event((float)xOffset, (float)yOffset);
-				data.Callback(event);
+				MouseScrolledEvent evt((float)xOffset, (float)yOffset);
+				data.Callback(evt);
 			});
 
-		// Mouse move callback
+		// Mouse movement callback
 		glfwSetCursorPosCallback(m_WindowHandle, [](GLFWwindow* window, double x, double y)
 			{
 				auto& data = *((WindowPtrData*)glfwGetWindowUserPointer(window));
-				MouseMovedEvent event((float)x, (float)y);
-				data.Callback(event);
+
+				MouseMovedEvent evt((float)x, (float)y);
+				data.Callback(evt);
+			});
+
+		// File drop callback (drag and drop external files onto window)
+		glfwSetDropCallback(m_WindowHandle, [](GLFWwindow* window, int pathCount, const char* paths[])
+			{
+				auto& data = *((WindowPtrData*)glfwGetWindowUserPointer(window));
+
+				FileDropEvent evt(pathCount, paths);
+				data.Callback(evt);
 			});
 	}
 }
