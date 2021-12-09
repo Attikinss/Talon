@@ -88,9 +88,9 @@ namespace Talon
 		}
 	}
 
-	Shader* Shader::Create(const std::string& filepath)
+	std::shared_ptr<Shader> Shader::Create(const std::string& filepath)
 	{
-		auto shader = new Shader(filepath);
+		auto shader = std::make_shared<Shader>(filepath);
 
 		// TODO: Add to some sort of shader library/collection?
 

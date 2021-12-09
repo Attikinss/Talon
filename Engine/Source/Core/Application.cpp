@@ -83,8 +83,6 @@ namespace Talon
 
 			m_Window->GetContext().SwapBuffers();
 		}
-
-		delete shader;
 	}
 
 	void Application::ProcessEvents(Event& evt)

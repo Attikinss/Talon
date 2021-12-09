@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 #include <unordered_map>
 
 #include <glm/glm.hpp>
@@ -9,7 +10,9 @@ namespace Talon
 	class Shader
 	{
 	public:
-		static Shader* Create(const std::string& filepath);
+		static std::shared_ptr<Shader> Create(const std::string& filepath);
+
+		Shader(const std::string& filepath);
 		
 		void Reload();
 		void Bind();
@@ -25,9 +28,6 @@ namespace Talon
 		void SetUniform(const std::string& name, const glm::mat3& value);
 		void SetUniform(const std::string& name, const glm::mat4& value);
 
-	private:
-		Shader(const std::string& filepath);
-
 		void Load(const std::string& source);
 		void Compile();
 		uint32_t GetUniformLocation(const std::string& name) const;
@@ -36,6 +36,7 @@ namespace Talon
 		uint32_t m_ID = 0;
 		std::string m_Name;
 		std::string m_Filepath;
+
 		std::unordered_map<uint32_t, std::string> m_ShaderSource;
 		mutable std::unordered_map<std::string, uint32_t> m_UniformLocations;
 	};
