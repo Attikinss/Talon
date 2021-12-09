@@ -108,9 +108,13 @@
     <ClInclude Include="Source\Core\Logger.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EntryPoint.h" />
+    <ClInclude Include="Source\Renderer\BufferLayout.h" />
+    <ClInclude Include="Source\Renderer\IndexBuffer.h" />
     <ClInclude Include="Source\Renderer\RenderContext.h" />
     <ClInclude Include="Source\Renderer\Renderer.h" />
     <ClInclude Include="Source\Renderer\Shader.h" />
+    <ClInclude Include="Source\Renderer\VertexArray.h" />
+    <ClInclude Include="Source\Renderer\VertexBuffer.h" />
     <ClInclude Include="Source\TalonEngine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -118,9 +122,12 @@
     <ClCompile Include="Source\Core\LayerStack.cpp" />
     <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
+    <ClCompile Include="Source\Renderer\IndexBuffer.cpp" />
     <ClCompile Include="Source\Renderer\RenderContext.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
     <ClCompile Include="Source\Renderer\Shader.cpp" />
+    <ClCompile Include="Source\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Source\Renderer\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Vendor\GLAD\GLAD.vcxproj">

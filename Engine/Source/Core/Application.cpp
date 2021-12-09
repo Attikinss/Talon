@@ -5,6 +5,7 @@
 
 #include "Renderer/Renderer.h"
 #include "Renderer/Shader.h"
+#include "Renderer/VertexArray.h"
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
@@ -54,22 +55,13 @@ namespace Talon
 			 0.5f, -0.5f, 0.0f,
 		};
 
-		uint32_t vao, vbo;
-		
-		// Create and bind vertex buffer
-		glCreateBuffers(1, &vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-		// Write vertex data to buffer
-		glNamedBufferData(vbo, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		// Create and bind vertex array
-		glCreateVertexArrays(1, &vao);
-		glBindVertexArray(vao);
-
-		// Enable and setup attrib pointer data
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)(sizeof(float) * 0));
+		auto vertexBuffer = VertexBuffer::Create(sizeof(vertices), vertices);
+		vertexBuffer->SetLayout({
+			{ DataType::Float3, "a_Position" },
+		});
+		auto vertexArray = VertexArray::Create();
+		vertexArray->AddVertexBuffer(vertexBuffer);
+		vertexArray->Bind();
 
 		for (Layer* layer : *m_LayerStack)
 			layer->Initialise();
@@ -91,9 +83,6 @@ namespace Talon
 
 			m_Window->GetContext().SwapBuffers();
 		}
-
-		glDeleteVertexArrays(1, &vao);
-		glDeleteBuffers(1, &vbo);
 
 		delete shader;
 	}

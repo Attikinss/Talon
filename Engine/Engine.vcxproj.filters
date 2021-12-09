@@ -43,6 +43,12 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntryPoint.h" />
+    <ClInclude Include="Source\Renderer\BufferLayout.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\IndexBuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\RenderContext.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer\Shader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\VertexArray.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\VertexBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\TalonEngine.h" />
@@ -67,6 +79,9 @@
     <ClCompile Include="Source\Core\Window.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\IndexBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Renderer\RenderContext.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -74,6 +89,12 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Shader.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\VertexArray.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\VertexBuffer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
