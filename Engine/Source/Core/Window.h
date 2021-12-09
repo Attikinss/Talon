@@ -18,8 +18,6 @@ namespace Talon
 	class Window
 	{
 	private:
-		using EventCallback = std::function<void(Event&)>;
-
 		struct WindowPtrData
 		{
 			std::string Title;

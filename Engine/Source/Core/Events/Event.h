@@ -6,6 +6,9 @@
 
 namespace Talon
 {
+	class Event;
+	using EventCallback = std::function<void(Event&)>;
+
 	enum EventType
 	{
 		TypeNone = 0,
