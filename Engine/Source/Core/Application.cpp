@@ -5,6 +5,9 @@
 
 #include "Renderer/Renderer.h"
 
+#include <glad/gl.h>
+#include <GLFW/glfw3.h>
+
 namespace Talon
 {
 	Application::Application()
@@ -39,6 +42,30 @@ namespace Talon
 
 	void Application::Run()
 	{
+		float vertices[] =
+		{
+			-0.5f, -0.5f,
+			 0.0f,  0.5f,
+			 0.5f, -0.5f,
+		};
+
+		uint32_t vao, vbo;
+		
+		// Create and bind vertex buffer
+		glCreateBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+		// Write vertex data to buffer
+		glNamedBufferData(vbo, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		// Create and bind vertex array
+		glCreateVertexArrays(1, &vao);
+		glBindVertexArray(vao);
+
+		// Enable and setup attrib pointer data
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (void*)0);
+
 		for (Layer* layer : *m_LayerStack)
 			layer->Initialise();
 
@@ -53,10 +80,15 @@ namespace Talon
 			for (Layer* layer : *m_LayerStack)
 				layer->Update();
 
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+
 			RendererCommand::EndFrame();
 
 			m_Window->GetContext().SwapBuffers();
 		}
+
+		glDeleteVertexArrays(1, &vao);
+		glDeleteBuffers(1, &vbo);
 	}
 
 	void Application::ProcessEvents(Event& evt)
