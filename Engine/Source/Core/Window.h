@@ -9,10 +9,10 @@ namespace Talon
 {
 	struct WindowCreateInfo
 	{
-		std::string Title;
-		uint16_t Width, Height;
-		bool Fullscreen;
-		bool VSync;
+		std::string Title = std::string();
+		uint16_t Width = 0, Height = 0;
+		bool Fullscreen = false;
+		bool VSync = false;
 	};
 
 	class Window
@@ -20,12 +20,12 @@ namespace Talon
 	private:
 		struct WindowPtrData
 		{
-			std::string Title;
-			uint16_t Width, Height;
-			bool Fullscreen;
-			bool VSync;
+			std::string Title = std::string();
+			uint16_t Width = 0, Height = 0;
+			bool Fullscreen = false;
+			bool VSync = false;
 
-			EventCallback Callback;
+			EventCallback Callback = EventCallback();
 		};
 
 	public:

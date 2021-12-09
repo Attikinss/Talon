@@ -9,7 +9,7 @@ namespace Talon
 	class Event;
 	using EventCallback = std::function<void(Event&)>;
 
-	enum EventType
+	enum class EventType
 	{
 		TypeNone = 0,
 		WindowClose, WindowResize, WindowMoved,

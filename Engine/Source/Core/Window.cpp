@@ -112,7 +112,7 @@ namespace Talon
 
 	std::pair<uint16_t, uint16_t> Window::GetSize() const
 	{
-		return GetSize();
+		return { m_PtrData.Width, m_PtrData.Height };
 	}
 
 	std::pair<float, float> Window::GetPosition() const
