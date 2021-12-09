@@ -262,33 +262,33 @@ namespace Talon
 		glUniform1f(location, value);
 	}
 
-	//void Shader::SetUniform(const std::string& name, const Vector2& value)
-	//{
-	//	GLint location = GetUniformLocation(name.c_str());
-	//	glUniform2f(location, value.x, value.y);
-	//}
-	//
-	//void Shader::SetUniform(const std::string& name, const Vector3& value)
-	//{
-	//	GLint location = GetUniformLocation(name.c_str());
-	//	glUniform3f(location, value.x, value.y, value.z);
-	//}
-	//
-	//void Shader::SetUniform(const std::string& name, const Vector4& value)
-	//{
-	//	GLint location = GetUniformLocation(name.c_str());
-	//	glUniform4f(location, value.x, value.y, value.z, value.w);
-	//}
-	//
-	//void Shader::SetUniform(const std::string& name, const Matrix3& value)
-	//{
-	//	GLint location = GetUniformLocation(name.c_str());
-	//	glUniformMatrix3fv(location, 1, GL_FALSE, &value[0][0]);
-	//}
-	//
-	//void Shader::SetUniform(const std::string& name, const Matrix4& value)
-	//{
-	//	GLint location = GetUniformLocation(name.c_str());
-	//	glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
-	//}
+	void Shader::SetUniform(const std::string& name, const glm::vec2& value)
+	{
+		GLint location = GetUniformLocation(name.c_str());
+		glUniform2f(location, value.x, value.y);
+	}
+	
+	void Shader::SetUniform(const std::string& name, const glm::vec3& value)
+	{
+		GLint location = GetUniformLocation(name.c_str());
+		glUniform3f(location, value.x, value.y, value.z);
+	}
+	
+	void Shader::SetUniform(const std::string& name, const glm::vec4& value)
+	{
+		GLint location = GetUniformLocation(name.c_str());
+		glUniform4f(location, value.x, value.y, value.z, value.w);
+	}
+	
+	void Shader::SetUniform(const std::string& name, const glm::mat3& value)
+	{
+		GLint location = GetUniformLocation(name.c_str());
+		glUniformMatrix3fv(location, 1, GL_FALSE, &value[0][0]);
+	}
+	
+	void Shader::SetUniform(const std::string& name, const glm::mat4& value)
+	{
+		GLint location = GetUniformLocation(name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
+	}
 }

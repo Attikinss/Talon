@@ -45,6 +45,7 @@ namespace Talon
 	{
 		auto shader = Shader::Create("Assets/Shaders/Basic.glsl");
 		shader->Bind();
+		shader->SetUniform("Colour", { 0.3, 0.8, 0.2f, 1.0f });
 
 		float vertices[] =
 		{
@@ -68,11 +69,7 @@ namespace Talon
 
 		// Enable and setup attrib pointer data
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)(sizeof(float) * 0));
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)(sizeof(float) * 1));
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)(sizeof(float) * 2));
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)(sizeof(float) * 0));
 
 		for (Layer* layer : *m_LayerStack)
 			layer->Initialise();

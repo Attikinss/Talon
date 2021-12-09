@@ -2,6 +2,8 @@
 #include <string>
 #include <unordered_map>
 
+#include <glm/glm.hpp>
+
 namespace Talon
 {
 	class Shader
@@ -17,11 +19,11 @@ namespace Talon
 		void SetUniform(const std::string& name, uint32_t value);
 		void SetUniform(const std::string& name, int32_t value);
 		void SetUniform(const std::string& name, float value);
-		//void SetUniform(const std::string& name, const Vector2& value);
-		//void SetUniform(const std::string& name, const Vector3& value);
-		//void SetUniform(const std::string& name, const Vector4& value);
-		//void SetUniform(const std::string& name, const Matrix3& value);
-		//void SetUniform(const std::string& name, const Matrix4& value);
+		void SetUniform(const std::string& name, const glm::vec2& value);
+		void SetUniform(const std::string& name, const glm::vec3& value);
+		void SetUniform(const std::string& name, const glm::vec4& value);
+		void SetUniform(const std::string& name, const glm::mat3& value);
+		void SetUniform(const std::string& name, const glm::mat4& value);
 
 	private:
 		Shader(const std::string& filepath);

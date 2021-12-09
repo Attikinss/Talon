@@ -13,6 +13,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDirs = {}
 IncludeDirs["GLAD"] = "Engine/Vendor/GLAD/include"
 IncludeDirs["GLFW"] = "Engine/Vendor/GLFW/include"
+IncludeDirs["GLM"] = "Engine/Vendor/GLM"
 IncludeDirs["SpdLog"] = "Engine/Vendor/SpdLog/include"
 
 include "Engine/Vendor/GLAD"
@@ -38,6 +39,7 @@ project "Engine"
         "%{prj.name}/Source",
         "%{IncludeDirs.GLAD}",
         "%{IncludeDirs.GLFW}",
+		"%{IncludeDirs.GLM}",
 		"%{IncludeDirs.SpdLog}",
     }
 
@@ -86,6 +88,7 @@ project "Editor"
     {
 		"%{prj.name}/Source",
         "Engine/Source",
+        "%{IncludeDirs.GLM}",
 		"%{IncludeDirs.SpdLog}",
     }
 
