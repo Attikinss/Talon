@@ -11,6 +11,7 @@ workspace "Talon"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDirs = {}
+IncludeDirs["ENTT"] = "Engine/Vendor/ENTT"
 IncludeDirs["GLAD"] = "Engine/Vendor/GLAD/include"
 IncludeDirs["GLFW"] = "Engine/Vendor/GLFW/include"
 IncludeDirs["GLM"] = "Engine/Vendor/GLM"
@@ -37,6 +38,7 @@ project "Engine"
     includedirs
     {
         "%{prj.name}/Source",
+        "%{IncludeDirs.ENTT}",
         "%{IncludeDirs.GLAD}",
         "%{IncludeDirs.GLFW}",
 		"%{IncludeDirs.GLM}",
@@ -88,6 +90,7 @@ project "Editor"
     {
 		"%{prj.name}/Source",
         "Engine/Source",
+        "%{IncludeDirs.ENTT}",
         "%{IncludeDirs.GLM}",
 		"%{IncludeDirs.SpdLog}",
     }

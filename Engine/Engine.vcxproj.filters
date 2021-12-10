@@ -7,6 +7,9 @@
     <Filter Include="Core\Events">
       <UniqueIdentifier>{52201B74-BED5-9369-47CA-8D40B37E8A6D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ECS">
+      <UniqueIdentifier>{60E1870B-CCEA-877C-5566-9E7CC16E937C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
     </Filter>
@@ -41,6 +44,21 @@
     </ClInclude>
     <ClInclude Include="Source\Core\Window.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ECS\Component.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ECS\Entity.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ECS\EntityRegistry.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ECS\Transform.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ECS\WorldCamera.h">
+      <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntryPoint.h" />
     <ClInclude Include="Source\Renderer\BufferLayout.h">
@@ -81,6 +99,12 @@
     </ClCompile>
     <ClCompile Include="Source\Core\Window.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ECS\Entity.cpp">
+      <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ECS\EntityRegistry.cpp">
+      <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp">
       <Filter>Renderer</Filter>
