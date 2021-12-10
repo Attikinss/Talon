@@ -109,6 +109,7 @@
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EntryPoint.h" />
     <ClInclude Include="Source\Renderer\BufferLayout.h" />
+    <ClInclude Include="Source\Renderer\Camera.h" />
     <ClInclude Include="Source\Renderer\IndexBuffer.h" />
     <ClInclude Include="Source\Renderer\RenderContext.h" />
     <ClInclude Include="Source\Renderer\Renderer.h" />

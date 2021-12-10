@@ -46,6 +46,9 @@
     <ClInclude Include="Source\Renderer\BufferLayout.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\Camera.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\IndexBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
