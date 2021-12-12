@@ -59,6 +59,7 @@ namespace Talon
 		vertexBuffer->SetLayout({
 			{ DataType::Float3, "a_Position" },
 		});
+
 		auto vertexArray = VertexArray::Create();
 		vertexArray->AddVertexBuffer(vertexBuffer);
 		vertexArray->Bind();

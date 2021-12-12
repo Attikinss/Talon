@@ -4,7 +4,7 @@ namespace Talon
 {
 	EntityRegistry::EntityRegistry()
 	{
-		entt::entity entity = m_Registry.create();
+		
 	}
 
 	EntityRegistry::~EntityRegistry()
@@ -15,5 +15,11 @@ namespace Talon
 	entt::entity EntityRegistry::CreateEntity()
 	{
 		return m_Registry.create();
+	}
+
+	void EntityRegistry::DestroyEntity(entt::entity entityHandle)
+	{
+		m_Registry.remove_all(entityHandle);
+		m_Registry.destroy(entityHandle);
 	}
 }

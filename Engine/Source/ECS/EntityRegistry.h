@@ -10,6 +10,7 @@ namespace Talon
 		~EntityRegistry();
 
 		entt::entity CreateEntity();
+		void DestroyEntity(entt::entity entityHandle);
 
 		template<typename T, typename... Args>
 		T& AddComponent(entt::entity entityHandle, Args&&... args)

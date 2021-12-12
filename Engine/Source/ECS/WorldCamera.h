@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Renderer/Camera.h"
 
 #include <glm/glm.hpp>
 
@@ -7,14 +8,19 @@ namespace Talon
 {
 	class WorldCamera : public Component
 	{
+		friend class Entity;
+
 	public:
-		WorldCamera() = default;
-		virtual ~WorldCamera() = default;
+		WorldCamera() : m_Camera(new Camera()) { }
 
-		const glm::mat4& GetProjection() const { return m_ProjectionMatrix; }
-		const char* GetName() override { return "Camera"; }
+		~WorldCamera()
+		{
+			delete m_Camera;
+		}
 
-	protected:
-		glm::mat4 m_ProjectionMatrix = glm::mat4(1.0f);
+		static const char* GetName() { return "Camera"; }
+
+	private:
+		Camera* m_Camera = nullptr;
 	};
 }

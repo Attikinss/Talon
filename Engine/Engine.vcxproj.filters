@@ -124,5 +124,7 @@
     <ClCompile Include="Source\Renderer\VertexBuffer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Camera.cpp" />
+    <ClCompile Include="Source\ECS\Component.cpp" />
   </ItemGroup>
 </Project>
