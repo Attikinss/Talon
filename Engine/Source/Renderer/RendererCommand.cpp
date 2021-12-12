@@ -4,9 +4,9 @@
 
 namespace Talon
 {
-	void RendererCommand::BeginFrame()
+	void RendererCommand::BeginFrame(const Camera& camera)
 	{
-		Renderer::BeginFrame();
+		Renderer::BeginFrame(camera);
 	}
 
 	void RendererCommand::EndFrame()

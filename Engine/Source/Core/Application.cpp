@@ -1,15 +1,12 @@
 #include "Application.h"
 #include "Defines.h"
 #include "Logger.h"
-#include "Events/ApplicationEvent.h"
+
+#include "ECS/Entity.h"
+#include "ECS/WorldCamera.h"
 
 #include "Renderer/Renderer.h"
 #include "Renderer/RendererCommand.h"
-#include "Renderer/Shader.h"
-#include "Renderer/VertexArray.h"
-
-#include <glad/gl.h>
-#include <GLFW/glfw3.h>
 
 namespace Talon
 {
@@ -45,35 +42,10 @@ namespace Talon
 
 	void Application::Run()
 	{
-		auto shader = Shader::Create("Assets/Shaders/Basic.glsl");
-		shader->Bind();
-
-		float vertices[] =
-		{
-			// Positions			Colours
-			-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
-			-0.5f,  0.5f, 0.0f,		0.0f, 1.0f,
-			 0.5f,  0.5f, 0.0f,		1.0f, 1.0f,
-			 0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
-		};
-
-		uint32_t indices[] =
-		{
-			0, 1, 2, 3, 2, 0
-		};
-
-		auto indexBuffer = IndexBuffer::Create(sizeof(indices), indices);
-		auto vertexBuffer = VertexBuffer::Create(sizeof(vertices), vertices);
-		vertexBuffer->SetLayout({
-			{ DataType::Float3, "a_Position" },
-			{ DataType::Float2, "a_UVs" },
-		});
-
-		auto vertexArray = VertexArray::Create();
-		vertexArray->AddVertexBuffer(vertexBuffer);
-		vertexArray->SetIndexBuffer(indexBuffer);
-		vertexArray->GetIndexBuffer()->Bind();
-		vertexArray->Bind();
+		// TODO: Make Enities shared pointers?
+		Entity cameraEntity = m_EntityRegistry.CreateEntity();
+		WorldCamera& camera = cameraEntity.AddComponent<WorldCamera>();
+		camera.SetPosition({ 0.0f, 0.0f, 1.0f });
 
 		for (Layer* layer : *m_LayerStack)
 			layer->Initialise();
@@ -83,13 +55,11 @@ namespace Talon
 			m_Window->GetContext().ProcessEvents();
 
 			RendererCommand::Clear(0.15f, 0.15f, 0.15f);
-			RendererCommand::BeginFrame();
+			RendererCommand::BeginFrame(cameraEntity.GetComponent<WorldCamera>());
 
 			// Update all layers
 			for (Layer* layer : *m_LayerStack)
 				layer->Update();
-
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 			RendererCommand::EndFrame();
 

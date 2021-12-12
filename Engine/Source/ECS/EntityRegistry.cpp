@@ -1,4 +1,5 @@
 #include "EntityRegistry.h"
+#include "Entity.h"
 
 namespace Talon
 {
@@ -12,14 +13,13 @@ namespace Talon
 
 	}
 
-	entt::entity EntityRegistry::CreateEntity()
+	Entity EntityRegistry::CreateEntity()
 	{
-		return m_Registry.create();
+		return Entity(this, m_Registry.create());
 	}
 
 	void EntityRegistry::DestroyEntity(entt::entity entityHandle)
 	{
-		m_Registry.remove_all(entityHandle);
 		m_Registry.destroy(entityHandle);
 	}
 }

@@ -2,6 +2,7 @@
 #include "Component.h"
 
 #include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace Talon
 {
@@ -14,7 +15,16 @@ namespace Talon
 		Transform(const glm::mat4& transform)
 			: m_Transform(transform) { }
 
-		void Set(const glm::mat4& transform) { m_Transform = transform; }
+		void Set(const glm::mat4& transform);
+
+		void SetPosition(const glm::vec3& position);
+		void SetRotation(const glm::vec3& rotation);
+
+		void Move(const glm::vec3& delta);
+		void Rotate(const glm::vec3& delta);
+		void Rotate(const glm::quat& delta);
+
+		operator const glm::mat4&() const { return m_Transform; }
 
 		static const char* GetName() { return "Transform"; }
 

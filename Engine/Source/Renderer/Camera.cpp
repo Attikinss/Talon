@@ -6,7 +6,7 @@ namespace Talon
 {
 	static glm::quat GetOrientation(const glm::vec3& rotation)
 	{
-		return glm::quat(-rotation);
+		return glm::quat(glm::radians(rotation * -1.0f));
 	}
 
 	Camera::Camera(Projection projectionType, float nearPlane, float farPlane, float fieldOfView)
@@ -15,20 +15,13 @@ namespace Talon
 		// TODO: Pull size from window/viewport
 		m_ViewSize = { 1280.0f, 720.0f };
 
-		RecalculateView();
 		RecalculateProjection();
 	}
 
 	Camera::Camera(const glm::vec2& viewSize, Projection projectionType, float nearPlane, float farPlane, float fieldOfView)
 		: m_ViewSize(viewSize), m_ProjectionType(projectionType), m_NearPlane(nearPlane), m_FarPlane(farPlane), m_FieldOfView(fieldOfView)
 	{
-		RecalculateView();
 		RecalculateProjection();
-	}
-
-	void Camera::Update()
-	{
-		RecalculateView();
 	}
 
 	void Camera::SetFOV(float fieldOfView)
@@ -76,29 +69,9 @@ namespace Talon
 		RecalculateProjection();
 	}
 
-	void Camera::SetPosition(const glm::vec3& position)
+	void Camera::SetView(const glm::mat4& viewMatrix)
 	{
-		if (m_Position == position)
-			return;
-
-		m_Position = position;
-		RecalculateView();
-	}
-
-	void Camera::SetRotation(const glm::vec3& rotation)
-	{
-		if (m_Rotation == rotation)
-			return;
-
-		m_Rotation = rotation;
-		RecalculateView();
-	}
-
-	void Camera::RecalculateView()
-	{
-		glm::quat orientation = GetOrientation(m_Rotation);
-		m_ViewMatrix = glm::translate(glm::mat4(1.0f), m_Position) * glm::toMat4(orientation);
-		m_ViewMatrix = glm::inverse(m_ViewMatrix);
+		m_ViewMatrix = viewMatrix;
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 

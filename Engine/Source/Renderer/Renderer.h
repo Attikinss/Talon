@@ -2,6 +2,8 @@
 
 namespace Talon
 {
+	class Camera;
+
 	class Renderer
 	{
 		friend class RendererCommand;
@@ -11,7 +13,7 @@ namespace Talon
 		static void Shutdown();
 
 	private:
-		static void BeginFrame();
+		static void BeginFrame(const Camera& camera);
 		static void EndFrame();
 
 		// Move clear colour info into a GLState structure or something

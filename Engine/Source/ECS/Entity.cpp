@@ -2,11 +2,10 @@
 
 namespace Talon
 {
-	Entity::Entity(EntityRegistry* registry)
-		: m_Registry(registry), m_EntityHandle(registry->CreateEntity())
+	Entity::Entity(EntityRegistry* registry, entt::entity handle)
+		: m_Registry(registry), m_EntityHandle(handle)
 	{
-		Transform& transform = AddComponent<Transform>();
-		transform.m_Entity = this;
+		AddComponent<Transform>();
 	}
 
 	Entity::~Entity()

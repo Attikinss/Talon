@@ -97,6 +97,8 @@ namespace Talon
 			delete m_Context;
 			m_Context = nullptr;
 			m_WindowHandle = nullptr;
+
+			Logger::Trace("Window Destroyed...");
 		}
 	}
 

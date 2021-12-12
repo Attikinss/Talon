@@ -112,6 +112,9 @@
     <ClCompile Include="Source\ECS\EntityRegistry.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ECS\Transform.cpp">
+      <Filter>ECS</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Renderer\Camera.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>

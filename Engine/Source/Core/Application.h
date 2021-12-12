@@ -1,6 +1,7 @@
 #pragma once
 #include "Events/ApplicationEvent.h"
 #include "LayerStack.h"
+#include "ECS/EntityRegistry.h"
 #include "Window.h"
 
 namespace Talon
@@ -28,5 +29,8 @@ namespace Talon
 		LayerStack* m_LayerStack = nullptr;
 		Window* m_Window = nullptr;
 		bool m_Running = false;
+
+		/* Temporary */
+		EntityRegistry m_EntityRegistry;
 	};
 }

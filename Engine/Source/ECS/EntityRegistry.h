@@ -3,13 +3,15 @@
 
 namespace Talon
 {
+	class Entity;
+
 	class EntityRegistry
 	{
 	public:
 		EntityRegistry();
 		~EntityRegistry();
 
-		entt::entity CreateEntity();
+		Entity CreateEntity();
 		void DestroyEntity(entt::entity entityHandle);
 
 		template<typename T, typename... Args>

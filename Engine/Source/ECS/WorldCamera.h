@@ -11,16 +11,31 @@ namespace Talon
 		friend class Entity;
 
 	public:
-		WorldCamera() : m_Camera(new Camera()) { }
+		WorldCamera() : m_Camera(Camera()) { }
+		~WorldCamera() = default;
 
-		~WorldCamera()
+		void SetPosition(const glm::vec3 position)
 		{
-			delete m_Camera;
+			Transform& transform = m_Entity->GetComponent<Transform>();
+			transform.SetPosition(position);
+
+			m_Camera.SetView(glm::inverse(glm::mat4(transform)));
 		}
+
+		void SetRotation(const glm::vec3 rotation)
+		{
+			Transform& transform = m_Entity->GetComponent<Transform>();
+			transform.SetRotation(rotation);
+
+			m_Camera.SetView(glm::inverse(glm::mat4(transform)));
+		}
+
+		operator Camera&() { return m_Camera; }
+		operator const Camera&() const { return m_Camera; }
 
 		static const char* GetName() { return "Camera"; }
 
 	private:
-		Camera* m_Camera = nullptr;
+		Camera m_Camera;
 	};
 }

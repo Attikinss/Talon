@@ -10,7 +10,7 @@ namespace Talon
 	class Entity
 	{
 	public:
-		Entity(EntityRegistry* registry);
+		Entity(EntityRegistry* registry, entt::entity handle);
 		~Entity();
 
 		template<typename T, typename... Args>
@@ -24,7 +24,10 @@ namespace Talon
 				_ASSERT(false);
 			}
 
-			return m_Registry->AddComponent<T>(m_EntityHandle, std::forward<Args>(args)...);
+			Component& component = m_Registry->AddComponent<T>(m_EntityHandle, std::forward<Args>(args)...);
+			component.m_Entity = this;
+
+			return (T&)component;
 		}
 
 		template<typename T>
@@ -32,7 +35,7 @@ namespace Talon
 		{
 			// TODO: Assert if T not component?
 
-			if (!HasComponent())
+			if (!HasComponent<T>())
 			{
 				Logger::Error("Entity does not have [{0}] component!", T::GetName());
 				_ASSERT(false);
