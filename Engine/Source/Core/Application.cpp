@@ -46,18 +46,19 @@ namespace Talon
 	{
 		auto shader = Shader::Create("Assets/Shaders/Basic.glsl");
 		shader->Bind();
-		shader->SetUniform("Colour", { 0.3, 0.8, 0.2f, 1.0f });
 
 		float vertices[] =
 		{
-			-0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
+			// Positions			Colours
+			-0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f,
+			 0.0f,  0.5f, 0.0f,		0.0f, 1.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f,		0.0f, 0.0f, 1.0f,
 		};
 
 		auto vertexBuffer = VertexBuffer::Create(sizeof(vertices), vertices);
 		vertexBuffer->SetLayout({
 			{ DataType::Float3, "a_Position" },
+			{ DataType::Float3, "a_Colour" },
 		});
 
 		auto vertexArray = VertexArray::Create();

@@ -2,20 +2,24 @@
 #version 450 core
 
 layout(location = 0) in vec3 a_Position;
+layout(location = 1) in vec3 a_Colour;
+
+out vec3 Colour;
 
 void main()
 {
+	Colour = a_Colour;
 	gl_Position = vec4(a_Position, 1.0);
 }
 
 #shader-type fragment
 #version 450 core
 
-out vec4 FragmentColour;
+out vec4 o_FragmentColour;
 
-uniform vec4 Colour;
+in vec3 Colour;
 
 void main()
 {
-	FragmentColour = Colour;
+	o_FragmentColour = vec4(Colour, 1.0);
 }
