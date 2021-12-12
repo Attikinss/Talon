@@ -50,19 +50,28 @@ namespace Talon
 		float vertices[] =
 		{
 			// Positions			Colours
-			-0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f,
-			 0.0f,  0.5f, 0.0f,		0.0f, 1.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f,		0.0f, 0.0f, 1.0f,
+			-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
+			-0.5f,  0.5f, 0.0f,		0.0f, 1.0f,
+			 0.5f,  0.5f, 0.0f,		1.0f, 1.0f,
+			 0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
 		};
 
+		uint32_t indices[] =
+		{
+			0, 1, 2, 3, 2, 0
+		};
+
+		auto indexBuffer = IndexBuffer::Create(sizeof(indices), indices);
 		auto vertexBuffer = VertexBuffer::Create(sizeof(vertices), vertices);
 		vertexBuffer->SetLayout({
 			{ DataType::Float3, "a_Position" },
-			{ DataType::Float3, "a_Colour" },
+			{ DataType::Float2, "a_UVs" },
 		});
 
 		auto vertexArray = VertexArray::Create();
 		vertexArray->AddVertexBuffer(vertexBuffer);
+		vertexArray->SetIndexBuffer(indexBuffer);
+		vertexArray->GetIndexBuffer()->Bind();
 		vertexArray->Bind();
 
 		for (Layer* layer : *m_LayerStack)
@@ -79,7 +88,7 @@ namespace Talon
 			for (Layer* layer : *m_LayerStack)
 				layer->Update();
 
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 			RendererCommand::EndFrame();
 

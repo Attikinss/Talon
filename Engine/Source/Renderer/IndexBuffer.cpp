@@ -4,30 +4,30 @@
 
 namespace Talon
 {
-	std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t count)
+	std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t size)
 	{
-		return std::make_shared<IndexBuffer>(count);
+		return std::make_shared<IndexBuffer>(size);
 	}
 
-	std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t count, void* data)
+	std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t size, void* data)
 	{
-		return std::make_shared<IndexBuffer>(count, data);
+		return std::make_shared<IndexBuffer>(size, data);
 	}
 
-	IndexBuffer::IndexBuffer(uint32_t count)
-		: m_Count(count)
+	IndexBuffer::IndexBuffer(uint32_t size)
+		: m_Count(size / sizeof(uint32_t))
 	{
 		// Create buffer and assign size but leave it empty
 		glCreateBuffers(1, &m_ID);
-		glNamedBufferData(m_ID, count * sizeof(uint32_t), nullptr, GL_DYNAMIC_DRAW);
+		glNamedBufferData(m_ID, size, nullptr, GL_DYNAMIC_DRAW);
 	}
 
-	IndexBuffer::IndexBuffer(uint32_t count, void* data)
-		: m_Count(count)
+	IndexBuffer::IndexBuffer(uint32_t size, void* data)
+		: m_Count(size / sizeof(uint32_t))
 	{
 		// Create and write to buffer
 		glCreateBuffers(1, &m_ID);
-		glNamedBufferData(m_ID, count * sizeof(uint32_t), data, GL_STATIC_DRAW);
+		glNamedBufferData(m_ID, size, data, GL_STATIC_DRAW);
 	}
 
 	IndexBuffer::~IndexBuffer()

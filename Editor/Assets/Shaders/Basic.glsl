@@ -2,13 +2,13 @@
 #version 450 core
 
 layout(location = 0) in vec3 a_Position;
-layout(location = 1) in vec3 a_Colour;
+layout(location = 1) in vec2 a_UVs;
 
-out vec3 Colour;
+out vec2 UVs;
 
 void main()
 {
-	Colour = a_Colour;
+	UVs = a_UVs;
 	gl_Position = vec4(a_Position, 1.0);
 }
 
@@ -17,9 +17,9 @@ void main()
 
 out vec4 o_FragmentColour;
 
-in vec3 Colour;
+in vec2 UVs;
 
 void main()
 {
-	o_FragmentColour = vec4(Colour, 1.0);
+	o_FragmentColour = vec4(UVs, 0.0, 1.0);
 }
