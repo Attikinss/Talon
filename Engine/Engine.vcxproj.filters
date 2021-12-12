@@ -76,6 +76,9 @@
     <ClInclude Include="Source\Renderer\Renderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\RendererCommand.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\Shader.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -100,11 +103,17 @@
     <ClCompile Include="Source\Core\Window.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ECS\Component.cpp">
+      <Filter>ECS</Filter>
+    </ClCompile>
     <ClCompile Include="Source\ECS\Entity.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="Source\ECS\EntityRegistry.cpp">
       <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Camera.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp">
       <Filter>Renderer</Filter>
@@ -113,6 +122,9 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\RendererCommand.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Shader.cpp">
@@ -124,7 +136,5 @@
     <ClCompile Include="Source\Renderer\VertexBuffer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Renderer\Camera.cpp" />
-    <ClCompile Include="Source\ECS\Component.cpp" />
   </ItemGroup>
 </Project>

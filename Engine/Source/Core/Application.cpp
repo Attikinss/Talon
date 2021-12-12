@@ -4,6 +4,7 @@
 #include "Events/ApplicationEvent.h"
 
 #include "Renderer/Renderer.h"
+#include "Renderer/RendererCommand.h"
 #include "Renderer/Shader.h"
 #include "Renderer/VertexArray.h"
 
