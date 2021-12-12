@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Defines.h"
 #include "Logger.h"
+#include "Time.h"
 
 #include "ECS/Entity.h"
 #include "ECS/WorldCamera.h"
@@ -13,6 +14,7 @@ namespace Talon
 	Application::Application()
 	{
 		Logger::Initialise();
+		Time::Initialise();
 
 		// Specify window creation details
 		WindowCreateInfo winCreateInfo;
@@ -64,6 +66,8 @@ namespace Talon
 			RendererCommand::EndFrame();
 
 			m_Window->GetContext().SwapBuffers();
+
+			Time::Update();
 		}
 	}
 

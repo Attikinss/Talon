@@ -99,13 +99,10 @@
   <ItemGroup>
     <ClInclude Include="Source\Core\Application.h" />
     <ClInclude Include="Source\Core\Defines.h" />
-    <ClInclude Include="Source\Core\Events\ApplicationEvent.h" />
-    <ClInclude Include="Source\Core\Events\Event.h" />
-    <ClInclude Include="Source\Core\Events\KeyboardEvent.h" />
-    <ClInclude Include="Source\Core\Events\MouseEvent.h" />
     <ClInclude Include="Source\Core\Layer.h" />
     <ClInclude Include="Source\Core\LayerStack.h" />
     <ClInclude Include="Source\Core\Logger.h" />
+    <ClInclude Include="Source\Core\Time.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\ECS\Component.h" />
     <ClInclude Include="Source\ECS\Entity.h" />
@@ -113,6 +110,10 @@
     <ClInclude Include="Source\ECS\Transform.h" />
     <ClInclude Include="Source\ECS\WorldCamera.h" />
     <ClInclude Include="Source\EntryPoint.h" />
+    <ClInclude Include="Source\Events\ApplicationEvent.h" />
+    <ClInclude Include="Source\Events\Event.h" />
+    <ClInclude Include="Source\Events\KeyboardEvent.h" />
+    <ClInclude Include="Source\Events\MouseEvent.h" />
     <ClInclude Include="Source\Renderer\BufferLayout.h" />
     <ClInclude Include="Source\Renderer\Camera.h" />
     <ClInclude Include="Source\Renderer\IndexBuffer.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="Source\Core\Application.cpp" />
     <ClCompile Include="Source\Core\LayerStack.cpp" />
     <ClCompile Include="Source\Core\Logger.cpp" />
+    <ClCompile Include="Source\Core\Time.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
     <ClCompile Include="Source\ECS\Component.cpp" />
     <ClCompile Include="Source\ECS\Entity.cpp" />
@@ -150,4 +152,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project> 
+</Project>

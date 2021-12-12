@@ -4,11 +4,11 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Events">
-      <UniqueIdentifier>{52201B74-BED5-9369-47CA-8D40B37E8A6D}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ECS">
       <UniqueIdentifier>{60E1870B-CCEA-877C-5566-9E7CC16E937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{3A8963B1-262B-8E87-0FE6-A1DBFB2615D8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
@@ -21,18 +21,6 @@
     <ClInclude Include="Source\Core\Defines.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Events\ApplicationEvent.h">
-      <Filter>Core\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Events\Event.h">
-      <Filter>Core\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Events\KeyboardEvent.h">
-      <Filter>Core\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Events\MouseEvent.h">
-      <Filter>Core\Events</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\Layer.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -40,6 +28,9 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Logger.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Time.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Window.h">
@@ -61,6 +52,18 @@
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntryPoint.h" />
+    <ClInclude Include="Source\Events\ApplicationEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Events\Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Events\KeyboardEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Events\MouseEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\BufferLayout.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -98,6 +101,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Logger.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Time.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Window.cpp">

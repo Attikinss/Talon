@@ -1,13 +1,17 @@
 #pragma once
+
+// Core
 #include "Core/Application.h"
 #include "Core/Logger.h"
+#include "Core/Time.h"
 
 // Events
-#include "Core/Events/ApplicationEvent.h"
-#include "Core/Events/KeyboardEvent.h"
-#include "Core/Events/MouseEvent.h"
+#include "Events/ApplicationEvent.h"
+#include "Events/KeyboardEvent.h"
+#include "Events/MouseEvent.h"
 
-#include "Renderer/Camera.h"
+// Rendering
+#include "Renderer/RendererCommand.h"
 
 #ifdef INCLUDE_ENTRY
 #include "EntryPoint.h"
