@@ -11,6 +11,10 @@
 #include "Events/KeyboardEvent.h"
 #include "Events/MouseEvent.h"
 
+// ImGui
+#include <imgui.h>
+#include "ImGui/ImGuiLayer.h"
+
 // Rendering
 #include "Renderer/EditorCamera.h"
 #include "Renderer/RendererCommand.h"

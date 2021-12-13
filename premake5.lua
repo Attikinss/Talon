@@ -51,12 +51,12 @@ project "Engine"
     libdirs
     {
         "%{prj.name}/Vendor/GLFW/lib",
-        "ImGui"
     }
 
     links
     {
         "GLAD",
+        "ImGui",
         "glfw3_mt.lib",
         "opengl32.lib",
     }
@@ -96,6 +96,7 @@ project "Editor"
         "Engine/Source",
         "%{IncludeDirs.ENTT}",
         "%{IncludeDirs.GLM}",
+        "%{IncludeDirs.ImGui}",
 		"%{IncludeDirs.SpdLog}",
     }
 

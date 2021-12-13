@@ -70,6 +70,9 @@
     <ClInclude Include="Source\Events\MouseEvent.h">
       <Filter>Events</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ImGui\ImGuiLayer.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\BufferLayout.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -134,6 +137,9 @@
       <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="Source\ImGui\ImGuiGLFW.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\ImGuiLayer.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Source\ImGui\ImGuiOpenGL.cpp">

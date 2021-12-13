@@ -1,8 +1,10 @@
 #pragma once
-#include "Events/ApplicationEvent.h"
 #include "LayerStack.h"
-#include "ECS/EntityRegistry.h"
 #include "Window.h"
+
+#include "Events/ApplicationEvent.h"
+#include "ImGui/ImGuiLayer.h"
+#include "ECS/EntityRegistry.h"
 
 namespace Talon
 {
@@ -27,6 +29,7 @@ namespace Talon
 
 	private:
 		LayerStack* m_LayerStack = nullptr;
+		ImGuiLayer* m_GUILayer = nullptr;
 		Window* m_Window = nullptr;
 		bool m_Running = false;
 

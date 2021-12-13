@@ -69,7 +69,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>Vendor\GLFW\lib;..\ImGui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Vendor\GLFW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -93,7 +93,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>Vendor\GLFW\lib;..\ImGui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Vendor\GLFW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -115,6 +115,7 @@
     <ClInclude Include="Source\Events\Event.h" />
     <ClInclude Include="Source\Events\KeyboardEvent.h" />
     <ClInclude Include="Source\Events\MouseEvent.h" />
+    <ClInclude Include="Source\ImGui\ImGuiLayer.h" />
     <ClInclude Include="Source\Renderer\BufferLayout.h" />
     <ClInclude Include="Source\Renderer\Camera.h" />
     <ClInclude Include="Source\Renderer\EditorCamera.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="Source\ECS\EntityRegistry.cpp" />
     <ClCompile Include="Source\ECS\Transform.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiGLFW.cpp" />
+    <ClCompile Include="Source\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiOpenGL.cpp" />
     <ClCompile Include="Source\Renderer\Camera.cpp" />
     <ClCompile Include="Source\Renderer\EditorCamera.cpp" />
@@ -153,6 +155,9 @@
   <ItemGroup>
     <ProjectReference Include="Vendor\GLAD\GLAD.vcxproj">
       <Project>{5D4A857C-4981-860D-F26D-6C10DE83020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Vendor\ImGui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

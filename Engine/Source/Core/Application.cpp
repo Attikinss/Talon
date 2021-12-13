@@ -33,6 +33,8 @@ namespace Talon
 		Renderer::Initialise();
 
 		m_LayerStack = new LayerStack();
+		m_GUILayer = new ImGuiLayer();
+		m_LayerStack->PushOverlay(m_GUILayer);
 
 		m_Running = true;
 	}
@@ -57,6 +59,12 @@ namespace Talon
 			// Update all layers
 			for (Layer* layer : *m_LayerStack)
 				layer->Update();
+
+			// Draw GUI for all layers
+			m_GUILayer->Begin();
+			for (Layer* layer : *m_LayerStack)
+				layer->DrawGUI();
+			m_GUILayer->End();
 
 			m_Window->GetContext().SwapBuffers();
 

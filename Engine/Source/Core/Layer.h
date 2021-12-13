@@ -17,6 +17,7 @@ namespace Talon
 
 		virtual void Initialise() {}
 		virtual void Update() {}
+		virtual void DrawGUI() {}
 		virtual void Shutdown() {}
 		virtual void ProcessEvents(Event& evt) {}
 
