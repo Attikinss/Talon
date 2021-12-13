@@ -2,6 +2,7 @@
 
 // Core
 #include "Core/Application.h"
+#include "Core/Input.h"
 #include "Core/Logger.h"
 #include "Core/Time.h"
 

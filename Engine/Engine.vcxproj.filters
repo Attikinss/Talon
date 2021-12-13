@@ -21,6 +21,9 @@
     <ClInclude Include="Source\Core\Defines.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Input.h">
+      <Filter>Core</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Core\Layer.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -70,6 +73,9 @@
     <ClInclude Include="Source\Renderer\Camera.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\EditorCamera.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\IndexBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -95,6 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Input.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\LayerStack.cpp">

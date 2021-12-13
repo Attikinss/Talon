@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Defines.h"
+#include "Input.h"
 #include "Logger.h"
 #include "Time.h"
 
@@ -14,6 +15,7 @@ namespace Talon
 	Application::Application()
 	{
 		Logger::Initialise();
+		Input::Initialise();
 		Time::Initialise();
 
 		// Specify window creation details
@@ -67,6 +69,7 @@ namespace Talon
 
 			m_Window->GetContext().SwapBuffers();
 
+			Input::Update();
 			Time::Update();
 		}
 	}

@@ -45,6 +45,8 @@ namespace Talon
 		GLFWwindow* GetWindowHandle() const;
 		RenderContext& GetContext() const;
 
+		static Window& Get() { return *s_Instance; }
+
 	private:
 		Window() = default;
 		void SetCallbacks();
@@ -54,5 +56,7 @@ namespace Talon
 
 		GLFWwindow* m_WindowHandle = nullptr;
 		RenderContext* m_Context = nullptr;
+
+		static Window* s_Instance;
 	};
 }

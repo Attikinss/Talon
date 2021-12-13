@@ -9,6 +9,8 @@
 
 namespace Talon
 {
+	Window* Window::s_Instance = nullptr;
+
 	static GLFWwindow* CreateWindowHandle(const char* title, uint16_t width, uint16_t height, bool fullscreen)
 	{
 		// Initialise glfw if it hasn't been already
@@ -19,7 +21,6 @@ namespace Talon
 			Logger::Critical("Failed to initialise GLFW!");
 			return nullptr;
 		}
-
 
 		// Create the window
 		GLFWwindow* windowHandle = nullptr;
@@ -48,6 +49,12 @@ namespace Talon
 
 	Window* Window::Create(const WindowCreateInfo& createInfo)
 	{
+		if (s_Instance)
+		{
+			Logger::Error("Only one Window creation is currently supported! Window creation aborted...");
+			return nullptr;
+		}
+
 		// Set up profile and version
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
@@ -81,6 +88,8 @@ namespace Talon
 		glfwGetWindowSize(window->m_WindowHandle, &width, &height);
 		window->m_PtrData.Width = width;
 		window->m_PtrData.Height = height;
+
+		s_Instance = window;
 
 		return window;
 	}
