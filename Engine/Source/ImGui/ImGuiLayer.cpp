@@ -1,5 +1,6 @@
 #include "ImGuiLayer.h"
 
+#include "Core/Input.h"
 #include "Core/Window.h"
 
 #include "Renderer/RenderContext.h"
@@ -128,6 +129,29 @@ namespace Talon
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(Window::Get().GetWindowHandle(), true);
 		ImGui_ImplOpenGL3_Init("#version 450");
+
+		io.KeyMap[ImGuiKey_Tab] = (int)KeyCode::Tab;
+		io.KeyMap[ImGuiKey_LeftArrow] = (int)KeyCode::Left;
+		io.KeyMap[ImGuiKey_RightArrow] = (int)KeyCode::Right;
+		io.KeyMap[ImGuiKey_UpArrow] = (int)KeyCode::Up;
+		io.KeyMap[ImGuiKey_DownArrow] = (int)KeyCode::Down;
+		io.KeyMap[ImGuiKey_PageUp] = (int)KeyCode::Page_Up;
+		io.KeyMap[ImGuiKey_PageDown] = (int)KeyCode::Page_Down;
+		io.KeyMap[ImGuiKey_Home] = (int)KeyCode::Home;
+		io.KeyMap[ImGuiKey_End] = (int)KeyCode::End;
+		io.KeyMap[ImGuiKey_Insert] = (int)KeyCode::Insert;
+		io.KeyMap[ImGuiKey_Delete] = (int)KeyCode::Delete;
+		io.KeyMap[ImGuiKey_Backspace] = (int)KeyCode::Backspace;
+		io.KeyMap[ImGuiKey_Space] = (int)KeyCode::Space;
+		io.KeyMap[ImGuiKey_Enter] = (int)KeyCode::Enter;
+		io.KeyMap[ImGuiKey_Escape] = (int)KeyCode::Escape;
+		io.KeyMap[ImGuiKey_KeyPadEnter] = (int)KeyCode::KP_Enter;
+		io.KeyMap[ImGuiKey_A] = (int)KeyCode::A;
+		io.KeyMap[ImGuiKey_C] = (int)KeyCode::C;
+		io.KeyMap[ImGuiKey_V] = (int)KeyCode::V;
+		io.KeyMap[ImGuiKey_X] = (int)KeyCode::X;
+		io.KeyMap[ImGuiKey_Y] = (int)KeyCode::Y;
+		io.KeyMap[ImGuiKey_Z] = (int)KeyCode::Z;
 	}
 
 	void ImGuiLayer::Shutdown()
@@ -139,6 +163,9 @@ namespace Talon
 
 	void ImGuiLayer::ProcessEvents(Event& evt)
 	{
-		
+		ImGuiIO& io = ImGui::GetIO();
+
+		evt.m_Used |= evt.IsInCategory(CategoryMouse) & io.WantCaptureMouse;
+		evt.m_Used |= evt.IsInCategory(CategoryKeyboard) & io.WantCaptureKeyboard;
 	}
 }
