@@ -1,5 +1,6 @@
 #pragma once
 #include "TalonEngine.h"
+#include "Panels/Viewport.h"
 
 class Editor : public Talon::Layer
 {
@@ -27,12 +28,7 @@ public:
 
 	void Update() override
 	{
-		m_EditorCamera.Update();
-
-		Talon::RendererCommand::Clear(0.15f, 0.15f, 0.15f);
-		Talon::RendererCommand::BeginFrame(m_EditorCamera);
-
-		Talon::RendererCommand::EndFrame();
+		m_Viewport.Update();
 	}
 
 	void DrawGUI() override
@@ -71,6 +67,8 @@ public:
 
 			ImGui::EndMainMenuBar();
 		}
+
+		m_Viewport.Draw();
 	}
 
 	void Shutdown() override
@@ -80,9 +78,9 @@ public:
 
 	void ProcessEvents(Talon::Event& evt) override
 	{
-		m_EditorCamera.OnEvent(evt);
+		m_Viewport.OnEvent(evt);
 	}
 
 private:
-	Talon::EditorCamera m_EditorCamera;
+	Viewport m_Viewport;
 };

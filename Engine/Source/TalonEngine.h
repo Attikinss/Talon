@@ -5,6 +5,7 @@
 #include "Core/Input.h"
 #include "Core/Logger.h"
 #include "Core/Time.h"
+#include "Core/Window.h"
 
 // Events
 #include "Events/ApplicationEvent.h"
