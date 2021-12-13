@@ -139,6 +139,7 @@
     <ClCompile Include="Source\ECS\EntityRegistry.cpp" />
     <ClCompile Include="Source\ECS\Transform.cpp" />
     <ClCompile Include="Source\Renderer\Camera.cpp" />
+    <ClCompile Include="Source\Renderer\EditorCamera.cpp" />
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp" />
     <ClCompile Include="Source\Renderer\RenderContext.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />

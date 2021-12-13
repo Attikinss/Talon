@@ -7,6 +7,7 @@
 #include "ECS/Entity.h"
 #include "ECS/WorldCamera.h"
 
+#include "Renderer/EditorCamera.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/RendererCommand.h"
 
@@ -46,11 +47,6 @@ namespace Talon
 
 	void Application::Run()
 	{
-		// TODO: Make Enities shared pointers?
-		Entity cameraEntity = m_EntityRegistry.CreateEntity();
-		WorldCamera& camera = cameraEntity.AddComponent<WorldCamera>();
-		camera.SetPosition({ 0.0f, 0.0f, 1.0f });
-
 		for (Layer* layer : *m_LayerStack)
 			layer->Initialise();
 
@@ -58,14 +54,9 @@ namespace Talon
 		{
 			m_Window->GetContext().ProcessEvents();
 
-			RendererCommand::Clear(0.15f, 0.15f, 0.15f);
-			RendererCommand::BeginFrame(cameraEntity.GetComponent<WorldCamera>());
-
 			// Update all layers
 			for (Layer* layer : *m_LayerStack)
 				layer->Update();
-
-			RendererCommand::EndFrame();
 
 			m_Window->GetContext().SwapBuffers();
 

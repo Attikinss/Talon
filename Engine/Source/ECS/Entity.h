@@ -7,6 +7,8 @@
 
 namespace Talon
 {
+	// TODO: Make Enities shared pointers?
+
 	class Entity
 	{
 	public:

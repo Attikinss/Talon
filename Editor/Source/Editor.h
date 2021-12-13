@@ -27,7 +27,12 @@ public:
 
 	void Update() override
 	{
+		m_EditorCamera.Update();
 
+		Talon::RendererCommand::Clear(0.15f, 0.15f, 0.15f);
+		Talon::RendererCommand::BeginFrame(m_EditorCamera);
+
+		Talon::RendererCommand::EndFrame();
 	}
 
 	void Shutdown() override
@@ -39,4 +44,7 @@ public:
 	{
 
 	}
+
+private:
+	Talon::EditorCamera m_EditorCamera;
 };

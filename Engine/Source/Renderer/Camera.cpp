@@ -1,10 +1,11 @@
 #include "Camera.h"
+#include "Core/Window.h"
 
 #include <glm/gtx/quaternion.hpp>
 
 namespace Talon
 {
-	static glm::quat GetOrientation(const glm::vec3& rotation)
+	glm::quat Camera::GetOrientation(const glm::vec3& rotation)
 	{
 		return glm::quat(glm::radians(rotation * -1.0f));
 	}
@@ -12,8 +13,9 @@ namespace Talon
 	Camera::Camera(Projection projectionType, float nearPlane, float farPlane, float fieldOfView)
 		: m_ProjectionType(projectionType), m_NearPlane(nearPlane), m_FarPlane(farPlane), m_FieldOfView(fieldOfView)
 	{
-		// TODO: Pull size from window/viewport
-		m_ViewSize = { 1280.0f, 720.0f };
+		// TODO: Pull size from viewport rather than window
+		auto [x, y] = Window::Get().GetSize();
+		m_ViewSize = { (float)x, (float)y };
 
 		RecalculateProjection();
 	}

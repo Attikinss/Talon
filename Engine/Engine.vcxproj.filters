@@ -133,6 +133,9 @@
     <ClCompile Include="Source\Renderer\Camera.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\EditorCamera.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>

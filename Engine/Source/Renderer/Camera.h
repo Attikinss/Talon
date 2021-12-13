@@ -25,6 +25,7 @@ namespace Talon
 
 	protected:
 		void RecalculateProjection();
+		glm::quat GetOrientation(const glm::vec3& rotation);
 
 	protected:
 		glm::mat4 m_ViewMatrix = glm::mat4(1.0f);
