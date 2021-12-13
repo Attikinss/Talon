@@ -83,10 +83,10 @@ namespace Talon
 
 	bool EditorCamera::OnMouseScroll(MouseScrolledEvent& evt)
 	{
-		float delta = evt.GetOffset().second * 0.1f;
+		float delta = evt.GetOffset().second * -0.15f;
 		Zoom(delta);
 
-		return true;
+		return false;
 	}
 
 	void EditorCamera::Pan(const glm::vec2& delta)

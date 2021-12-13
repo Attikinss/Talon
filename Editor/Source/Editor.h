@@ -42,7 +42,7 @@ public:
 
 	void ProcessEvents(Talon::Event& evt) override
 	{
-
+		m_EditorCamera.OnEvent(evt);
 	}
 
 private:
