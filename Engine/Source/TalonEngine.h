@@ -18,6 +18,7 @@
 
 // Rendering
 #include "Renderer/EditorCamera.h"
+#include "Renderer/Framebuffer.h"
 #include "Renderer/RendererCommand.h"
 
 #ifdef INCLUDE_ENTRY

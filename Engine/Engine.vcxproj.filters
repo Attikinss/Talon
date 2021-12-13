@@ -82,6 +82,9 @@
     <ClInclude Include="Source\Renderer\EditorCamera.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\Framebuffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\IndexBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -149,6 +152,9 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\EditorCamera.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Framebuffer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp">
