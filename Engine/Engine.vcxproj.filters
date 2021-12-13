@@ -10,6 +10,9 @@
     <Filter Include="Events">
       <UniqueIdentifier>{3A8963B1-262B-8E87-0FE6-A1DBFB2615D8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{C0FF640D-2C14-8DBE-F595-301E616989EF}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
     </Filter>
@@ -129,6 +132,12 @@
     </ClCompile>
     <ClCompile Include="Source\ECS\Transform.cpp">
       <Filter>ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\ImGuiGLFW.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\ImGuiOpenGL.cpp">
+      <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Camera.cpp">
       <Filter>Renderer</Filter>

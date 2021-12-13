@@ -15,9 +15,11 @@ IncludeDirs["ENTT"] = "Engine/Vendor/ENTT"
 IncludeDirs["GLAD"] = "Engine/Vendor/GLAD/include"
 IncludeDirs["GLFW"] = "Engine/Vendor/GLFW/include"
 IncludeDirs["GLM"] = "Engine/Vendor/GLM"
+IncludeDirs["ImGui"] = "Engine/Vendor/ImGui"
 IncludeDirs["SpdLog"] = "Engine/Vendor/SpdLog/include"
 
 include "Engine/Vendor/GLAD"
+include "Engine/Vendor/ImGui"
 
 project "Engine"
     location "Engine"
@@ -42,12 +44,14 @@ project "Engine"
         "%{IncludeDirs.GLAD}",
         "%{IncludeDirs.GLFW}",
 		"%{IncludeDirs.GLM}",
+        "%{IncludeDirs.ImGui}",
 		"%{IncludeDirs.SpdLog}",
     }
 
     libdirs
     {
         "%{prj.name}/Vendor/GLFW/lib",
+        "ImGui"
     }
 
     links
