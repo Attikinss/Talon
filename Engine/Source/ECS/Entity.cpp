@@ -8,7 +8,7 @@ namespace Talon
 		AddComponent<Transform>();
 	}
 
-	Entity::~Entity()
+	void Entity::Destroy()
 	{
 		m_Registry->DestroyEntity(m_EntityHandle);
 	}

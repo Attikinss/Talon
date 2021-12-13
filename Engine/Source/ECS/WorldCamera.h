@@ -11,7 +11,7 @@ namespace Talon
 		friend class Entity;
 
 	public:
-		WorldCamera() : m_Camera(Camera()) { }
+		WorldCamera() = default;
 		~WorldCamera() = default;
 
 		void SetPosition(const glm::vec3 position)

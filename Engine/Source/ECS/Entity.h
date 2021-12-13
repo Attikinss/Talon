@@ -12,8 +12,11 @@ namespace Talon
 	class Entity
 	{
 	public:
+		Entity() = default;
 		Entity(EntityRegistry* registry, entt::entity handle);
-		~Entity();
+		~Entity() = default;
+
+		void Destroy();
 
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args)
