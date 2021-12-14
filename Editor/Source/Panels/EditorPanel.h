@@ -12,6 +12,7 @@ public:
 	virtual void Draw() = 0;
 	virtual void OnEvent(Talon::Event& evt) = 0;
 
+	bool Enabled() { return m_Enabled; }
 	void Enable() { m_Enabled = true; }
 	void Disable() { m_Enabled = false; }
 
