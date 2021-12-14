@@ -29,19 +29,19 @@ namespace Talon
 		return speed;
 	}
 
-	glm::vec3& GetDirectionFront(const glm::quat& orientation)
+	glm::vec3 GetDirectionFront(const glm::quat& orientation)
 	{
 		glm::vec3 rotation = glm::rotate(orientation, glm::vec3(0.0f, 0.0f, -1.0f));
 		return rotation;
 	}
 
-	glm::vec3& GetDirectionUp(const glm::quat& orientation)
+	glm::vec3 GetDirectionUp(const glm::quat& orientation)
 	{
 		glm::vec3 rotation = glm::rotate(orientation, glm::vec3(0.0f, 1.0f, 0.0f));
 		return rotation;
 	}
 
-	glm::vec3& GetDirectionRight(const glm::quat& orientation)
+	glm::vec3 GetDirectionRight(const glm::quat& orientation)
 	{
 		glm::vec3 rotation = glm::rotate(orientation, glm::vec3(1.0f, 0.0f, 0.0f));
 		return rotation;
