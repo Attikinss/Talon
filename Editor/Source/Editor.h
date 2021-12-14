@@ -8,7 +8,7 @@ public:
 	Editor()
 		: Talon::Layer("Editor")
 	{
-
+		m_OpenPanels.push_back(new Viewport("Scene"));
 	}
 
 	void Attach() override
@@ -28,7 +28,20 @@ public:
 
 	void Update() override
 	{
-		m_Viewport.Update();
+		std::vector<EditorPanel*>::iterator it = m_OpenPanels.begin();
+		while (it != m_OpenPanels.end())
+		{
+			if (m_OpenPanels.size() > 1 && !(*it)->Enabled())
+			{
+				delete (*it);
+				it = m_OpenPanels.erase(it);
+				continue;
+			}
+
+			(*it)->Enable();
+			(*it)->Update();
+			it++;
+		}
 	}
 
 	void DrawGUI() override
@@ -68,7 +81,13 @@ public:
 			ImGui::EndMainMenuBar();
 		}
 
-		m_Viewport.Draw();
+		if (m_OpenPanels.size() == 1)
+			m_OpenPanels[0]->Draw(ImGuiWindowFlags_NoMove);
+		else
+		{
+			for (auto& panel : m_OpenPanels)
+				panel->Draw();
+		}
 	}
 
 	void Shutdown() override
@@ -78,9 +97,10 @@ public:
 
 	void ProcessEvents(Talon::Event& evt) override
 	{
-		m_Viewport.OnEvent(evt);
+		for (auto& panel : m_OpenPanels)
+			panel->OnEvent(evt);
 	}
 
 private:
-	Viewport m_Viewport;
+	std::vector<EditorPanel*> m_OpenPanels;
 };

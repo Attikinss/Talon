@@ -9,7 +9,7 @@ public:
 	virtual ~EditorPanel() = default;
 
 	virtual void Update() = 0;
-	virtual void Draw() = 0;
+	virtual void Draw(ImGuiWindowFlags_ additionalFlags = ImGuiWindowFlags_None) = 0;
 	virtual void OnEvent(Talon::Event& evt) = 0;
 
 	bool Enabled() { return m_Enabled; }

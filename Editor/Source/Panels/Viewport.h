@@ -1,10 +1,12 @@
 #pragma once
 #include "EditorPanel.h"
 
+#include <imgui_internal.h>
+
 class Viewport : public EditorPanel
 {
 public:
-	Viewport() : EditorPanel("Viewport")
+	Viewport(const std::string& name = "Viewport") : EditorPanel(name)
 	{
 		auto [x, y] = Talon::Window::Get().GetSize();
 		m_ViewportSize = { (float)x, (float)y };
@@ -36,12 +38,12 @@ public:
 		m_Framebuffer->Unbind();
 	}
 
-	void Draw() override
+	void Draw(ImGuiWindowFlags_ additionalFlags) override
 	{
 		if (m_Enabled)
 		{
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-			ImGui::Begin(m_Name.c_str(), &m_Enabled, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar);
+			ImGui::Begin(m_Name.c_str(), nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | additionalFlags);
 
 			ImVec2 panelSize = ImGui::GetContentRegionAvail();
 			m_ViewportSize = { panelSize.x, panelSize.y };
