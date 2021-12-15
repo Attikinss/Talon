@@ -14,24 +14,19 @@ namespace Talon
 		WorldCamera() = default;
 		~WorldCamera() = default;
 
-		void SetPosition(const glm::vec3 position)
+		void OnEditorUpdate() override
 		{
-			Transform& transform = m_Entity->GetComponent<Transform>();
-			transform.SetPosition(position);
-
-			m_Camera.SetView(glm::inverse(glm::mat4(transform)));
+			OnUpdate();
 		}
 
-		void SetRotation(const glm::vec3 rotation)
+		void OnUpdate() override
 		{
 			Transform& transform = m_Entity->GetComponent<Transform>();
-			transform.SetRotation(rotation);
-
-			m_Camera.SetView(glm::inverse(glm::mat4(transform)));
+			m_Camera.SetView(glm::inverse(transform.GetTransform()));
 		}
 
-		operator Camera&() { return m_Camera; }
-		operator const Camera&() const { return m_Camera; }
+		Camera& GetCamera() { return m_Camera; }
+		const Camera& GetCamera() const { return m_Camera; }
 
 		static const char* GetName() { return "Camera"; }
 

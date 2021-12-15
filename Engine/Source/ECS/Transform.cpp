@@ -5,38 +5,14 @@
 
 namespace Talon
 {
-	glm::quat GetOrientation(const glm::vec3& rotation)
+	void Transform::OnUpdate()
 	{
-		return glm::quat(glm::radians(rotation * -1.0f));
+		m_Transform = glm::translate(glm::mat4(1.0f), Position) * glm::toMat4(Rotation) * glm::scale(glm::mat4(1.0f), Scale);
 	}
 
-	void Transform::Set(const glm::mat4& transform)
+	void Transform::OnEditorUpdate()
 	{
-		m_Transform = transform;
-	}
-
-	void Transform::SetPosition(const glm::vec3& position)
-	{
-		m_Transform[3] = glm::vec4(position, 1.0f);
-	}
-
-	void Transform::SetRotation(const glm::vec3& rotation)
-	{
-		m_Transform = glm::translate(glm::mat4(1.0f), glm::vec3(m_Transform[3])) * glm::toMat4(GetOrientation(rotation));
-	}
-
-	void Transform::Move(const glm::vec3& delta)
-	{
-		m_Transform = glm::translate(m_Transform, delta);
-	}
-
-	void Transform::Rotate(const glm::vec3& delta)
-	{
-		m_Transform *= glm::toMat4(GetOrientation(delta));
-	}
-
-	void Transform::Rotate(const glm::quat& delta)
-	{
-		m_Transform *= glm::toMat4(delta);
+		Rotation = glm::quat(EulerAngles);
+		OnUpdate();
 	}
 }

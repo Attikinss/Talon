@@ -12,21 +12,20 @@ namespace Talon
 
 	public:
 		Transform() = default;
-		Transform(const glm::mat4& transform)
-			: m_Transform(transform) { }
+		Transform(const glm::vec3& origin)
+			: Position(origin) { }
 
-		void Set(const glm::mat4& transform);
+		void OnEditorUpdate() override;
+		void OnUpdate() override;
 
-		void SetPosition(const glm::vec3& position);
-		void SetRotation(const glm::vec3& rotation);
-
-		void Move(const glm::vec3& delta);
-		void Rotate(const glm::vec3& delta);
-		void Rotate(const glm::quat& delta);
-
-		operator const glm::mat4&() const { return m_Transform; }
-
+		const glm::mat4& GetTransform() const { return m_Transform; }
 		static const char* GetName() { return "Transform"; }
+
+	public:
+		glm::vec3 Position = { 0.0f, 0.0f, 0.0f };
+		glm::vec3 EulerAngles = { 0.0f, 0.0f, 0.0f };
+		glm::quat Rotation = { 0.0f, 0.0f, 0.0f, 1.0f };
+		glm::vec3 Scale = { 1.0f, 1.0f, 1.0f };
 
 	private:
 		glm::mat4 m_Transform = glm::mat4(1.0f);

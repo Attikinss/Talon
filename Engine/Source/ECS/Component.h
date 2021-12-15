@@ -12,6 +12,10 @@ namespace Talon
 		Component() = default;
 		virtual ~Component() = default;
 
+		virtual void OnEditorUpdate() {}
+		virtual void OnUpdate() {}
+		virtual void OnFixedUpdate() {}
+
 	protected:
 		Entity* m_Entity = nullptr;
 	};
