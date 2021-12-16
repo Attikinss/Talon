@@ -16,6 +16,9 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StbImage">
+      <UniqueIdentifier>{71D06EE0-5D9D-C9EB-86B6-B79372E2FE79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Application.h">
@@ -100,11 +103,17 @@
     <ClInclude Include="Source\Renderer\Shader.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\Texture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\VertexArray.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer\VertexBuffer.h">
       <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StbImage\stb_image.h">
+      <Filter>StbImage</Filter>
     </ClInclude>
     <ClInclude Include="Source\TalonEngine.h" />
   </ItemGroup>
@@ -172,11 +181,17 @@
     <ClCompile Include="Source\Renderer\Shader.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Texture.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Renderer\VertexArray.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\VertexBuffer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StbImage\stb_image.cpp">
+      <Filter>StbImage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
