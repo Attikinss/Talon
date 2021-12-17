@@ -20,9 +20,11 @@ void main()
 
 out vec4 o_FragmentColour;
 
+uniform sampler2D u_TestTexture;
+
 in vec2 UVs;
 
 void main()
 {
-	o_FragmentColour = vec4(UVs, 0.0, 1.0);
+	o_FragmentColour = texture(u_TestTexture, UVs);
 }

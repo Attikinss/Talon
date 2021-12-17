@@ -70,10 +70,11 @@ namespace Talon
 		Texture2D(const std::string& filepath);
 		~Texture2D();
 
-		void Reload();
-
 		void Bind(uint32_t unit = 0) override;
 		void Unbind() override;
+
+	private:
+		void Reload(const TextureCreateInfo& createInfo);
 
 	private:
 		std::string m_Filepath;

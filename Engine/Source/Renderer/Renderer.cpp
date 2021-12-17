@@ -3,6 +3,7 @@
 #include "Core/Logger.h"
 #include "Camera.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "VertexArray.h"
 
 #include <glad/gl.h>
@@ -16,12 +17,14 @@ namespace Talon
 	struct RendererData
 	{
 		Shader* TestShader = nullptr;
+		Texture2D* TestTexture = nullptr;
 		VertexArray* VAO = nullptr;
 		glm::mat4 ViewProjMatrix = glm::mat4(1.0f);
 
 		RendererData()
 		{
 			TestShader = new Shader("Assets/Shaders/Basic.glsl");
+			TestTexture = new Texture2D("Assets/Textures/whenquadisblack.jpg");
 
 			float vertices[] =
 			{
@@ -47,17 +50,12 @@ namespace Talon
 			VAO = new VertexArray();
 			VAO->AddVertexBuffer(vertexBuffer);
 			VAO->SetIndexBuffer(indexBuffer);
-			
-			// These are only here temporarily to draw the square until
-			// a more permanent solution for model submission is created
-			TestShader->Bind();
-			VAO->Bind();
-			VAO->GetIndexBuffer()->Bind();
 		}
 
 		~RendererData()
 		{
 			delete TestShader;
+			delete TestTexture;
 			delete VAO;
 		}
 	};
@@ -115,7 +113,15 @@ namespace Talon
 	{
 		if (Active(__func__))
 		{
+			// These are only here temporarily to draw the quad until
+			// a more permanent solution for model submission is created
+			s_RendererData->TestShader->Bind();
+			s_RendererData->TestTexture->Bind();
+			s_RendererData->VAO->Bind();
+			s_RendererData->VAO->GetIndexBuffer()->Bind();
+
 			s_RendererData->ViewProjMatrix = camera.GetViewProjection();
+			s_RendererData->TestShader->SetUniform("u_TestTexture", 0);
 			s_RendererData->TestShader->SetUniform("u_ModelMatrix", glm::mat4(1.0f));
 			s_RendererData->TestShader->SetUniform("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
 		}
