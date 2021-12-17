@@ -2,7 +2,7 @@
 #version 450 core
 
 layout(location = 0) in vec3 a_Position;
-layout(location = 1) in vec2 a_UVs;
+layout(location = 2) in vec2 a_UVs;
 
 uniform mat4 u_ModelMatrix;
 uniform mat4 u_ViewProjectionMatrix;

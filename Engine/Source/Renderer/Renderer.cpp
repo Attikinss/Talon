@@ -2,6 +2,7 @@
 
 #include "Core/Logger.h"
 #include "Camera.h"
+#include "MeshLoader.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
@@ -16,35 +17,31 @@ namespace Talon
 {
 	struct RendererData
 	{
+		Mesh* TestMesh = nullptr;
 		Shader* TestShader = nullptr;
 		Texture2D* TestTexture = nullptr;
 		VertexArray* VAO = nullptr;
+
 		glm::mat4 ViewProjMatrix = glm::mat4(1.0f);
 
 		RendererData()
 		{
+			TestMesh = MeshLoader::Load("Assets/Models/cube.obj")[0];
 			TestShader = new Shader("Assets/Shaders/Basic.glsl");
 			TestTexture = new Texture2D("Assets/Textures/whenquadisblack.jpg");
 
-			float vertices[] =
-			{
-				// Positions			UVs
-				-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
-				-0.5f,  0.5f, 0.0f,		0.0f, 1.0f,
-				 0.5f,  0.5f, 0.0f,		1.0f, 1.0f,
-				 0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
-			};
+			uint32_t indexDataSize = TestMesh->GetIndices().size() * sizeof(uint32_t);
+			uint32_t vertexDataSize = TestMesh->GetVertices().size() * sizeof(Vertex);
 
-			uint32_t indices[] =
-			{
-				0, 1, 2, 3, 2, 0
-			};
-
-			auto indexBuffer = IndexBuffer::Create(sizeof(indices), indices);
-			auto vertexBuffer = VertexBuffer::Create(sizeof(vertices), vertices);
+			auto indexBuffer = IndexBuffer::Create(indexDataSize, (void*)TestMesh->GetIndices().data());
+			auto vertexBuffer = VertexBuffer::Create(vertexDataSize, (void*)TestMesh->GetVertices().data());
+			
 			vertexBuffer->SetLayout({
 				{ DataType::Float3, "a_Position" },
+				{ DataType::Float3, "a_Normals" },
 				{ DataType::Float2, "a_UVs" },
+				{ DataType::Float3, "a_Tangent" },
+				{ DataType::Float3, "a_BiTangent" },
 			});
 
 			VAO = new VertexArray();
@@ -54,6 +51,7 @@ namespace Talon
 
 		~RendererData()
 		{
+			delete TestMesh;
 			delete TestShader;
 			delete TestTexture;
 			delete VAO;
@@ -87,6 +85,19 @@ namespace Talon
 		// A context MUST be set before this can return a successful result
 		int gladStatus = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
 		_ASSERT(gladStatus);
+
+		// Enable depth testing
+		glEnable(GL_DEPTH_TEST);
+
+		// Enable face culling
+		glEnable(GL_CULL_FACE);
+
+		// Set back face culling mode
+		glCullFace(GL_BACK);
+
+		// Enable blending
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		s_RendererData = new RendererData();
 

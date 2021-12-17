@@ -91,6 +91,12 @@
     <ClInclude Include="Source\Renderer\IndexBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\Mesh.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\MeshLoader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\RenderContext.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -104,6 +110,9 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer\Texture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Vertex.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer\VertexArray.h">
@@ -167,6 +176,9 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\MeshLoader.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\RenderContext.cpp">
