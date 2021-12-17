@@ -38,12 +38,10 @@ namespace Talon
 
 	void IndexBuffer::SetData(uint32_t size, void* data, uint32_t offset)
 	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
-
-		void* buffer = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY | GL_MAP_UNSYNCHRONIZED_BIT);
+		void* buffer = glMapNamedBuffer(m_ID, GL_WRITE_ONLY | GL_MAP_UNSYNCHRONIZED_BIT);
 		memcpy((&buffer)[offset], data, size);
 
-		glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+		glUnmapNamedBuffer(m_ID);
 	}
 
 	void IndexBuffer::Bind()
