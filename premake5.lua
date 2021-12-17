@@ -11,6 +11,7 @@ workspace "Talon"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDirs = {}
+IncludeDirs["Assimp"] = "Engine/Vendor/Assimp/include"
 IncludeDirs["ENTT"] = "Engine/Vendor/ENTT"
 IncludeDirs["GLAD"] = "Engine/Vendor/GLAD/include"
 IncludeDirs["GLFW"] = "Engine/Vendor/GLFW/include"
@@ -40,6 +41,7 @@ project "Engine"
     includedirs
     {
         "%{prj.name}/Source",
+        "%{IncludeDirs.Assimp}",
         "%{IncludeDirs.ENTT}",
         "%{IncludeDirs.GLAD}",
         "%{IncludeDirs.GLFW}",
@@ -50,6 +52,7 @@ project "Engine"
 
     libdirs
     {
+        "%{prj.name}/Vendor/Assimp/lib",
         "%{prj.name}/Vendor/GLFW/lib",
     }
 
@@ -68,11 +71,23 @@ project "Engine"
         defines "TALON_DEBUG"
         runtime "Debug"
         symbols "on"
+        links
+        {
+            "assimp-vc142-mtd.lib",
+            "IrrXMLd.lib",
+            "zlibstaticd.lib"
+        }
 
     filter "configurations:Release"
         defines "TALON_RELEASE"
         runtime "Release"
         optimize "on"
+        links
+        {
+            "assimp-vc142-mt.lib",
+            "IrrXML.lib",
+            "zlibstatic.lib"
+        }
 
 project "Editor"
     location "Editor"
