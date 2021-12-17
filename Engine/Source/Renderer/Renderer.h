@@ -1,8 +1,10 @@
 #pragma once
+#include "glm/glm.hpp"
 
 namespace Talon
 {
 	class Camera;
+	class Mesh;
 
 	class Renderer
 	{
@@ -18,5 +20,7 @@ namespace Talon
 
 		// Move clear colour info into a GLState structure or something
 		static void Clear(float r, float g, float b, float a);
+
+		static void Submit(Mesh* mesh, const glm::mat4& transform);
 	};
 }

@@ -18,4 +18,9 @@ namespace Talon
 	{
 		Renderer::Clear(r, g, b, a);
 	}
+
+	void RendererCommand::Submit(Mesh* mesh, const glm::mat4& transform)
+	{
+		Renderer::Submit(mesh, transform);
+	}
 }

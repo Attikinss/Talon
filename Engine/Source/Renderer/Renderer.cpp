@@ -17,7 +17,6 @@ namespace Talon
 {
 	struct RendererData
 	{
-		Mesh* TestMesh = nullptr;
 		Shader* TestShader = nullptr;
 		Texture2D* TestTexture = nullptr;
 		VertexArray* VAO = nullptr;
@@ -26,15 +25,11 @@ namespace Talon
 
 		RendererData()
 		{
-			TestMesh = MeshLoader::Load("Assets/Models/cube.obj")[0];
 			TestShader = new Shader("Assets/Shaders/Basic.glsl");
 			TestTexture = new Texture2D("Assets/Textures/whenquadisblack.jpg");
 
-			uint32_t indexDataSize = TestMesh->GetIndices().size() * sizeof(uint32_t);
-			uint32_t vertexDataSize = TestMesh->GetVertices().size() * sizeof(Vertex);
-
-			auto indexBuffer = IndexBuffer::Create(indexDataSize, (void*)TestMesh->GetIndices().data());
-			auto vertexBuffer = VertexBuffer::Create(vertexDataSize, (void*)TestMesh->GetVertices().data());
+			auto indexBuffer = IndexBuffer::Create(1000 * sizeof(uint32_t));
+			auto vertexBuffer = VertexBuffer::Create(20000 * sizeof(Vertex));
 			
 			vertexBuffer->SetLayout({
 				{ DataType::Float3, "a_Position" },
@@ -51,7 +46,6 @@ namespace Talon
 
 		~RendererData()
 		{
-			delete TestMesh;
 			delete TestShader;
 			delete TestTexture;
 			delete VAO;
@@ -133,7 +127,6 @@ namespace Talon
 
 			s_RendererData->ViewProjMatrix = camera.GetViewProjection();
 			s_RendererData->TestShader->SetUniform("u_TestTexture", 0);
-			s_RendererData->TestShader->SetUniform("u_ModelMatrix", glm::mat4(1.0f));
 			s_RendererData->TestShader->SetUniform("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
 		}
 	}
@@ -142,7 +135,7 @@ namespace Talon
 	{
 		if (Active(__func__))
 		{
-			glDrawElements(GL_TRIANGLES, s_RendererData->VAO->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
+			//glDrawElements(GL_TRIANGLES, s_RendererData->VAO->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
 		}
 	}
 	
@@ -155,5 +148,16 @@ namespace Talon
 			glClearColor(r, g, b, a);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
+	}
+
+	void Renderer::Submit(Mesh* mesh, const glm::mat4& transform)
+	{
+		// TODO: Draw objects at EndFrame rather than immediately
+
+		s_RendererData->TestShader->SetUniform("u_ModelMatrix", transform);
+		s_RendererData->VAO->GetVertexBuffers()[0]->SetData(mesh->GetVertices().size() * sizeof(Vertex), (void*)mesh->GetVertices().data());
+		s_RendererData->VAO->GetIndexBuffer()->SetData(mesh->GetIndices().size() * sizeof(uint32_t), (void*)mesh->GetIndices().data());
+
+		glDrawElements(GL_TRIANGLES, s_RendererData->VAO->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
 	}
 }
