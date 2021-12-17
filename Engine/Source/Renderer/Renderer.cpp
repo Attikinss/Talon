@@ -155,8 +155,8 @@ namespace Talon
 		// TODO: Draw objects at EndFrame rather than immediately
 
 		s_RendererData->TestShader->SetUniform("u_ModelMatrix", transform);
-		s_RendererData->VAO->GetVertexBuffers()[0]->SetData(mesh->GetVertices().size() * sizeof(Vertex), (void*)mesh->GetVertices().data());
-		s_RendererData->VAO->GetIndexBuffer()->SetData(mesh->GetIndices().size() * sizeof(uint32_t), (void*)mesh->GetIndices().data());
+		s_RendererData->VAO->GetVertexBuffers()[0]->SetData((uint32_t)mesh->GetVertices().size() * sizeof(Vertex), (void*)mesh->GetVertices().data());
+		s_RendererData->VAO->GetIndexBuffer()->SetData((uint32_t)mesh->GetIndices().size() * sizeof(uint32_t), (void*)mesh->GetIndices().data());
 
 		glDrawElements(GL_TRIANGLES, s_RendererData->VAO->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
 	}
