@@ -7,6 +7,12 @@
 #include "Core/Time.h"
 #include "Core/Window.h"
 
+// Components
+#include "ECS/Entity.h"
+#include "ECS/EntityRegistry.h"
+#include "ECS/MeshRenderer.h"
+#include "ECS/Transform.h"
+
 // Events
 #include "Events/ApplicationEvent.h"
 #include "Events/KeyboardEvent.h"
@@ -19,6 +25,7 @@
 // Rendering
 #include "Renderer/EditorCamera.h"
 #include "Renderer/Framebuffer.h"
+#include "Renderer/MeshLoader.h"
 #include "Renderer/RendererCommand.h"
 
 #ifdef INCLUDE_ENTRY

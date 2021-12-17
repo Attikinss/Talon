@@ -17,6 +17,10 @@ public:
 		framebufferCreateInfo.Height = y;
 		framebufferCreateInfo.Attachments = { Talon::FramebufferTextureFormat::RGBA8, Talon::FramebufferTextureFormat::DEPTH24_STENCIL8 };
 		m_Framebuffer = Talon::Framebuffer::Create(framebufferCreateInfo);
+
+		m_Cube = m_Registry.CreateEntity();
+		auto& meshRenderer = m_Cube.AddComponent<Talon::MeshRenderer>();
+		meshRenderer.SetMesh(Talon::MeshLoader::Load("Assets/Models/cube.obj")[0]);
 	}
 
 	void Update() override
@@ -33,6 +37,8 @@ public:
 		m_Framebuffer->Bind();
 		Talon::RendererCommand::Clear(0.15f, 0.15f, 0.15f);
 		Talon::RendererCommand::BeginFrame(m_EditorCamera);
+
+		m_Cube.GetComponent<Talon::MeshRenderer>().Render();
 
 		Talon::RendererCommand::EndFrame();
 		m_Framebuffer->Unbind();
@@ -63,4 +69,7 @@ private:
 	glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 	Talon::EditorCamera m_EditorCamera;
 	std::shared_ptr<Talon::Framebuffer> m_Framebuffer;
+
+	Talon::Entity m_Cube;
+	Talon::EntityRegistry m_Registry;
 };
