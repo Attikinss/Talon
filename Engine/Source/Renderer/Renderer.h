@@ -1,5 +1,6 @@
 #pragma once
 #include "glm/glm.hpp"
+#include <memory>
 
 namespace Talon
 {
@@ -21,6 +22,6 @@ namespace Talon
 		// Move clear colour info into a GLState structure or something
 		static void Clear(float r, float g, float b, float a);
 
-		static void Submit(Mesh* mesh, const glm::mat4& transform);
+		static void Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform);
 	};
 }

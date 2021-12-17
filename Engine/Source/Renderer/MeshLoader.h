@@ -1,6 +1,7 @@
 #pragma once
 #include "Mesh.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -12,6 +13,6 @@ namespace Talon
 	class MeshLoader
 	{
 	public:
-		static std::vector<Mesh*> Load(const std::string& filepath);
+		static std::vector<std::shared_ptr<Mesh>> Load(const std::string& filepath);
 	};
 }

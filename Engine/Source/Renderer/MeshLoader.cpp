@@ -9,7 +9,7 @@ namespace Talon
 {
     namespace Utilites
     {
-        static Mesh* ProcessMesh(aiMesh* mesh, const aiScene* scene)
+        static std::shared_ptr<Mesh> ProcessMesh(aiMesh* mesh, const aiScene* scene)
         {
             std::vector<Vertex> vertices;
             std::vector<uint32_t> indices;
@@ -53,10 +53,10 @@ namespace Talon
                     indices.emplace_back(face.mIndices[j]);
             }
 
-            return new Mesh(vertices, indices);
+            return std::make_shared<Mesh>(vertices, indices);
         }
 
-        static void ProcessNode(aiNode* node, const aiScene* scene, std::vector<Mesh*>& meshes)
+        static void ProcessNode(aiNode* node, const aiScene* scene, std::vector<std::shared_ptr<Mesh>>& meshes)
         {
             for (uint32_t i = 0; i < node->mNumMeshes; i++)
             {
@@ -69,11 +69,11 @@ namespace Talon
         }
     }
 
-    std::vector<Mesh*> MeshLoader::Load(const std::string& filepath)
+    std::vector<std::shared_ptr<Mesh>> MeshLoader::Load(const std::string& filepath)
 	{
         Assimp::Importer importer;
         const aiScene* scene = importer.ReadFile(filepath, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_CalcTangentSpace);
-        std::vector<Mesh*> meshes;
+        std::vector<std::shared_ptr<Mesh>> meshes;
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {

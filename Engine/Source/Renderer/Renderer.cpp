@@ -150,7 +150,7 @@ namespace Talon
 		}
 	}
 
-	void Renderer::Submit(Mesh* mesh, const glm::mat4& transform)
+	void Renderer::Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform)
 	{
 		// TODO: Draw objects at EndFrame rather than immediately
 

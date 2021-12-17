@@ -19,7 +19,7 @@ namespace Talon
 		Renderer::Clear(r, g, b, a);
 	}
 
-	void RendererCommand::Submit(Mesh* mesh, const glm::mat4& transform)
+	void RendererCommand::Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform)
 	{
 		Renderer::Submit(mesh, transform);
 	}
