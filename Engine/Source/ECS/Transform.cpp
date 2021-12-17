@@ -12,7 +12,7 @@ namespace Talon
 
 	void Transform::OnEditorUpdate()
 	{
-		Rotation = glm::quat(EulerAngles);
+		Rotation = glm::quat(glm::radians(EulerAngles));
 		OnUpdate();
 	}
 }
