@@ -21,6 +21,11 @@ public:
 		m_Cube = m_Registry.CreateEntity();
 		auto& meshRenderer = m_Cube.AddComponent<Talon::MeshRenderer>();
 		meshRenderer.SetMesh(Talon::MeshLoader::Load("Assets/Models/cube.obj")[0]);
+
+		Talon::RendererCommand::SetFaceCull(true);
+		Talon::RendererCommand::SetFaceCullType(Talon::FaceCullType::Back);
+		Talon::RendererCommand::SetPrimitiveType(Talon::PrimitiveType::Triangles);
+		Talon::RendererCommand::SetDepthTest(true);
 	}
 
 	void Update() override
@@ -35,7 +40,7 @@ public:
 		m_EditorCamera.Update();
 
 		m_Framebuffer->Bind();
-		Talon::RendererCommand::Clear(0.15f, 0.15f, 0.15f);
+		Talon::RendererCommand::Clear();
 		Talon::RendererCommand::BeginFrame(m_EditorCamera);
 
 		m_Cube.GetComponent<Talon::MeshRenderer>().Render();

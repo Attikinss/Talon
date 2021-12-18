@@ -21,6 +21,9 @@ namespace Talon
 		Texture2D* TestTexture = nullptr;
 		VertexArray* VAO = nullptr;
 
+		GLenum PrimitiveType = GL_TRIANGLES;
+		uint32_t ClearFlags = 0;
+
 		glm::mat4 ViewProjMatrix = glm::mat4(1.0f);
 
 		RendererData()
@@ -80,15 +83,6 @@ namespace Talon
 		int gladStatus = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
 		_ASSERT(gladStatus);
 
-		// Enable depth testing
-		glEnable(GL_DEPTH_TEST);
-
-		// Enable face culling
-		glEnable(GL_CULL_FACE);
-
-		// Set back face culling mode
-		glCullFace(GL_BACK);
-
 		// Enable blending
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -139,25 +133,108 @@ namespace Talon
 		}
 	}
 	
-	void Renderer::Clear(float r, float g, float b, float a)
+	void Renderer::Clear()
 	{
 		if (Active(__func__))
 		{
-			// TODO: Move into GLState class or something
-
-			glClearColor(r, g, b, a);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT | s_RendererData->ClearFlags);
 		}
 	}
 
 	void Renderer::Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform)
 	{
-		// TODO: Draw objects at EndFrame rather than immediately
+		if (Active(__func__))
+		{
+			// TODO: Draw objects at EndFrame rather than immediately
 
-		s_RendererData->TestShader->SetUniform("u_ModelMatrix", transform);
-		s_RendererData->VAO->GetVertexBuffers()[0]->SetData((uint32_t)mesh->GetVertices().size() * sizeof(Vertex), (void*)mesh->GetVertices().data());
-		s_RendererData->VAO->GetIndexBuffer()->SetData((uint32_t)mesh->GetIndices().size() * sizeof(uint32_t), (void*)mesh->GetIndices().data());
+			s_RendererData->TestShader->SetUniform("u_ModelMatrix", transform);
+			s_RendererData->VAO->GetVertexBuffers()[0]->SetData((uint32_t)mesh->GetVertices().size() * sizeof(Vertex), (void*)mesh->GetVertices().data());
+			s_RendererData->VAO->GetIndexBuffer()->SetData((uint32_t)mesh->GetIndices().size() * sizeof(uint32_t), (void*)mesh->GetIndices().data());
 
-		glDrawElements(GL_TRIANGLES, s_RendererData->VAO->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
+			glDrawElements(s_RendererData->PrimitiveType, s_RendererData->VAO->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, 0);
+		}
+	}
+
+	void Renderer::SetClearColour(const glm::vec4& colour)
+	{
+		if (Active(__func__))
+			glClearColor(colour.r, colour.g, colour.b, colour.a);
+	}
+
+	void Renderer::SetDepthTest(bool enabled)
+	{
+		if (Active(__func__))
+		{
+			if (enabled && s_RendererData->ClearFlags & GL_DEPTH_BUFFER_BIT)
+				s_RendererData->ClearFlags |= GL_DEPTH_BUFFER_BIT;
+
+			else if (!enabled && !(s_RendererData->ClearFlags & GL_DEPTH_BUFFER_BIT))
+				s_RendererData->ClearFlags = s_RendererData->ClearFlags & ~GL_DEPTH_BUFFER_BIT;
+		}
+	}
+
+	void Renderer::SetFaceCull(bool enabled)
+	{
+		if (Active(__func__))
+		{
+			if (enabled)
+				glEnable(GL_CULL_FACE);
+			else
+				glDisable(GL_CULL_FACE);
+		}
+	}
+
+	void Renderer::SetFaceCullType(FaceCullType type)
+	{
+		if (Active(__func__))
+		{
+			switch (type)
+			{
+			case Talon::FaceCullType::None:
+				glCullFace(GL_NONE);
+				break;
+
+			case Talon::FaceCullType::Front:
+				glCullFace(GL_FRONT);
+				break;
+
+			case Talon::FaceCullType::Back:
+				glCullFace(GL_BACK);
+				break;
+
+			case Talon::FaceCullType::Both:
+				glCullFace(GL_FRONT_AND_BACK);
+				break;
+
+			default:
+				Logger::Warn("({0}) - Invalid value selected!", __func__);
+				break;
+			}
+		}
+	}
+
+	void Renderer::SetPrimitiveType(PrimitiveType type)
+	{
+		if (Active(__func__))
+		{
+			switch (type)
+			{
+			case Talon::PrimitiveType::Triangles:
+				s_RendererData->PrimitiveType = GL_TRIANGLES;
+				break;
+
+			case Talon::PrimitiveType::Lines:
+				s_RendererData->PrimitiveType = GL_LINES;
+				break;
+
+			case Talon::PrimitiveType::Points:
+				s_RendererData->PrimitiveType = GL_POINTS;
+				break;
+
+			default:
+				Logger::Warn("({0}) - Invalid value selected!", __func__);
+				break;
+			}
+		}
 	}
 }

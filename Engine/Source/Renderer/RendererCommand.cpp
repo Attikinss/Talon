@@ -14,13 +14,38 @@ namespace Talon
 		Renderer::EndFrame();
 	}
 
-	void RendererCommand::Clear(float r, float g, float b, float a)
+	void RendererCommand::Clear()
 	{
-		Renderer::Clear(r, g, b, a);
+		Renderer::Clear();
 	}
 
 	void RendererCommand::Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform)
 	{
 		Renderer::Submit(mesh, transform);
+	}
+
+	void RendererCommand::SetClearColour(const glm::vec4& colour)
+	{
+		Renderer::SetClearColour(colour);
+	}
+
+	void RendererCommand::SetDepthTest(bool enabled)
+	{
+		Renderer::SetDepthTest(enabled);
+	}
+
+	void RendererCommand::SetFaceCull(bool enabled)
+	{
+		Renderer::SetFaceCull(enabled);
+	}
+
+	void RendererCommand::SetFaceCullType(FaceCullType type)
+	{
+		Renderer::SetFaceCullType(type);
+	}
+
+	void RendererCommand::SetPrimitiveType(PrimitiveType type)
+	{
+		Renderer::SetPrimitiveType(type);
 	}
 }
