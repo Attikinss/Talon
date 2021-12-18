@@ -136,7 +136,7 @@ namespace Talon
 		glTextureSubImage2D(m_ID, 0, 0, 0, createInfo.Width, createInfo.Height, createInfo.Format, createInfo.DataType, createInfo.PixelData);
 
 		// Gen mips?
-		//if (createInfo.GenerateMipMaps)
-		//	glGenerateTextureMipmap(m_ID);
+		if (createInfo.GenerateMipMaps)
+			glGenerateTextureMipmap(m_ID);
 	}
 }
