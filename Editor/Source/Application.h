@@ -4,12 +4,15 @@
 
 #include "Editor.h"
 
-class EditorApplication : public Talon::Application
+namespace Talon
 {
-public:
-	EditorApplication()
-		: Talon::Application()
+	class EditorApplication : public Talon::Application
 	{
-		PushLayer(new Editor());
-	}
-};
+	public:
+		EditorApplication()
+			: Talon::Application()
+		{
+			PushLayer(new Editor());
+		}
+	};
+}

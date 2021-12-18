@@ -1,6 +1,9 @@
 #include "Application.h"
 
-Talon::Application* Talon::Application::Create()
+namespace Talon
 {
-	return new EditorApplication();
+	Application* Application::Create()
+	{
+		return new EditorApplication();
+	}
 }
