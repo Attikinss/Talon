@@ -7,6 +7,6 @@ namespace Talon
 {
 	void MeshRenderer::Render()
 	{
-		RendererCommand::Submit(m_Mesh, m_Entity->GetComponent<Transform>().GetTransform());
+		RendererCommand::Submit(m_Mesh, m_Material, m_Entity->GetComponent<Transform>().GetTransform());
 	}
 }

@@ -3,6 +3,7 @@
 #include "Core/Logger.h"
 #include "Camera.h"
 #include "MeshLoader.h"
+#include "Material.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
@@ -17,7 +18,7 @@ namespace Talon
 {
 	struct RendererData
 	{
-		Shader* TestShader = nullptr;
+		Shader* MissingMatShader = nullptr;
 		Texture2D* TestTexture = nullptr;
 		VertexArray* VAO = nullptr;
 
@@ -28,7 +29,7 @@ namespace Talon
 
 		RendererData()
 		{
-			TestShader = new Shader("Assets/Shaders/Basic.glsl");
+			MissingMatShader = new Shader("Assets/Shaders/MissingMat.glsl");
 			TestTexture = new Texture2D("Assets/Textures/whenquadisblack.jpg");
 
 			auto indexBuffer = IndexBuffer::Create(1000 * sizeof(uint32_t));
@@ -49,7 +50,7 @@ namespace Talon
 
 		~RendererData()
 		{
-			delete TestShader;
+			delete MissingMatShader;
 			delete TestTexture;
 			delete VAO;
 		}
@@ -114,14 +115,10 @@ namespace Talon
 		{
 			// These are only here temporarily to draw the quad until
 			// a more permanent solution for model submission is created
-			s_RendererData->TestShader->Bind();
 			s_RendererData->TestTexture->Bind();
 			s_RendererData->VAO->Bind();
 			s_RendererData->VAO->GetIndexBuffer()->Bind();
-
 			s_RendererData->ViewProjMatrix = camera.GetViewProjection();
-			s_RendererData->TestShader->SetUniform("u_TestTexture", 0);
-			s_RendererData->TestShader->SetUniform("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
 		}
 	}
 
@@ -141,13 +138,25 @@ namespace Talon
 		}
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform)
+	void Renderer::Submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material, const glm::mat4& transform)
 	{
 		if (Active(__func__))
 		{
 			// TODO: Draw objects at EndFrame rather than immediately
+			if (material.get())
+			{
+				material->Bind();
+				material->SetInt("u_TestTexture", 0);
+				material->SetMatrix4("u_ModelMatrix", transform);
+				material->SetMatrix4("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
+			}
+			else
+			{
+				s_RendererData->MissingMatShader->Bind();
+				s_RendererData->MissingMatShader->SetUniform("u_ModelMatrix", transform);
+				s_RendererData->MissingMatShader->SetUniform("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
+			}
 
-			s_RendererData->TestShader->SetUniform("u_ModelMatrix", transform);
 			s_RendererData->VAO->GetVertexBuffers()[0]->SetData((uint32_t)mesh->GetVertices().size() * sizeof(Vertex), (void*)mesh->GetVertices().data());
 			s_RendererData->VAO->GetIndexBuffer()->SetData((uint32_t)mesh->GetIndices().size() * sizeof(uint32_t), (void*)mesh->GetIndices().data());
 

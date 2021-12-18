@@ -21,6 +21,7 @@ namespace Talon
 			m_Cube = m_Registry.CreateEntity();
 			auto& meshRenderer = m_Cube.AddComponent<MeshRenderer>();
 			meshRenderer.SetMesh(MeshLoader::Load("Assets/Models/cube.obj")[0]);
+			meshRenderer.SetMaterial(std::make_shared<Material>(Shader::Create("Assets/Shaders/Basic.glsl")));
 
 			RendererCommand::SetFaceCull(true);
 			RendererCommand::SetFaceCullType(FaceCullType::Back);

@@ -19,9 +19,9 @@ namespace Talon
 		Renderer::Clear();
 	}
 
-	void RendererCommand::Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform)
+	void RendererCommand::Submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material, const glm::mat4& transform)
 	{
-		Renderer::Submit(mesh, transform);
+		Renderer::Submit(mesh, material, transform);
 	}
 
 	void RendererCommand::SetClearColour(const glm::vec4& colour)

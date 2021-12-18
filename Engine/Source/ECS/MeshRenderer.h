@@ -5,6 +5,7 @@
 namespace Talon
 {
 	class Mesh;
+	class Material;
 
 	class MeshRenderer : public Component
 	{
@@ -17,6 +18,9 @@ namespace Talon
 		// TODO: Revise this function, could be better utilised elsewhere?
 		void Render();
 
+		const std::shared_ptr<Material>& GetMaterial() const { return m_Material; }
+		void SetMaterial(const std::shared_ptr<Material>& material) { m_Material = material; }
+
 		const std::shared_ptr<Mesh>& GetMesh() const { return m_Mesh; }
 		void SetMesh(const std::shared_ptr<Mesh>& mesh) { m_Mesh = mesh; }
 
@@ -24,5 +28,6 @@ namespace Talon
 
 	private:
 		std::shared_ptr<Mesh> m_Mesh;
+		std::shared_ptr<Material> m_Material;
 	};
 }

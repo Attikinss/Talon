@@ -7,6 +7,7 @@
 namespace Talon
 {
 	class Camera;
+	class Material;
 	class Mesh;
 
 	class Renderer
@@ -21,7 +22,7 @@ namespace Talon
 		static void BeginFrame(const Camera& camera);
 		static void EndFrame();
 		static void Clear();
-		static void Submit(const std::shared_ptr<Mesh>& mesh, const glm::mat4& transform);
+		static void Submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material, const glm::mat4& transform);
 
 		static void SetClearColour(const glm::vec4& colour);
 		static void SetDepthTest(bool enabled);

@@ -7,6 +7,9 @@
 
 namespace Talon
 {
+	// TODO: Create Shader instances so that the same Shader
+	//		 can be changed on a material to material basis
+
 	class Shader
 	{
 	public:

@@ -27,6 +27,8 @@
 #include "Renderer/Framebuffer.h"
 #include "Renderer/MeshLoader.h"
 #include "Renderer/RendererCommand.h"
+#include "Renderer/Material.h"
+#include "Renderer/Shader.h"
 
 #ifdef INCLUDE_ENTRY
 #include "EntryPoint.h"
