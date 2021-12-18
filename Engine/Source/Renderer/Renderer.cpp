@@ -143,6 +143,11 @@ namespace Talon
 		if (Active(__func__))
 		{
 			// TODO: Draw objects at EndFrame rather than immediately
+
+			// Bail if there's no mesh to render
+			if (!mesh.get())
+				return;
+
 			if (material.get())
 			{
 				material->Bind();
