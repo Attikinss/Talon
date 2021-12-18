@@ -80,7 +80,7 @@ namespace Talon
 	void Camera::RecalculateProjection()
 	{
 		m_ProjectionMatrix = m_ProjectionType == Projection::Orthographic ?
-			glm::ortho(-m_ViewSize.x, m_ViewSize.x, -m_ViewSize.y, m_ViewSize.y, m_NearPlane, m_FarPlane) :
+			glm::ortho(-m_ViewSize.x * 0.0025f, m_ViewSize.x * 0.0025f, -m_ViewSize.y * 0.0025f, m_ViewSize.y * 0.0025f, m_NearPlane, m_FarPlane) :
 			glm::perspective(glm::radians(m_FieldOfView), m_ViewSize.x / m_ViewSize.y, m_NearPlane, m_FarPlane);
 
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
