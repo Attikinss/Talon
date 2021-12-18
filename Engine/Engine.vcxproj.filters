@@ -94,6 +94,9 @@
     <ClInclude Include="Source\Renderer\IndexBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\Material.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Renderer\Mesh.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -182,6 +185,9 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Material.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\MeshLoader.cpp">

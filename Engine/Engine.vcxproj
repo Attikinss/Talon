@@ -122,6 +122,7 @@
     <ClInclude Include="Source\Renderer\EditorCamera.h" />
     <ClInclude Include="Source\Renderer\Framebuffer.h" />
     <ClInclude Include="Source\Renderer\IndexBuffer.h" />
+    <ClInclude Include="Source\Renderer\Material.h" />
     <ClInclude Include="Source\Renderer\Mesh.h" />
     <ClInclude Include="Source\Renderer\MeshLoader.h" />
     <ClInclude Include="Source\Renderer\RenderContext.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Source\Renderer\EditorCamera.cpp" />
     <ClCompile Include="Source\Renderer\Framebuffer.cpp" />
     <ClCompile Include="Source\Renderer\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Renderer\Material.cpp" />
     <ClCompile Include="Source\Renderer\MeshLoader.cpp" />
     <ClCompile Include="Source\Renderer\RenderContext.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
@@ -175,4 +177,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project> 
+</Project>
