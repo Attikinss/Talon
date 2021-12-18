@@ -8,15 +8,15 @@ namespace Talon
 {
 	class Shader;
 
-	// TODO: Create material instances so that the same material
-	//		 can be changed on an entity to entity basis
-
 	class Material
 	{
 	public:
 		Material(const std::shared_ptr<Shader>& shader)
 			: m_Shader(shader) { }
 		~Material() = default;
+
+		// ** Temporary **
+		void Bind();
 
 		void SetFloat(const std::string& name, float value);
 		void SetInt(const std::string& name, int32_t value);

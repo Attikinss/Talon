@@ -3,6 +3,11 @@
 
 namespace Talon
 {
+	void Material::Bind()
+	{
+		m_Shader->Bind();
+	}
+
 	void Material::SetFloat(const std::string& name, float value)
 	{
 		m_Shader->SetUniform(name, value);
