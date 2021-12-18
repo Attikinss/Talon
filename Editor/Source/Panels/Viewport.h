@@ -23,6 +23,7 @@ namespace Talon
 			meshRenderer.SetMesh(MeshLoader::Load("Assets/Models/cube.obj")[0]);
 			meshRenderer.SetMaterial(std::make_shared<Material>(Shader::Create("Assets/Shaders/Basic.glsl")));
 
+			RendererCommand::SetClearColour({ 0.15f, 0.15f, 0.15f, 1.0f });
 			RendererCommand::SetFaceCull(true);
 			RendererCommand::SetFaceCullType(FaceCullType::Back);
 			RendererCommand::SetPrimitiveType(PrimitiveType::Triangles);
