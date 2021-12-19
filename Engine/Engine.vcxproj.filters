@@ -54,6 +54,9 @@
     <ClInclude Include="Source\ECS\EntityRegistry.h">
       <Filter>ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ECS\Light.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
     <ClInclude Include="Source\ECS\MeshRenderer.h">
       <Filter>ECS</Filter>
     </ClInclude>

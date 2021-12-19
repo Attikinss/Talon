@@ -108,6 +108,7 @@
     <ClInclude Include="Source\ECS\Component.h" />
     <ClInclude Include="Source\ECS\Entity.h" />
     <ClInclude Include="Source\ECS\EntityRegistry.h" />
+    <ClInclude Include="Source\ECS\Light.h" />
     <ClInclude Include="Source\ECS\MeshRenderer.h" />
     <ClInclude Include="Source\ECS\Transform.h" />
     <ClInclude Include="Source\ECS\WorldCamera.h" />

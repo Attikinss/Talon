@@ -10,6 +10,7 @@
 // Components
 #include "ECS/Entity.h"
 #include "ECS/EntityRegistry.h"
+#include "ECS/Light.h"
 #include "ECS/MeshRenderer.h"
 #include "ECS/Transform.h"
 
