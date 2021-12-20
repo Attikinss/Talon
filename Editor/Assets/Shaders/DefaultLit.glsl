@@ -31,36 +31,67 @@ uniform vec3 u_ViewPosition;
 uniform vec3 u_AmbientLightColour;
 uniform vec3 u_LightDirection;
 
+uniform vec3 u_LightPosition;
+uniform vec3 u_Attenuation;
+
 in VertexData
 {
 	vec3 FragPosition;
 	vec3 Normal;
 } vertexIn;
 
-vec3 CalculateDirectionalLight(vec3 dirToView)
+vec3 CalcDiffuse(vec3 dirToLight)
 {
-	vec3 dirToLight = normalize(-u_LightDirection);
-
-	/* -------------- AMBIENT -------------- */
-	vec3 ambient = u_AmbientLightColour;
-
-	/* -------------- DIFFUSE -------------- */
 	float ndl = max(dot(vertexIn.Normal, dirToLight), 0.0);
-	vec3 diffuse = vec3(1.0) * ndl;
+	return vec3(1.0) * ndl;
+}
 
-	/* -------------- SPECULAR ------------- */
+vec3 CalcSpecular(vec3 dirToView, vec3 dirToLight)
+{
 	vec3 reflectDirection = reflect(-dirToLight, vertexIn.Normal);
 	float vdr = max(dot(dirToView, reflectDirection), 0.0);
 	vdr = pow(vdr, 32.0);
-	vec3 specular = vec3(1.0) * vdr;
+	return vec3(1.0) * vdr;
+}
+
+vec3 CalculateDirLight(vec3 dirToView)
+{
+	vec3 dirToLight = normalize(-u_LightDirection);
+	
+	vec3 ambient = u_AmbientLightColour;
+	vec3 diffuse = CalcDiffuse(dirToLight);
+	vec3 specular = CalcSpecular(dirToView, dirToLight);
 
 	return ambient + diffuse + specular;
+}
+
+vec3 CalculatePointLight(vec3 dirToView)
+{
+	vec3 dirToLight = normalize(u_LightPosition - vertexIn.FragPosition);
+
+	/* ------------- ATTENUATION ----------- */
+	float constant = max(u_Attenuation.x, 0.0);
+	float linear = max(u_Attenuation.y, 0.0);
+	float quadratic = max(u_Attenuation.x, 0.0);
+
+	float distance = length(u_LightPosition - vertexIn.FragPosition) / 2.5f;
+	float attenuation = constant + (linear * distance) + (quadratic * distance * distance);
+
+	vec3 ambient = u_AmbientLightColour;
+	vec3 diffuse = CalcDiffuse(dirToLight);
+	vec3 specular = CalcSpecular(dirToView, dirToLight);
+	return (ambient + diffuse + specular) / attenuation;
 }
 
 void main()
 {
 	vec3 dirToView = normalize(u_ViewPosition - vertexIn.FragPosition);
-	vec3 result = CalculateDirectionalLight(dirToView);
 
-	FragColour = vec4(result, 1.0);
+	// Directional Light
+	vec3 dirLight = CalculateDirLight(dirToView);
+
+	// Point Light
+	vec3 pointLight = CalculatePointLight(dirToView);
+
+	FragColour = vec4(dirLight + pointLight, 1.0);
 }
