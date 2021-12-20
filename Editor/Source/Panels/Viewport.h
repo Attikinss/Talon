@@ -22,11 +22,19 @@ namespace Talon
 			m_Light.GetComponent<Transform>().Rotation = glm::quatLookAt(glm::normalize(glm::vec3(1.5f, 2.0f, 2.5f)), { 0.0f, 1.0f, 0.0f });
 			m_Light.GetComponent<Transform>().OnUpdate();
 
+			m_TestMaterial = std::make_shared<Material>(Shader::Create("Assets/Shaders/DefaultLit.glsl"));
+
 			m_Cube = m_Registry.CreateEntity();
 			auto& meshRenderer = m_Cube.AddComponent<MeshRenderer>();
 			meshRenderer.SetMesh(MeshLoader::Load("Assets/Models/cube.obj")[0]);
-			m_TestMaterial = std::make_shared<Material>(Shader::Create("Assets/Shaders/DefaultLit.glsl"));
 			meshRenderer.SetMaterial(m_TestMaterial);
+
+			m_CubeAlbedo = Texture2D::Create("Assets/Textures/greasy-pan-2-albedo.png");
+			m_CubeNormal = Texture2D::Create("Assets/Textures/greasy-pan-2-normal.png");
+
+			m_TestMaterial->Bind();
+			m_TestMaterial->SetInt("u_AlbedoTex", 0);
+			m_TestMaterial->SetInt("u_NormalTex", 1);
 
 			RendererCommand::SetClearColour({ 0.15f, 0.15f, 0.15f, 1.0f });
 			RendererCommand::SetFaceCull(true);
@@ -46,8 +54,11 @@ namespace Talon
 
 			m_EditorCamera.Update();
 
+			m_CubeAlbedo->Bind(0);
+			m_CubeNormal->Bind(1);
+
 			m_TestMaterial->Bind();
-			m_TestMaterial->SetVector3("u_AmbientLightColour", { 0.25f, 0.25f, 0.25f });
+			m_TestMaterial->SetVector3("u_AmbientLightColour", glm::vec3(0.1f));
 			m_TestMaterial->SetVector3("u_LightDirection", m_Light.GetComponent<Transform>().GetForward());
 			m_TestMaterial->SetVector3("u_LightPosition", { -0.75f, -1.5f, -2.5f });
 			m_TestMaterial->SetVector3("u_ViewPosition", glm::inverse(m_EditorCamera.GetView())[3]);
@@ -93,5 +104,8 @@ namespace Talon
 		Entity m_Light;
 		EntityRegistry m_Registry;
 		std::shared_ptr<Material> m_TestMaterial;
+
+		std::shared_ptr<Texture2D> m_CubeAlbedo;
+		std::shared_ptr<Texture2D> m_CubeNormal;
 	};
 }

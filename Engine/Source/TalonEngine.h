@@ -30,6 +30,7 @@
 #include "Renderer/RendererCommand.h"
 #include "Renderer/Material.h"
 #include "Renderer/Shader.h"
+#include "Renderer/Texture.h"
 
 #ifdef INCLUDE_ENTRY
 #include "EntryPoint.h"

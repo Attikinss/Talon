@@ -14,7 +14,7 @@ void main()
 #shader-type fragment
 #version 450 core
 
-out vec4 FragColour;
+layout(location = 0) out vec4 FragColour;
 
 void main()
 {

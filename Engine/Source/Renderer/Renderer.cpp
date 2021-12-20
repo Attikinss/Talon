@@ -30,8 +30,8 @@ namespace Talon
 		{
 			MissingMatShader = new Shader("Assets/Shaders/MissingMat.glsl");
 
-			auto indexBuffer = IndexBuffer::Create(1000 * sizeof(uint32_t));
-			auto vertexBuffer = VertexBuffer::Create(20000 * sizeof(Vertex));
+			auto indexBuffer = IndexBuffer::Create(12500 * sizeof(uint32_t));
+			auto vertexBuffer = VertexBuffer::Create(7500 * sizeof(Vertex));
 			
 			vertexBuffer->SetLayout({
 				{ DataType::Float3, "a_Position" },
