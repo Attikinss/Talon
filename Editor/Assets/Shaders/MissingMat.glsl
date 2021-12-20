@@ -14,9 +14,9 @@ void main()
 #shader-type fragment
 #version 450 core
 
-out vec4 FragmentColour;
+out vec4 FragColour;
 
 void main()
 {
-	FragmentColour = vec4(1.0, 0.0, 1.0, 1.0);
+	FragColour = vec4(1.0, 0.0, 1.0, 1.0);
 }

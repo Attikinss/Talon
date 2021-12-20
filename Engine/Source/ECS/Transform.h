@@ -21,6 +21,8 @@ namespace Talon
 		const glm::mat4& GetTransform() const { return m_Transform; }
 		static const char* GetName() { return "Transform"; }
 
+		glm::vec3 GetForward() { return glm::normalize(m_Transform[2]); }
+
 	public:
 		glm::vec3 Position = { 0.0f, 0.0f, 0.0f };
 		glm::vec3 EulerAngles = { 0.0f, 0.0f, 0.0f };

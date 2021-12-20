@@ -19,7 +19,6 @@ namespace Talon
 	struct RendererData
 	{
 		Shader* MissingMatShader = nullptr;
-		Texture2D* TestTexture = nullptr;
 		VertexArray* VAO = nullptr;
 
 		GLenum PrimitiveType = GL_TRIANGLES;
@@ -30,15 +29,14 @@ namespace Talon
 		RendererData()
 		{
 			MissingMatShader = new Shader("Assets/Shaders/MissingMat.glsl");
-			TestTexture = new Texture2D("Assets/Textures/whenquadisblack.jpg");
 
 			auto indexBuffer = IndexBuffer::Create(1000 * sizeof(uint32_t));
 			auto vertexBuffer = VertexBuffer::Create(20000 * sizeof(Vertex));
 			
 			vertexBuffer->SetLayout({
 				{ DataType::Float3, "a_Position" },
-				{ DataType::Float3, "a_Normals" },
-				{ DataType::Float2, "a_UVs" },
+				{ DataType::Float3, "a_Normal" },
+				{ DataType::Float2, "a_UV" },
 				{ DataType::Float3, "a_Tangent" },
 				{ DataType::Float3, "a_BiTangent" },
 			});
@@ -51,7 +49,6 @@ namespace Talon
 		~RendererData()
 		{
 			delete MissingMatShader;
-			delete TestTexture;
 			delete VAO;
 		}
 	};
@@ -115,7 +112,6 @@ namespace Talon
 		{
 			// These are only here temporarily to draw the quad until
 			// a more permanent solution for model submission is created
-			s_RendererData->TestTexture->Bind();
 			s_RendererData->VAO->Bind();
 			s_RendererData->VAO->GetIndexBuffer()->Bind();
 			s_RendererData->ViewProjMatrix = camera.GetViewProjection();
@@ -151,8 +147,8 @@ namespace Talon
 			if (material.get())
 			{
 				material->Bind();
-				material->SetInt("u_TestTexture", 0);
 				material->SetMatrix4("u_ModelMatrix", transform);
+				material->SetMatrix3("u_NormalMatrix", glm::mat3(glm::transpose(glm::inverse(transform))));
 				material->SetMatrix4("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
 			}
 			else
