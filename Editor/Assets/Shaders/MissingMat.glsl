@@ -3,8 +3,13 @@
 
 layout(location = 0) in vec3 a_Position;
 
+layout (std140, binding = 0) uniform CameraData
+{
+	uniform mat4 u_ViewProjectionMatrix;
+	uniform vec3 u_ViewPosition;
+};
+
 uniform mat4 u_ModelMatrix;
-uniform mat4 u_ViewProjectionMatrix;
 
 void main()
 {

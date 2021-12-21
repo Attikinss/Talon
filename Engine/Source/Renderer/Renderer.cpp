@@ -6,6 +6,7 @@
 #include "Material.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "UniformBuffer.h"
 #include "VertexArray.h"
 
 #include <glad/gl.h>
@@ -16,15 +17,22 @@
 
 namespace Talon
 {
+	struct CameraData
+	{
+		glm::mat4 ViewProjMatrix = glm::mat4(1.0f);
+		glm::vec3 ViewPosition = glm::vec3(0.0f);
+	};
+
 	struct RendererData
 	{
 		Shader* MissingMatShader = nullptr;
 		VertexArray* VAO = nullptr;
+		UniformBuffer* UBO = nullptr;
 
 		GLenum PrimitiveType = GL_TRIANGLES;
 		uint32_t ClearFlags = 0;
 
-		glm::mat4 ViewProjMatrix = glm::mat4(1.0f);
+		CameraData CameraBuffer;
 
 		RendererData()
 		{
@@ -44,12 +52,15 @@ namespace Talon
 			VAO = new VertexArray();
 			VAO->AddVertexBuffer(vertexBuffer);
 			VAO->SetIndexBuffer(indexBuffer);
+
+			UBO = new UniformBuffer((uint32_t)sizeof(CameraData), 0);
 		}
 
 		~RendererData()
 		{
 			delete MissingMatShader;
 			delete VAO;
+			delete UBO;
 		}
 	};
 
@@ -110,11 +121,15 @@ namespace Talon
 	{
 		if (Active(__func__))
 		{
+			s_RendererData->CameraBuffer.ViewProjMatrix = camera.GetViewProjection();
+			s_RendererData->CameraBuffer.ViewPosition = glm::inverse(camera.GetView())[3];
+
 			// These are only here temporarily to draw the quad until
 			// a more permanent solution for model submission is created
 			s_RendererData->VAO->Bind();
 			s_RendererData->VAO->GetIndexBuffer()->Bind();
-			s_RendererData->ViewProjMatrix = camera.GetViewProjection();
+
+			s_RendererData->UBO->SetData((uint32_t)sizeof(CameraData), &s_RendererData->CameraBuffer, 0);
 		}
 	}
 
@@ -149,13 +164,11 @@ namespace Talon
 				material->Bind();
 				material->SetMatrix4("u_ModelMatrix", transform);
 				material->SetMatrix3("u_NormalMatrix", glm::mat3(glm::transpose(glm::inverse(transform))));
-				material->SetMatrix4("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
 			}
 			else
 			{
 				s_RendererData->MissingMatShader->Bind();
 				s_RendererData->MissingMatShader->SetUniform("u_ModelMatrix", transform);
-				s_RendererData->MissingMatShader->SetUniform("u_ViewProjectionMatrix", s_RendererData->ViewProjMatrix);
 			}
 
 			s_RendererData->VAO->GetVertexBuffers()[0]->SetData((uint32_t)mesh->GetVertices().size() * sizeof(Vertex), (void*)mesh->GetVertices().data());
@@ -175,10 +188,10 @@ namespace Talon
 	{
 		if (Active(__func__))
 		{
-			if (enabled && s_RendererData->ClearFlags & GL_DEPTH_BUFFER_BIT)
+			if (enabled && !(s_RendererData->ClearFlags & GL_DEPTH_BUFFER_BIT))
 				s_RendererData->ClearFlags |= GL_DEPTH_BUFFER_BIT;
 
-			else if (!enabled && !(s_RendererData->ClearFlags & GL_DEPTH_BUFFER_BIT))
+			else if (!enabled && s_RendererData->ClearFlags & GL_DEPTH_BUFFER_BIT)
 				s_RendererData->ClearFlags = s_RendererData->ClearFlags & ~GL_DEPTH_BUFFER_BIT;
 		}
 	}

@@ -58,11 +58,13 @@ namespace Talon
 			m_CubeNormal->Bind(1);
 
 			m_TestMaterial->Bind();
-			m_TestMaterial->SetVector3("u_AmbientLightColour", glm::vec3(0.1f));
+
 			m_TestMaterial->SetVector3("u_LightDirection", m_Light.GetComponent<Transform>().GetForward());
 			m_TestMaterial->SetVector3("u_LightPosition", { -0.75f, -1.5f, -2.5f });
-			m_TestMaterial->SetVector3("u_ViewPosition", glm::inverse(m_EditorCamera.GetView())[3]);
 			m_TestMaterial->SetVector3("u_Attenuation", { 1.0f, 0.01f, 0.002f });
+
+			// TODO: Add to lighting uniform buffer
+			m_TestMaterial->SetVector3("u_AmbientLightColour", glm::vec3(0.1f));
 
 			m_Framebuffer->Bind();
 			RendererCommand::Clear();

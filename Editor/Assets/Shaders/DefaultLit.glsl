@@ -7,9 +7,14 @@ layout(location = 2) in vec2 a_UV;
 layout(location = 3) in vec3 a_Tangent;
 layout(location = 4) in vec3 a_BiTangent;
 
+layout (std140, binding = 0) uniform CameraData
+{
+	uniform mat4 u_ViewProjectionMatrix;
+	uniform vec3 u_ViewPosition;
+};
+
 uniform mat4 u_ModelMatrix;
 uniform mat3 u_NormalMatrix;
-uniform mat4 u_ViewProjectionMatrix;
 
 struct VertexData
 {
@@ -21,6 +26,7 @@ struct VertexData
 };
 
 layout(location = 0) out VertexData VertexOut;
+layout(location = 5) out vec3 ViewPosition;
 
 void main()
 {
@@ -31,6 +37,8 @@ void main()
 	VertexOut.UV = a_UV;
 	VertexOut.Tangent = a_Tangent;
 	VertexOut.BiTangent = a_BiTangent;
+
+	ViewPosition = u_ViewPosition;
 }
 
 #shader-type fragment
@@ -46,10 +54,10 @@ struct VertexData
 };
 
 layout(location = 0) in VertexData VertexIn;
+layout(location = 5) in vec3 ViewPosition;
 
 layout(location = 0) out vec4 FragColour;
 
-uniform vec3 u_ViewPosition;
 uniform vec3 u_AmbientLightColour;
 uniform vec3 u_LightDirection;
 
@@ -119,7 +127,7 @@ vec3 CalculatePointLight(vec3 dirToView, vec3 normal)
 
 void main()
 {
-	vec3 dirToView = normalize(u_ViewPosition - VertexIn.FragPosition);
+	vec3 dirToView = normalize(ViewPosition - VertexIn.FragPosition);
 	vec3 normal = CalcNormalTex();
 
 	// Directional Light
