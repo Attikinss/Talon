@@ -21,7 +21,8 @@ namespace Talon
 		void Disable() { m_Enabled = false; }
 
 	protected:
-		std::string m_Name = std::string();
+		std::string m_Name;
 		bool m_Enabled = true;
+		bool m_Focused = false;
 	};
 }

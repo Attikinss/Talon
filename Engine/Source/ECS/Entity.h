@@ -17,10 +17,18 @@ namespace Talon
 
 	public:
 		Entity() = default;
-		Entity(Scene* registry, entt::entity handle);
+		Entity(Scene* scene, entt::entity handle)
+			: m_Scene(scene), m_EntityHandle(handle)
+		{
+			AddComponent<Transform>();
+		}
+
 		~Entity() = default;
 
-		void Destroy();
+		void Destroy()
+		{
+			m_Scene->DestroyEntity(*this);
+		}
 
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args)

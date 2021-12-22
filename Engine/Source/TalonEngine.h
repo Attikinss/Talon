@@ -13,6 +13,7 @@
 #include "ECS/Light.h"
 #include "ECS/MeshRenderer.h"
 #include "ECS/Transform.h"
+#include "ECS/WorldCamera.h"
 
 // Events
 #include "Events/ApplicationEvent.h"

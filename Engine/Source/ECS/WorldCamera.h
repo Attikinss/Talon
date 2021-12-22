@@ -8,22 +8,11 @@ namespace Talon
 {
 	class WorldCamera : public Component
 	{
-		friend class Entity;
+		friend class Scene;
 
 	public:
 		WorldCamera() = default;
 		~WorldCamera() = default;
-
-		void OnEditorUpdate() override
-		{
-			OnUpdate();
-		}
-
-		void OnUpdate() override
-		{
-			Transform& transform = m_Entity->GetComponent<Transform>();
-			m_Camera.SetView(glm::inverse(transform.GetTransform()));
-		}
 
 		Camera& GetCamera() { return m_Camera; }
 		const Camera& GetCamera() const { return m_Camera; }

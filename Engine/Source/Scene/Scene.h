@@ -4,6 +4,8 @@
 
 namespace Talon
 {
+	class Camera;
+
 	class Scene
 	{
 	public:
@@ -11,6 +13,7 @@ namespace Talon
 		~Scene();
 
 		void Update();
+		void Render(const Camera& camera);
 		void OnEvent(Event& evt);
 
 		Entity CreateEntity();
@@ -18,8 +21,12 @@ namespace Talon
 
 		EntityRegistry& GetRegistry() { return m_Registry; }
 
+		static Scene& GetCurrent() { return *s_CurrentScene; }
+		inline static Scene* s_CurrentScene = nullptr;
+
 	private:
 		std::string m_Name;
+		bool m_IsCurrent = false;
 
 		EntityRegistry m_Registry;
 	};

@@ -8,7 +8,7 @@ namespace Talon
 {
 	class Transform : public Component
 	{
-		friend class Entity;
+		friend class Scene;
 
 	public:
 		Transform() = default;
@@ -16,7 +16,12 @@ namespace Talon
 			: Position(origin) { }
 
 		const glm::mat4& GetTransform() const { return m_Transform; }
-		const glm::mat4 UpdateTransform() const { return glm::translate(glm::mat4(1.0f), Position) * glm::toMat4(glm::quat(Rotation)) * glm::scale(glm::mat4(1.0f), Scale); }
+		const glm::mat4 UpdateTransform()
+		{
+			m_Transform = glm::translate(glm::mat4(1.0f), Position) * glm::toMat4(glm::quat(Rotation)) * glm::scale(glm::mat4(1.0f), Scale);
+			return m_Transform;
+		}
+
 		static const char* GetName() { return "Transform"; }
 
 	public:

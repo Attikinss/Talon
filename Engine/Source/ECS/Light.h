@@ -6,6 +6,8 @@ namespace Talon
 {
 	class Light : public Component
 	{
+		friend class Scene;
+
 	public:
 		enum class Type { Directional, Point, Spot };
 

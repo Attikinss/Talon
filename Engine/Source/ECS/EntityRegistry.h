@@ -5,13 +5,14 @@ namespace Talon
 {
 	class Entity;
 
+	template<typename T>
+	using ComponentCollection = entt::basic_view<entt::entity, entt::exclude_t<>, T>;
+
 	class EntityRegistry
 	{
 	public:
 		EntityRegistry();
 		~EntityRegistry();
-
-		void Update();
 
 		entt::entity CreateEntity();
 		void DestroyEntity(entt::entity entityHandle);
@@ -26,6 +27,12 @@ namespace Talon
 		T& GetComponent(entt::entity entityHandle)
 		{
 			return m_Registry.get<T>(entityHandle);
+		}
+
+		template<typename T>
+		ComponentCollection<T> GetComponentsOfType()
+		{
+			return m_Registry.view<T>();
 		}
 
 		template<typename T>

@@ -9,6 +9,8 @@ namespace Talon
 
 	class MeshRenderer : public Component
 	{
+		friend class Scene;
+
 	public:
 		MeshRenderer() = default;
 		MeshRenderer(const std::shared_ptr<Mesh>& mesh)

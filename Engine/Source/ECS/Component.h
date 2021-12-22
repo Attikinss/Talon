@@ -2,8 +2,6 @@
 
 namespace Talon
 {
-	class Entity;
-
 	class Component
 	{
 		friend class Entity;
