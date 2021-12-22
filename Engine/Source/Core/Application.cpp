@@ -4,47 +4,13 @@
 #include "Logger.h"
 #include "Time.h"
 
-#include "ECS/Entity.h"
-#include "ECS/WorldCamera.h"
-
-#include "Renderer/EditorCamera.h"
 #include "Renderer/Renderer.h"
-#include "Renderer/RendererCommand.h"
 
 namespace Talon
 {
 	Application::Application()
 	{
-		Logger::Initialise();
-		Input::Initialise();
-		Time::Initialise();
-
-		// Specify window creation details
-		WindowCreateInfo winCreateInfo;
-		winCreateInfo.Fullscreen = false;
-		winCreateInfo.Width = 1280;
-		winCreateInfo.Height = 720;
-		winCreateInfo.Title = "Talon";
-		winCreateInfo.VSync = true;
-
-		m_Window = Window::Create(winCreateInfo);
-		m_Window->SetEventCallback(BIND_FUNCTION(Application::ProcessEvents));
-
-		Renderer::Initialise();
-
-		m_LayerStack = new LayerStack();
-		m_GUILayer = new ImGuiLayer();
-		m_LayerStack->PushOverlay(m_GUILayer);
-
-		m_Running = true;
-	}
-
-	Application::~Application()
-	{
-		Renderer::Shutdown();
-
-		delete m_LayerStack;
-		delete m_Window;
+		OnStartUp();
 	}
 
 	void Application::Run()
@@ -71,6 +37,8 @@ namespace Talon
 			Input::Update();
 			Time::Update();
 		}
+
+		OnShutDown();
 	}
 
 	void Application::ProcessEvents(Event& evt)
@@ -103,6 +71,40 @@ namespace Talon
 	Window& Application::GetWindow() const
 	{
 		return *m_Window;
+	}
+
+	void Application::OnStartUp()
+	{
+		Logger::Initialise();
+		Input::Initialise();
+		Time::Initialise();
+
+		// Specify window creation details
+		WindowCreateInfo winCreateInfo;
+		winCreateInfo.Fullscreen = false;
+		winCreateInfo.Width = 1280;
+		winCreateInfo.Height = 720;
+		winCreateInfo.Title = "Talon";
+		winCreateInfo.VSync = true;
+
+		m_Window = Window::Create(winCreateInfo);
+		m_Window->SetEventCallback(BIND_FUNCTION(Application::ProcessEvents));
+
+		Renderer::Initialise();
+
+		m_LayerStack = new LayerStack();
+		m_GUILayer = new ImGuiLayer();
+		m_LayerStack->PushOverlay(m_GUILayer);
+
+		m_Running = true;
+	}
+
+	void Application::OnShutDown()
+	{
+		Renderer::Shutdown();
+
+		delete m_LayerStack;
+		delete m_Window;
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& evt)

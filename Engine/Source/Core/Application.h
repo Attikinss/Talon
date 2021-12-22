@@ -4,7 +4,6 @@
 
 #include "Events/ApplicationEvent.h"
 #include "ImGui/ImGuiLayer.h"
-#include "ECS/EntityRegistry.h"
 
 namespace Talon
 {
@@ -15,7 +14,7 @@ namespace Talon
 		static Application* Create();
 
 		Application();
-		virtual ~Application();
+		virtual ~Application() = default;
 
 		void Run();
 		void ProcessEvents(Event& evt);
@@ -25,6 +24,9 @@ namespace Talon
 		Window& GetWindow() const;
 
 	private:
+		void OnStartUp();
+		void OnShutDown();
+
 		bool OnWindowClose(WindowCloseEvent& evt);
 
 	private:
@@ -32,8 +34,5 @@ namespace Talon
 		ImGuiLayer* m_GUILayer = nullptr;
 		Window* m_Window = nullptr;
 		bool m_Running = false;
-
-		/* Temporary */
-		EntityRegistry m_EntityRegistry;
 	};
 }
