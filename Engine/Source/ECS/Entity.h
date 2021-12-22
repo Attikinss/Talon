@@ -3,6 +3,8 @@
 #include "EntityRegistry.h"
 #include "Transform.h"
 
+#include "Scene/Scene.h"
+
 #include <entt/entt.hpp>
 
 namespace Talon
@@ -11,9 +13,11 @@ namespace Talon
 
 	class Entity
 	{
+		friend class Scene;
+
 	public:
 		Entity() = default;
-		Entity(EntityRegistry* registry, entt::entity handle);
+		Entity(Scene* registry, entt::entity handle);
 		~Entity() = default;
 
 		void Destroy();
@@ -29,7 +33,7 @@ namespace Talon
 				_ASSERT(false);
 			}
 
-			Component& component = m_Registry->AddComponent<T>(m_EntityHandle, std::forward<Args>(args)...);
+			Component& component = m_Scene->GetRegistry().AddComponent<T>(m_EntityHandle, std::forward<Args>(args)...);
 			component.m_Entity = this;
 
 			return (T&)component;
@@ -46,7 +50,7 @@ namespace Talon
 				_ASSERT(false);
 			}
 
-			return m_Registry->GetComponent<T>(m_EntityHandle);
+			return m_Scene->GetRegistry().GetComponent<T>(m_EntityHandle);
 		}
 
 		template<typename T>
@@ -54,7 +58,7 @@ namespace Talon
 		{
 			// TODO: Assert if T not component?
 
-			return m_Registry->HasComponent<T>(m_EntityHandle);
+			return m_Scene->GetRegistry().HasComponent<T>(m_EntityHandle);
 		}
 
 		template<typename T>
@@ -68,7 +72,7 @@ namespace Talon
 				_ASSERT(false);
 			}
 
-			m_Registry->RemoveComponent<T>(m_EntityHandle);
+			m_Scene->GetRegistry().RemoveComponent<T>(m_EntityHandle);
 		}
 
 		template<typename T>
@@ -76,12 +80,12 @@ namespace Talon
 		{
 			// TODO: Assert if T not compoent?
 
-			component = m_Registry->TryGetComponent<T>(m_EntityHandle, component);
+			component = m_Scene->GetRegistry().TryGetComponent<T>(m_EntityHandle, component);
 			return component != nullptr;
 		}
 
 	private:
 		entt::entity m_EntityHandle = entt::null;
-		EntityRegistry* m_Registry = nullptr;
+		Scene* m_Scene = nullptr;
 	};
 }

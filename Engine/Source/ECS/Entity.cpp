@@ -1,15 +1,17 @@
 #include "Entity.h"
 
+#include "Scene/Scene.h"
+
 namespace Talon
 {
-	Entity::Entity(EntityRegistry* registry, entt::entity handle)
-		: m_Registry(registry), m_EntityHandle(handle)
+	Entity::Entity(Scene* scene, entt::entity handle)
+		: m_Scene(scene), m_EntityHandle(handle)
 	{
 		AddComponent<Transform>();
 	}
 
 	void Entity::Destroy()
 	{
-		m_Registry->DestroyEntity(m_EntityHandle);
+		m_Scene->DestroyEntity(*this);
 	}
 }

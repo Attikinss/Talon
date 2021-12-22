@@ -11,7 +11,9 @@ namespace Talon
 		EntityRegistry();
 		~EntityRegistry();
 
-		Entity CreateEntity();
+		void Update();
+
+		entt::entity CreateEntity();
 		void DestroyEntity(entt::entity entityHandle);
 
 		template<typename T, typename... Args>

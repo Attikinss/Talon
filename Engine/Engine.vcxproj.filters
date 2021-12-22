@@ -16,6 +16,9 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{B3F7140E-1F0C-3DBF-E88D-E01E546139F0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="StbImage">
       <UniqueIdentifier>{71D06EE0-5D9D-C9EB-86B6-B79372E2FE79}</UniqueIdentifier>
     </Filter>
@@ -133,6 +136,9 @@
     <ClInclude Include="Source\Renderer\VertexBuffer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
     <ClInclude Include="Source\StbImage\stb_image.h">
       <Filter>StbImage</Filter>
     </ClInclude>
@@ -157,19 +163,10 @@
     <ClCompile Include="Source\Core\Window.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ECS\Component.cpp">
-      <Filter>ECS</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ECS\Entity.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="Source\ECS\EntityRegistry.cpp">
-      <Filter>ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECS\MeshRenderer.cpp">
-      <Filter>ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ECS\Transform.cpp">
       <Filter>ECS</Filter>
     </ClCompile>
     <ClCompile Include="Source\ImGui\ImGuiGLFW.cpp">
@@ -222,6 +219,9 @@
     </ClCompile>
     <ClCompile Include="Source\Renderer\VertexBuffer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Scene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\StbImage\stb_image.cpp">
       <Filter>StbImage</Filter>

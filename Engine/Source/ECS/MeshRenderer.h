@@ -15,9 +15,6 @@ namespace Talon
 			: m_Mesh(mesh) { }
 		~MeshRenderer() = default;
 
-		// TODO: Revise this function, could be better utilised elsewhere?
-		void Render();
-
 		const std::shared_ptr<Material>& GetMaterial() const { return m_Material; }
 		void SetMaterial(const std::shared_ptr<Material>& material) { m_Material = material; }
 

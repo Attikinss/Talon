@@ -18,13 +18,12 @@ namespace Talon
 			framebufferCreateInfo.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::DEPTH24_STENCIL8 };
 			m_Framebuffer = Framebuffer::Create(framebufferCreateInfo);
 
-			m_Light = m_Registry.CreateEntity();
-			m_Light.GetComponent<Transform>().Rotation = glm::quatLookAt(glm::normalize(glm::vec3(1.5f, 2.0f, 2.5f)), { 0.0f, 1.0f, 0.0f });
-			m_Light.GetComponent<Transform>().OnUpdate();
+			m_Light = m_CurrentScene.CreateEntity();
+			m_Light.GetComponent<Transform>().Rotation = glm::quatLookAt(glm::normalize(glm::vec3(-1.5f, -2.0f, -2.5f)), { 0.0f, 1.0f, 0.0f });
 
 			m_TestMaterial = std::make_shared<Material>(Shader::Create("Assets/Shaders/DefaultLit.glsl"));
 
-			m_Cube = m_Registry.CreateEntity();
+			m_Cube = m_CurrentScene.CreateEntity();
 			auto& meshRenderer = m_Cube.AddComponent<MeshRenderer>();
 			meshRenderer.SetMesh(MeshLoader::Load("Assets/Models/cube.obj")[0]);
 			meshRenderer.SetMaterial(m_TestMaterial);
@@ -52,6 +51,7 @@ namespace Talon
 				m_EditorCamera.SetViewSize(m_ViewportSize);
 			}
 
+			m_CurrentScene.Update();
 			m_EditorCamera.Update();
 
 			m_CubeAlbedo->Bind(0);
@@ -59,7 +59,7 @@ namespace Talon
 
 			m_TestMaterial->Bind();
 
-			m_TestMaterial->SetVector3("u_LightDirection", m_Light.GetComponent<Transform>().GetForward());
+			m_TestMaterial->SetVector3("u_LightDirection", m_Light.GetComponent<Transform>().Forward);
 			m_TestMaterial->SetVector3("u_LightPosition", { -0.75f, -1.5f, -2.5f });
 			m_TestMaterial->SetVector3("u_Attenuation", { 1.0f, 0.01f, 0.002f });
 
@@ -70,7 +70,8 @@ namespace Talon
 			RendererCommand::Clear();
 			RendererCommand::BeginFrame(m_EditorCamera);
 
-			m_Cube.GetComponent<MeshRenderer>().Render();
+			auto& meshRenderer = m_Cube.GetComponent<MeshRenderer>();
+			RendererCommand::Submit(meshRenderer.GetMesh(), meshRenderer.GetMaterial(), m_Cube.GetComponent<Transform>().GetTransform());
 
 			RendererCommand::EndFrame();
 			m_Framebuffer->Unbind();
@@ -104,7 +105,7 @@ namespace Talon
 
 		Entity m_Cube;
 		Entity m_Light;
-		EntityRegistry m_Registry;
+		Scene m_CurrentScene;
 		std::shared_ptr<Material> m_TestMaterial;
 
 		std::shared_ptr<Texture2D> m_CubeAlbedo;

@@ -135,6 +135,7 @@
     <ClInclude Include="Source\Renderer\Vertex.h" />
     <ClInclude Include="Source\Renderer\VertexArray.h" />
     <ClInclude Include="Source\Renderer\VertexBuffer.h" />
+    <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="Source\StbImage\stb_image.h" />
     <ClInclude Include="Source\TalonEngine.h" />
   </ItemGroup>
@@ -145,11 +146,8 @@
     <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Core\Time.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
-    <ClCompile Include="Source\ECS\Component.cpp" />
     <ClCompile Include="Source\ECS\Entity.cpp" />
     <ClCompile Include="Source\ECS\EntityRegistry.cpp" />
-    <ClCompile Include="Source\ECS\MeshRenderer.cpp" />
-    <ClCompile Include="Source\ECS\Transform.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiGLFW.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiOpenGL.cpp" />
@@ -167,6 +165,7 @@
     <ClCompile Include="Source\Renderer\UniformBuffer.cpp" />
     <ClCompile Include="Source\Renderer\VertexArray.cpp" />
     <ClCompile Include="Source\Renderer\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Scene\Scene.cpp" />
     <ClCompile Include="Source\StbImage\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
