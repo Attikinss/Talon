@@ -25,6 +25,7 @@ namespace Talon
 		void Pan(const glm::vec2& delta);
 		void Rotate(const glm::vec2& delta);
 		void Zoom(float delta);
+		void FlyCam(const glm::vec3& direction, const glm::vec2& mouseDelta);
 
 		void RecalculateView();
 
@@ -34,5 +35,7 @@ namespace Talon
 		glm::vec3 m_Rotation = { 0.0f, 0.0f, 0.0f };
 
 		float m_Distance = 0.0f;
+		float m_FlyCamSpeed = 0.085f;
+		bool m_FlyCamMode = false;
 	};
 }

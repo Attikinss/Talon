@@ -1,6 +1,7 @@
 #include "EditorCamera.h"
 
 #include "Core/Input.h"
+#include "Core/Logger.h"
 #include "Events/MouseEvent.h"
 
 #include <glm/gtx/quaternion.hpp>
@@ -21,10 +22,10 @@ namespace Talon
 	static float ZoomSpeed(float focalPointDistance)
 	{
 		float distance = focalPointDistance * 0.5f;
-		distance = glm::max(distance, 0.001f);
+		distance = glm::max(distance, 0.1f);
 
 		float speed = distance * distance;
-		speed = glm::min(speed, 100.0f);
+		speed = glm::clamp(speed, 1.0f, 100.0f);
 
 		return speed;
 	}
@@ -55,6 +56,7 @@ namespace Talon
 
 	void EditorCamera::Update()
 	{
+		m_FlyCamMode = false;
 		glm::vec2 delta = Input::GetMouseDelta() * 0.5f;
 
 		if (Input::GetKey(KeyCode::Left_Alt))
@@ -68,6 +70,26 @@ namespace Talon
 			}
 			else if (Input::GetMouseButton(MouseButton::Button_Right))
 				Zoom(delta.y * 0.01f);
+		}
+		else if (Input::GetMouseButton(MouseButton::Button_Right))
+		{
+			m_FlyCamMode = true;
+			glm::vec3 direction(0.0f);
+
+			if (Input::GetKey(KeyCode::W))
+				direction.z -= 1.0f;
+			if (Input::GetKey(KeyCode::S))
+				direction.z += 1.0f;
+			if (Input::GetKey(KeyCode::A))
+				direction.x -= 1.0f;
+			if (Input::GetKey(KeyCode::D))
+				direction.x += 1.0f;
+			if (Input::GetKey(KeyCode::Q))
+				direction.y -= 1.0f;
+			if (Input::GetKey(KeyCode::E))
+				direction.y += 1.0f;
+
+			FlyCam(direction, delta);
 		}
 		else if (Input::GetMouseButton(MouseButton::Button_Middle))
 			Pan(delta * 0.01f);
@@ -84,7 +106,11 @@ namespace Talon
 	bool EditorCamera::OnMouseScroll(MouseScrolledEvent& evt)
 	{
 		float delta = evt.GetOffset().second * -0.15f;
-		Zoom(delta);
+
+		if (m_FlyCamMode)
+			m_FlyCamSpeed = glm::clamp(m_FlyCamSpeed - m_FlyCamSpeed * delta, 0.005f, 2.0f);
+		else
+			Zoom(delta);
 
 		return false;
 	}
@@ -116,10 +142,25 @@ namespace Talon
 		}
 	}
 
+	void EditorCamera::FlyCam(const glm::vec3& direction, const glm::vec2& mouseDelta)
+	{
+		float speed = Input::GetKey(KeyCode::Left_Shift) ? m_FlyCamSpeed * 5.0f : m_FlyCamSpeed;
+
+		Rotate(mouseDelta);
+
+		m_Position += GetDirectionRight(GetOrientation({ -m_Rotation.x, -m_Rotation.y, 0.0f })) * direction.x * speed;
+		m_Position += GetDirectionUp(GetOrientation({ -m_Rotation.x, -m_Rotation.y, 0.0f })) * direction.y * speed;
+		m_Position -= GetDirectionFront(GetOrientation({ -m_Rotation.x, -m_Rotation.y, 0.0f })) * direction.z * speed;
+
+		m_FocalPoint = m_Position + GetDirectionFront(GetOrientation({ -m_Rotation.x, -m_Rotation.y, 0.0f })) * m_Distance;
+	}
+
 	void EditorCamera::RecalculateView()
 	{
 		glm::quat orientation = GetOrientation({ -m_Rotation.x, -m_Rotation.y, 0.0f });
-		m_Position = CalculatePosition(m_FocalPoint, orientation, m_Distance);
+
+		if (!m_FlyCamMode)
+ 			m_Position = CalculatePosition(m_FocalPoint, orientation, m_Distance);
 
 		m_ViewMatrix = glm::translate(glm::mat4(1.0f), m_Position) * glm::toMat4(orientation);
 		m_ViewMatrix = glm::inverse(m_ViewMatrix);
