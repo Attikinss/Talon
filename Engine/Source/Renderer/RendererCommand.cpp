@@ -1,5 +1,6 @@
 #include "RendererCommand.h"
 
+#include "ECS/MeshRenderer.h"
 #include "Renderer.h"
 
 namespace Talon
@@ -19,9 +20,9 @@ namespace Talon
 		Renderer::Clear();
 	}
 
-	void RendererCommand::Submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material, const glm::mat4& transform)
+	void RendererCommand::Submit(const MeshRenderer& meshRenderer, const glm::mat4& transform)
 	{
-		Renderer::Submit(mesh, material, transform);
+		Renderer::Submit(meshRenderer, transform);
 	}
 
 	void RendererCommand::SetClearColour(const glm::vec4& colour)

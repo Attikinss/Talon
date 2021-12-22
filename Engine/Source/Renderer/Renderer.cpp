@@ -1,6 +1,9 @@
 #include "Renderer.h"
 
+
 #include "Core/Logger.h"
+#include "ECS/MeshRenderer.h"
+
 #include "Camera.h"
 #include "MeshLoader.h"
 #include "Material.h"
@@ -149,16 +152,18 @@ namespace Talon
 		}
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Material>& material, const glm::mat4& transform)
+	void Renderer::Submit(const MeshRenderer& meshRenderer, const glm::mat4& transform)
 	{
 		if (Active(__func__))
 		{
 			// TODO: Draw objects at EndFrame rather than immediately
 
 			// Bail if there's no mesh to render
+			auto mesh = meshRenderer.GetMesh();
 			if (!mesh.get())
 				return;
 
+			auto material = meshRenderer.GetMaterial();
 			if (material.get())
 			{
 				material->Bind();

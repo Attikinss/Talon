@@ -70,8 +70,7 @@ namespace Talon
 			RendererCommand::Clear();
 			RendererCommand::BeginFrame(m_EditorCamera);
 
-			auto& meshRenderer = m_Cube.GetComponent<MeshRenderer>();
-			RendererCommand::Submit(meshRenderer.GetMesh(), meshRenderer.GetMaterial(), m_Cube.GetComponent<Transform>().GetTransform());
+			RendererCommand::Submit(m_Cube.GetComponent<MeshRenderer>(), m_Cube.GetComponent<Transform>().GetTransform());
 
 			RendererCommand::EndFrame();
 			m_Framebuffer->Unbind();
