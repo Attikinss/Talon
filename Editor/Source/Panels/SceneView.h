@@ -35,7 +35,8 @@ namespace Talon
 
 		void OnEvent(Event& evt)
 		{
-			m_EditorCamera.OnEvent(evt);
+			if (m_Focused)
+				m_EditorCamera.OnEvent(evt);
 		}
 
 		void Render(Scene& scene) override

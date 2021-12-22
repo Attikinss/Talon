@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorPanel.h"
+#include <imgui_internal.h>
 
 namespace Talon
 {
@@ -18,6 +19,7 @@ namespace Talon
 			{
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 				ImGui::Begin(m_Name.c_str(), nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | additionalFlags);
+				ImGui::GetCurrentContext()->NavWindowingToggleLayer = false;
 
 				m_Focused = ImGui::IsWindowFocused();
 
