@@ -54,45 +54,48 @@ namespace Talon
 		return focalPoint - front * distance;
 	}
 
-	void EditorCamera::Update()
+	void EditorCamera::Update(bool allowMovement)
 	{
-		m_FlyCamMode = false;
-		glm::vec2 delta = Input::GetMouseDelta() * 0.5f;
-
-		if (Input::GetKey(KeyCode::Left_Alt))
+		if (allowMovement)
 		{
-			if (Input::GetMouseButton(MouseButton::Button_Left))
+			m_FlyCamMode = false;
+			glm::vec2 delta = Input::GetMouseDelta() * 0.5f;
+
+			if (Input::GetKey(KeyCode::Left_Alt))
 			{
-				if (Input::GetKey(KeyCode::Left_Control))
-					Pan(delta * 0.01f);
-				else
-					Rotate(delta);
+				if (Input::GetMouseButton(MouseButton::Button_Left))
+				{
+					if (Input::GetKey(KeyCode::Left_Control))
+						Pan(delta * 0.01f);
+					else
+						Rotate(delta);
+				}
+				else if (Input::GetMouseButton(MouseButton::Button_Right))
+					Zoom(delta.y * 0.01f);
 			}
 			else if (Input::GetMouseButton(MouseButton::Button_Right))
-				Zoom(delta.y * 0.01f);
-		}
-		else if (Input::GetMouseButton(MouseButton::Button_Right))
-		{
-			m_FlyCamMode = true;
-			glm::vec3 direction(0.0f);
+			{
+				m_FlyCamMode = true;
+				glm::vec3 direction(0.0f);
 
-			if (Input::GetKey(KeyCode::W))
-				direction.z -= 1.0f;
-			if (Input::GetKey(KeyCode::S))
-				direction.z += 1.0f;
-			if (Input::GetKey(KeyCode::A))
-				direction.x -= 1.0f;
-			if (Input::GetKey(KeyCode::D))
-				direction.x += 1.0f;
-			if (Input::GetKey(KeyCode::Q))
-				direction.y -= 1.0f;
-			if (Input::GetKey(KeyCode::E))
-				direction.y += 1.0f;
+				if (Input::GetKey(KeyCode::W))
+					direction.z -= 1.0f;
+				if (Input::GetKey(KeyCode::S))
+					direction.z += 1.0f;
+				if (Input::GetKey(KeyCode::A))
+					direction.x -= 1.0f;
+				if (Input::GetKey(KeyCode::D))
+					direction.x += 1.0f;
+				if (Input::GetKey(KeyCode::Q))
+					direction.y -= 1.0f;
+				if (Input::GetKey(KeyCode::E))
+					direction.y += 1.0f;
 
-			FlyCam(direction, delta);
+				FlyCam(direction, delta);
+			}
+			else if (Input::GetMouseButton(MouseButton::Button_Middle))
+				Pan(delta * 0.01f);
 		}
-		else if (Input::GetMouseButton(MouseButton::Button_Middle))
-			Pan(delta * 0.01f);
 
 		RecalculateView();
 	}

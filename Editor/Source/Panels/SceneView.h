@@ -29,13 +29,12 @@ namespace Talon
 				m_EditorCamera.SetViewSize(m_ViewportSize);
 			}
 
-			if (m_Focused)
-				m_EditorCamera.Update();
+			m_EditorCamera.Update(m_Focused);
 		}
 
 		void OnEvent(Event& evt)
 		{
-			if (m_Focused)
+			if (m_Hovered)
 				m_EditorCamera.OnEvent(evt);
 		}
 

@@ -22,6 +22,7 @@ namespace Talon
 				ImGui::GetCurrentContext()->NavWindowingToggleLayer = false;
 
 				m_Focused = ImGui::IsWindowFocused();
+				m_Hovered = ImGui::IsWindowHovered();
 
 				ImVec2 panelSize = ImGui::GetContentRegionAvail();
 				m_ViewportSize = { panelSize.x, panelSize.y };

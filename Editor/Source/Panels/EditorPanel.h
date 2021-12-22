@@ -23,6 +23,6 @@ namespace Talon
 	protected:
 		std::string m_Name;
 		bool m_Enabled = true;
-		bool m_Focused = false;
+		bool m_Focused, m_Hovered = false;
 	};
 }

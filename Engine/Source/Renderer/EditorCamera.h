@@ -16,7 +16,7 @@ namespace Talon
 
 		}
 
-		void Update();
+		void Update(bool allowMovement);
 		void OnEvent(Event& evt);
 
 	private:
