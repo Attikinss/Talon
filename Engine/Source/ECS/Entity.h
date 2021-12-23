@@ -97,13 +97,13 @@ namespace Talon
 			m_Scene->GetRegistry().RemoveComponent<T>(m_EntityHandle);
 		}
 
+		// NOTE: Currently not functioning correctly - DO NOT USE
 		template<typename T>
-		bool TryGetComponent(T** component)
+		bool TryGetComponent(T* component)
 		{
 			// TODO: Assert if T not compoent?
 
-			component = m_Scene->GetRegistry().TryGetComponent<T>(m_EntityHandle, component);
-			return component != nullptr;
+			return m_Scene->GetRegistry().TryGetComponent<T>(m_EntityHandle, component);
 		}
 
 		uint32_t GetID() { return (uint32_t)m_EntityHandle; }

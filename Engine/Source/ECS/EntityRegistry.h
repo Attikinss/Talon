@@ -50,9 +50,11 @@ namespace Talon
 		}
 
 		template<typename T>
-		bool TryGetComponent(entt::entity entityHandle, T** component)
+		bool TryGetComponent(entt::entity entityHandle, T* component)
 		{
-			component = m_Registry.get<T>(entityHandle);
+			T foundComponent = m_Registry.get<T>(entityHandle);
+			*component = foundComponent;
+
 			return component != nullptr;
 		}
 
