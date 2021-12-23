@@ -32,6 +32,7 @@ namespace Talon
 		VertexArray* VAO = nullptr;
 		UniformBuffer* UBO = nullptr;
 
+		glm::vec4 ClearColour = { 0.0f, 0.0f, 0.0f, 1.0f };
 		GLenum PrimitiveType = GL_TRIANGLES;
 		uint32_t ClearFlags = 0;
 
@@ -148,6 +149,17 @@ namespace Talon
 	{
 		if (Active(__func__))
 		{
+			glm::vec4& colour = s_RendererData->ClearColour;
+			glClearColor(colour.r, colour.g, colour.b, colour.a);
+			glClear(GL_COLOR_BUFFER_BIT | s_RendererData->ClearFlags);
+		}
+	}
+
+	void Renderer::Clear(const glm::vec4& colour)
+	{
+		if (Active(__func__))
+		{
+			glClearColor(colour.r, colour.g, colour.b, colour.a);
 			glClear(GL_COLOR_BUFFER_BIT | s_RendererData->ClearFlags);
 		}
 	}
@@ -186,7 +198,7 @@ namespace Talon
 	void Renderer::SetClearColour(const glm::vec4& colour)
 	{
 		if (Active(__func__))
-			glClearColor(colour.r, colour.g, colour.b, colour.a);
+			s_RendererData->ClearColour = colour;
 	}
 
 	void Renderer::SetDepthTest(bool enabled)

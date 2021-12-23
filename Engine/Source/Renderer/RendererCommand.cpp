@@ -20,6 +20,11 @@ namespace Talon
 		Renderer::Clear();
 	}
 
+	void RendererCommand::Clear(const glm::vec4& colour)
+	{
+		Renderer::Clear(colour);
+	}
+
 	void RendererCommand::Submit(const MeshRenderer& meshRenderer, const glm::mat4& transform)
 	{
 		Renderer::Submit(meshRenderer, transform);

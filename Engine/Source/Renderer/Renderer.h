@@ -21,6 +21,7 @@ namespace Talon
 		static void BeginFrame(const Camera& camera);
 		static void EndFrame();
 		static void Clear();
+		static void Clear(const glm::vec4& colour);
 		static void Submit(const MeshRenderer& meshRenderer, const glm::mat4& transform);
 
 		static void SetClearColour(const glm::vec4& colour);
