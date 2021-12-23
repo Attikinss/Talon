@@ -10,6 +10,9 @@ namespace Talon
 		Component() = default;
 		virtual ~Component() = default;
 
+	public:
+		bool Enabled = true;
+
 	protected:
 		Entity* m_Entity = nullptr;
 	};

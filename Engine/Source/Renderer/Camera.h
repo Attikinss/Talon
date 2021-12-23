@@ -7,6 +7,9 @@ namespace Talon
 
 	class Camera
 	{
+		/* Temporary (hopefully) */
+		friend class DetailsPanel;
+
 	public:
 		Camera(Projection projectionType = Projection::Perspective, float nearPlane = 0.3f, float farPlane = 1000.0f, float fieldOfView = 60.0f);
 		Camera(const glm::vec2& viewSize, Projection projectionType = Projection::Perspective, float nearPlane = 0.3f, float farPlane = 1000.0f, float fieldOfView = 60.0f);

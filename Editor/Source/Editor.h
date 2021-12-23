@@ -1,5 +1,6 @@
 #pragma once
 #include "TalonEngine.h"
+#include "Panels/DetailsPanel.h"
 #include "Panels/HierarchyPanel.h"
 #include "Panels/GameViewPanel.h"
 #include "Panels/SceneViewPanel.h"
@@ -28,6 +29,7 @@ namespace Talon
 		void Initialise() override
 		{
 			m_CurrentScene = std::make_shared<Scene>();
+			m_DetailsPanel = DetailsPanel(m_CurrentScene);
 			m_SceneHierarchy = HierarchyPanel(m_CurrentScene);
 			m_GameView = GameViewPanel(m_CurrentScene);
 			m_SceneView = SceneViewPanel(m_CurrentScene);
@@ -77,13 +79,18 @@ namespace Talon
 			m_TestMaterial->SetVector3("u_AmbientLightColour", glm::vec3(0.1f));
 
 			// Update panels
+			m_DetailsPanel.Update();
 			m_GameView.Update();
 			m_SceneView.Update();
 			m_SceneHierarchy.Update();
 
 			// Draw to game view
 			m_GameView.BeginFrame();
-			m_CurrentScene->Render(m_GameView.GetCamera());
+			if (m_Camera.GetComponent<WorldCamera>().Enabled)
+				m_CurrentScene->Render(m_GameView.GetCamera());
+			else
+				RendererCommand::Clear(glm::vec4(0.0f));
+
 			m_GameView.EndFrame();
 
 			// Draw to scene view
@@ -133,6 +140,7 @@ namespace Talon
 			m_GameView.Draw();
 			m_SceneView.Draw();
 			m_SceneHierarchy.Draw();
+			m_DetailsPanel.Draw();
 		}
 
 		void Shutdown() override
@@ -145,12 +153,14 @@ namespace Talon
 			m_GameView.OnEvent(evt);
 			m_SceneView.OnEvent(evt);
 			m_SceneHierarchy.OnEvent(evt);
+			m_DetailsPanel.OnEvent(evt);
 		}
 
 	private:
 		GameViewPanel m_GameView;
 		SceneViewPanel m_SceneView;
 		HierarchyPanel m_SceneHierarchy;
+		DetailsPanel m_DetailsPanel;
 
 		Entity m_Camera;
 		Entity m_Cube;

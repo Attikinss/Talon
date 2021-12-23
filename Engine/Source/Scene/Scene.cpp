@@ -58,6 +58,7 @@ namespace Talon
 			Utilities::DecomposeMatrix(t, scale, rotation, position);
 
 			// Update vectors
+			transform.EulerAngles = glm::degrees(glm::eulerAngles(rotation));
 			transform.Up = glm::normalize(glm::rotate(rotation, glm::vec3(0.0f, 1.0f, 0.0f)));
 			transform.Right = glm::normalize(glm::rotate(rotation, glm::vec3(1.0f, 0.0f, 0.0f)));
 			transform.Forward = glm::normalize(glm::rotate(rotation, glm::vec3(0.0f, 0.0f, -1.0f)));
@@ -70,9 +71,12 @@ namespace Talon
 		{
 			// Get component from view
 			WorldCamera& camera = cameraView.get<WorldCamera>(entity);
-			glm::mat4 transform = camera.m_Entity->GetComponent<Transform>().GetTransform();
 
-			camera.GetCamera().SetView(glm::inverse(transform));
+			if (camera.Enabled)
+			{
+				glm::mat4 transform = camera.m_Entity->GetComponent<Transform>().GetTransform();
+				camera.GetCamera().SetView(glm::inverse(transform));
+			}
 		}
 	}
 
@@ -87,10 +91,15 @@ namespace Talon
 		{
 			// Get component from view
 			MeshRenderer& meshRenderer = meshRendererView.get<MeshRenderer>(entity);
-			glm::mat4 transform = meshRenderer.m_Entity->GetComponent<Transform>().GetTransform();
 
-			RendererCommand::Submit(meshRenderer, transform);
+			if (meshRenderer.Enabled)
+			{
+				glm::mat4 transform = meshRenderer.m_Entity->GetComponent<Transform>().GetTransform();
+				RendererCommand::Submit(meshRenderer, transform);
+			}
 		}
+
+		// TODO: Add lighting handover
 
 		RendererCommand::EndFrame();
 	}

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -93,10 +93,12 @@
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Editor.h" />
+    <ClInclude Include="Source\Panels\DetailsPanel.h" />
     <ClInclude Include="Source\Panels\EditorPanel.h" />
-    <ClInclude Include="Source\Panels\GameView.h" />
-    <ClInclude Include="Source\Panels\SceneView.h" />
-    <ClInclude Include="Source\Panels\Viewport.h" />
+    <ClInclude Include="Source\Panels\GameViewPanel.h" />
+    <ClInclude Include="Source\Panels\HierarchyPanel.h" />
+    <ClInclude Include="Source\Panels\SceneViewPanel.h" />
+    <ClInclude Include="Source\Panels\ViewportPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
@@ -109,4 +111,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project> 
+</Project>
