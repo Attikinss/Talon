@@ -32,7 +32,7 @@ namespace Talon
 				m_EditorCamera.SetViewSize(m_ViewportSize);
 			}
 
-			m_EditorCamera.Update(m_Focused);
+			m_EditorCamera.Update(m_Focused && m_Hovered);
 		}
 
 		void Draw(ImGuiWindowFlags additionalFlags = ImGuiWindowFlags_None) override
