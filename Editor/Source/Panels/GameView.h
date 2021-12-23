@@ -38,17 +38,7 @@ namespace Talon
 
 		}
 
-		void Render(Scene& scene) override
-		{
-			if (s_CurrentCamera)
-			{
-				m_Framebuffer->Bind();
-
-				scene.Render(*s_CurrentCamera);
-
-				m_Framebuffer->Unbind();
-			}
-		}
+		const Camera& GetCamera() const override { return *s_CurrentCamera; }
 
 		static void SetCamera(Camera* camera) { s_CurrentCamera = camera; }
 

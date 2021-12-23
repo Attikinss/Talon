@@ -33,7 +33,17 @@ namespace Talon
 			}
 		}
 
-		virtual void Render(Scene& scene) = 0;
+		void BeginFrame()
+		{
+			m_Framebuffer->Bind();
+		}
+
+		void EndFrame()
+		{
+			m_Framebuffer->Unbind();
+		}
+
+		virtual const Camera& GetCamera() const = 0;
 
 	protected:
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };

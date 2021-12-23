@@ -27,16 +27,17 @@ namespace Talon
 
 		void Initialise() override
 		{
-			m_Camera = m_CurrentScene.CreateEntity();
+			m_CurrentScene = std::make_shared<Scene>();
+			m_Camera = m_CurrentScene->CreateEntity();
 			m_Camera.GetComponent<Transform>().Position = { 0.0f, 0.0f, 10.0f };
 			GameView::SetCamera(&m_Camera.AddComponent<WorldCamera>().GetCamera());
 
-			m_Light = m_CurrentScene.CreateEntity();
+			m_Light = m_CurrentScene->CreateEntity();
 			m_Light.GetComponent<Transform>().Rotation = glm::quatLookAt(glm::normalize(glm::vec3(-1.5f, -2.0f, -2.5f)), { 0.0f, 1.0f, 0.0f });
 
 			m_TestMaterial = std::make_shared<Material>(Shader::Create("Assets/Shaders/DefaultLit.glsl"));
 
-			m_Cube = m_CurrentScene.CreateEntity();
+			m_Cube = m_CurrentScene->CreateEntity();
 			auto& meshRenderer = m_Cube.AddComponent<MeshRenderer>();
 			meshRenderer.SetMesh(MeshLoader::Load("Assets/Models/cube.obj")[0]);
 			meshRenderer.SetMaterial(m_TestMaterial);
@@ -57,7 +58,7 @@ namespace Talon
 
 		void Update() override
 		{
-			m_CurrentScene.Update();
+			m_CurrentScene->Update();
 
 			m_CubeAlbedo->Bind(0);
 			m_CubeNormal->Bind(1);
@@ -74,7 +75,10 @@ namespace Talon
 			for (auto& vp : m_Viewports)
 			{
 				vp->Update();
-				vp->Render(m_CurrentScene);
+
+				vp->BeginFrame();
+				m_CurrentScene->Render(vp->GetCamera());
+				vp->EndFrame();
 			}
 		}
 
@@ -145,7 +149,7 @@ namespace Talon
 		Entity m_Cube;
 		Entity m_Light;
 
-		Scene m_CurrentScene;
+		std::shared_ptr<Scene> m_CurrentScene;
 		std::shared_ptr<Material> m_TestMaterial;
 
 		std::shared_ptr<Texture2D> m_CubeAlbedo;

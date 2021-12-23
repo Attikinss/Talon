@@ -38,14 +38,7 @@ namespace Talon
 				m_EditorCamera.OnEvent(evt);
 		}
 
-		void Render(Scene& scene) override
-		{
-			m_Framebuffer->Bind();
-
-			scene.Render(m_EditorCamera);
-
-			m_Framebuffer->Unbind();
-		}
+		const Camera& GetCamera() const override { return m_EditorCamera; }
 
 	private:
 		EditorCamera m_EditorCamera;
