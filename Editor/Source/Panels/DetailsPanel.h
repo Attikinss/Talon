@@ -25,6 +25,10 @@ namespace Talon
 		{
 			ImGui::Begin(m_Name.c_str());
 			ImGui::GetCurrentContext()->NavWindowingToggleLayer = false;
+			bool windowHovered = ImGui::IsWindowHovered();
+
+			if (ImGui::IsMouseClicked(1) && windowHovered)
+				ImGui::FocusWindow(ImGui::GetCurrentContext()->CurrentWindow);
 
 			if (m_Scene.get())
 			{

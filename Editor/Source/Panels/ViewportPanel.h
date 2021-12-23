@@ -20,6 +20,10 @@ namespace Talon
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 				ImGui::Begin(m_Name.c_str(), nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | additionalFlags);
 				ImGui::GetCurrentContext()->NavWindowingToggleLayer = false;
+				bool windowHovered = ImGui::IsWindowHovered();
+
+				if (ImGui::IsMouseClicked(1) && windowHovered)
+					ImGui::FocusWindow(ImGui::GetCurrentContext()->CurrentWindow);
 
 				m_Focused = ImGui::IsWindowFocused();
 				m_Hovered = ImGui::IsWindowHovered();
