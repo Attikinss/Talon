@@ -6,9 +6,12 @@ namespace Talon
 	class GameViewPanel : public ViewportPanel
 	{
 	public:
-		GameViewPanel()
+		GameViewPanel() : ViewportPanel("Details") { }
+		GameViewPanel(const std::shared_ptr<Scene>& scene)
 			: ViewportPanel("Game")
 		{
+			SetScene(scene);
+
 			auto [x, y] = Window::Get().GetSize();
 			m_ViewportSize = { (float)x, (float)y };
 

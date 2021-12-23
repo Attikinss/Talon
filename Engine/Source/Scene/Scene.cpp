@@ -34,16 +34,11 @@ namespace Talon
 	Scene::Scene(const std::string& name)
 		: m_Name(name)
 	{
-		if (!s_CurrentScene)
-		{
-			s_CurrentScene = this;
-			m_IsCurrent = true;
-		}
 	}
 
 	Scene::~Scene()
 	{
-
+		m_Selection.clear();
 	}
 
 	void Scene::Update()

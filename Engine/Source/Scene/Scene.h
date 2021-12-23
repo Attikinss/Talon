@@ -38,8 +38,8 @@ namespace Talon
 		const std::vector<Entity>& GetSelection() const { return m_Selection; }
 		void ClearSelection() { m_Selection.clear(); }
 
-		static Scene& GetCurrent() { return *s_CurrentScene; }
-		inline static Scene* s_CurrentScene = nullptr;
+		static const std::shared_ptr<Scene>& GetCurrent() { return s_CurrentScene; }
+		inline static std::shared_ptr<Scene> s_CurrentScene;
 
 	private:
 		std::string m_Name;

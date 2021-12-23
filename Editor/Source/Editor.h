@@ -1,8 +1,8 @@
 #pragma once
 #include "TalonEngine.h"
+#include "Panels/HierarchyPanel.h"
 #include "Panels/GameViewPanel.h"
 #include "Panels/SceneViewPanel.h"
-#include "Panels/HierarchyPanel.h"
 
 namespace Talon
 {
@@ -28,7 +28,9 @@ namespace Talon
 		void Initialise() override
 		{
 			m_CurrentScene = std::make_shared<Scene>();
-			m_SceneHierarchy.SetScene(m_CurrentScene);
+			m_SceneHierarchy = HierarchyPanel(m_CurrentScene);
+			m_GameView = GameViewPanel(m_CurrentScene);
+			m_SceneView = SceneViewPanel(m_CurrentScene);
 
 			m_Camera = m_CurrentScene->CreateEntity("Camera");
 			m_Camera.GetComponent<Transform>().Position = { 0.0f, 0.0f, 10.0f };

@@ -15,11 +15,6 @@ namespace Talon
 			SetScene(scene);
 		}
 
-		void SetScene(const std::shared_ptr<Scene>& scene)
-		{
-			m_Scene = scene;
-		}
-
 		void Update() override {}
 		void OnEvent(Event& evt) override {}
 
@@ -80,8 +75,5 @@ namespace Talon
 				ImGui::TreePop();
 			}
 		}
-
-	private:
-		std::shared_ptr<Scene> m_Scene;
 	};
 }
