@@ -1,13 +1,13 @@
 #pragma once
-#include "Viewport.h"
+#include "ViewportPanel.h"
 
 namespace Talon
 {
-	class GameView : public Viewport
+	class GameViewPanel : public ViewportPanel
 	{
 	public:
-		GameView()
-			: Viewport("Game")
+		GameViewPanel()
+			: ViewportPanel("Game")
 		{
 			auto [x, y] = Window::Get().GetSize();
 			m_ViewportSize = { (float)x, (float)y };

@@ -1,13 +1,13 @@
 #pragma once
-#include "Viewport.h"
+#include "ViewportPanel.h"
 
 namespace Talon
 {
-	class SceneView : public Viewport
+	class SceneViewPanel : public ViewportPanel
 	{
 	public:
-		SceneView()
-			: Viewport("Scene")
+		SceneViewPanel()
+			: ViewportPanel("Scene")
 		{
 			auto [x, y] = Window::Get().GetSize();
 			m_ViewportSize = { (float)x, (float)y };
@@ -34,7 +34,7 @@ namespace Talon
 
 		void Draw(ImGuiWindowFlags additionalFlags = ImGuiWindowFlags_None) override
 		{
-			Viewport::Draw();
+			ViewportPanel::Draw();
 
 
 		}

@@ -1,8 +1,8 @@
 #pragma once
 #include "TalonEngine.h"
-#include "Panels/GameView.h"
-#include "Panels/SceneView.h"
-#include "Panels/Hierarchy.h"
+#include "Panels/GameViewPanel.h"
+#include "Panels/SceneViewPanel.h"
+#include "Panels/HierarchyPanel.h"
 
 namespace Talon
 {
@@ -32,7 +32,7 @@ namespace Talon
 
 			m_Camera = m_CurrentScene->CreateEntity("Camera");
 			m_Camera.GetComponent<Transform>().Position = { 0.0f, 0.0f, 10.0f };
-			GameView::SetCamera(&m_Camera.AddComponent<WorldCamera>().GetCamera());
+			GameViewPanel::SetCamera(&m_Camera.AddComponent<WorldCamera>().GetCamera());
 
 			m_Light = m_CurrentScene->CreateEntity("Directional Light");
 			m_Light.GetComponent<Transform>().Rotation = glm::quatLookAt(glm::normalize(glm::vec3(-1.5f, -2.0f, -2.5f)), { 0.0f, 1.0f, 0.0f });
@@ -146,9 +146,9 @@ namespace Talon
 		}
 
 	private:
-		GameView m_GameView;
-		SceneView m_SceneView;
-		Hierarchy m_SceneHierarchy;
+		GameViewPanel m_GameView;
+		SceneViewPanel m_SceneView;
+		HierarchyPanel m_SceneHierarchy;
 
 		Entity m_Camera;
 		Entity m_Cube;

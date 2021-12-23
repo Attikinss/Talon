@@ -4,10 +4,10 @@
 
 namespace Talon
 {
-	class Viewport : public EditorPanel
+	class ViewportPanel : public EditorPanel
 	{
 	public:
-		Viewport(const std::string& name)
+		ViewportPanel(const std::string& name)
 			: EditorPanel(name)
 		{
 			

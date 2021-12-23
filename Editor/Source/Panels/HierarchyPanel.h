@@ -5,11 +5,11 @@
 
 namespace Talon
 {
-	class Hierarchy : public EditorPanel
+	class HierarchyPanel : public EditorPanel
 	{
 	public:
-		Hierarchy() : EditorPanel("Hierarchy") { }
-		Hierarchy(const std::shared_ptr<Scene>& scene)
+		HierarchyPanel() : EditorPanel("Hierarchy") { }
+		HierarchyPanel(const std::shared_ptr<Scene>& scene)
 			: EditorPanel("Hierarchy")
 		{
 			SetScene(scene);
