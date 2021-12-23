@@ -10,6 +10,8 @@ namespace Talon
 
 	class EntityRegistry
 	{
+		friend class Scene;
+
 	public:
 		EntityRegistry();
 		~EntityRegistry();

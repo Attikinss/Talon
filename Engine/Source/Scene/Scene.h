@@ -19,6 +19,19 @@ namespace Talon
 		Entity CreateEntity();
 		void DestroyEntity(Entity entity);
 
+		std::vector<Entity> GetAllEntities()
+		{
+			std::vector<Entity> entites;
+			entites.reserve(m_Registry.m_Registry.size());
+
+			m_Registry.m_Registry.each([&](auto id)
+			{
+				entites.emplace_back(this, id);
+			});
+
+			return entites;
+		}
+
 		EntityRegistry& GetRegistry() { return m_Registry; }
 
 		static Scene& GetCurrent() { return *s_CurrentScene; }

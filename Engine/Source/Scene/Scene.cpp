@@ -107,7 +107,10 @@ namespace Talon
 
 	Entity Scene::CreateEntity()
 	{
-		return Entity(this, m_Registry.CreateEntity());
+		Entity entity(this, m_Registry.CreateEntity());
+		entity.AddComponent<Transform>();
+
+		return entity;
 	}
 
 	void Scene::DestroyEntity(Entity entity)
