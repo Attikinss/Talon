@@ -20,7 +20,7 @@ namespace Talon
 		Entity(Scene* scene, entt::entity handle)
 			: m_Scene(scene), m_EntityHandle(handle)
 		{
-			AddComponent<Transform>();
+			
 		}
 
 		~Entity() = default;
@@ -91,6 +91,14 @@ namespace Talon
 			component = m_Scene->GetRegistry().TryGetComponent<T>(m_EntityHandle, component);
 			return component != nullptr;
 		}
+
+		uint32_t GetID() { return (uint32_t)m_EntityHandle; }
+
+		bool operator==(const Entity& other) { return m_EntityHandle == other.m_EntityHandle; }
+		bool operator!=(const Entity& other) { return !(*this == other); }
+
+	public:
+		std::string Name = "Entity";
 
 	private:
 		entt::entity m_EntityHandle = entt::null;
