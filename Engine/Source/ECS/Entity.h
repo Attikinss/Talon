@@ -11,6 +11,20 @@ namespace Talon
 {
 	// TODO: Make Enities shared pointers?
 
+	class EntityInfo : public Component
+	{
+	public:
+		EntityInfo() = default;
+		EntityInfo(const std::string& name, bool enabled = true)
+			: Name(name), Enabled(true) { }
+
+		static const char* GetName() { return "EntityInfo"; }
+
+	public:
+		std::string Name = "Entity";
+		bool Enabled = true;
+	};
+
 	class Entity
 	{
 		friend class Scene;
@@ -96,9 +110,6 @@ namespace Talon
 
 		bool operator==(const Entity& other) { return m_EntityHandle == other.m_EntityHandle; }
 		bool operator!=(const Entity& other) { return !(*this == other); }
-
-	public:
-		std::string Name = "Entity";
 
 	private:
 		entt::entity m_EntityHandle = entt::null;

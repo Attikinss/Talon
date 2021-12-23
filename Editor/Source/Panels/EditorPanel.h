@@ -13,7 +13,7 @@ namespace Talon
 		virtual ~EditorPanel() = default;
 
 		virtual void Update() = 0;
-		virtual void Draw(ImGuiWindowFlags_ additionalFlags = ImGuiWindowFlags_None) = 0;
+		virtual void Draw(ImGuiWindowFlags additionalFlags = ImGuiWindowFlags_None) = 0;
 		virtual void OnEvent(Event& evt) = 0;
 
 		bool Enabled() { return m_Enabled; }

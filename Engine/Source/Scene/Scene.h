@@ -16,7 +16,7 @@ namespace Talon
 		void Render(const Camera& camera);
 		void OnEvent(Event& evt);
 
-		Entity CreateEntity();
+		Entity CreateEntity(const std::string& name = "Entity");
 		void DestroyEntity(Entity entity);
 
 		std::vector<Entity> GetAllEntities()

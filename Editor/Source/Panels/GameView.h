@@ -6,8 +6,8 @@ namespace Talon
 	class GameView : public Viewport
 	{
 	public:
-		GameView(const std::string& name = "Game")
-			: Viewport(name)
+		GameView()
+			: Viewport("Game")
 		{
 			auto [x, y] = Window::Get().GetSize();
 			m_ViewportSize = { (float)x, (float)y };

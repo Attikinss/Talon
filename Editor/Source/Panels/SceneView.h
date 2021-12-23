@@ -6,8 +6,8 @@ namespace Talon
 	class SceneView : public Viewport
 	{
 	public:
-		SceneView(const std::string& name = "Scene")
-			: Viewport(name)
+		SceneView()
+			: Viewport("Scene")
 		{
 			auto [x, y] = Window::Get().GetSize();
 			m_ViewportSize = { (float)x, (float)y };
@@ -30,6 +30,13 @@ namespace Talon
 			}
 
 			m_EditorCamera.Update(m_Focused);
+		}
+
+		void Draw(ImGuiWindowFlags additionalFlags = ImGuiWindowFlags_None) override
+		{
+			Viewport::Draw();
+
+
 		}
 
 		void OnEvent(Event& evt)

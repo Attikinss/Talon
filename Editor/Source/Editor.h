@@ -2,6 +2,7 @@
 #include "TalonEngine.h"
 #include "Panels/GameView.h"
 #include "Panels/SceneView.h"
+#include "Panels/Hierarchy.h"
 
 namespace Talon
 {
@@ -11,8 +12,7 @@ namespace Talon
 		Editor()
 			: Layer("Editor")
 		{
-			m_Viewports.push_back(new SceneView("Scene"));
-			m_Viewports.push_back(new GameView("Game"));
+
 		}
 
 		void Attach() override
@@ -28,16 +28,18 @@ namespace Talon
 		void Initialise() override
 		{
 			m_CurrentScene = std::make_shared<Scene>();
-			m_Camera = m_CurrentScene->CreateEntity();
+			m_SceneHierarchy.SetScene(m_CurrentScene);
+
+			m_Camera = m_CurrentScene->CreateEntity("Camera");
 			m_Camera.GetComponent<Transform>().Position = { 0.0f, 0.0f, 10.0f };
 			GameView::SetCamera(&m_Camera.AddComponent<WorldCamera>().GetCamera());
 
-			m_Light = m_CurrentScene->CreateEntity();
+			m_Light = m_CurrentScene->CreateEntity("Directional Light");
 			m_Light.GetComponent<Transform>().Rotation = glm::quatLookAt(glm::normalize(glm::vec3(-1.5f, -2.0f, -2.5f)), { 0.0f, 1.0f, 0.0f });
 
 			m_TestMaterial = std::make_shared<Material>(Shader::Create("Assets/Shaders/DefaultLit.glsl"));
 
-			m_Cube = m_CurrentScene->CreateEntity();
+			m_Cube = m_CurrentScene->CreateEntity("Cube");
 			auto& meshRenderer = m_Cube.AddComponent<MeshRenderer>();
 			meshRenderer.SetMesh(MeshLoader::Load("Assets/Models/cube.obj")[0]);
 			meshRenderer.SetMaterial(m_TestMaterial);
@@ -72,14 +74,20 @@ namespace Talon
 			// TODO: Add to lighting uniform buffer
 			m_TestMaterial->SetVector3("u_AmbientLightColour", glm::vec3(0.1f));
 
-			for (auto& vp : m_Viewports)
-			{
-				vp->Update();
+			// Update panels
+			m_GameView.Update();
+			m_SceneView.Update();
+			m_SceneHierarchy.Update();
 
-				vp->BeginFrame();
-				m_CurrentScene->Render(vp->GetCamera());
-				vp->EndFrame();
-			}
+			// Draw to game view
+			m_GameView.BeginFrame();
+			m_CurrentScene->Render(m_GameView.GetCamera());
+			m_GameView.EndFrame();
+
+			// Draw to scene view
+			m_SceneView.BeginFrame();
+			m_CurrentScene->Render(m_SceneView.GetCamera());
+			m_SceneView.EndFrame();
 		}
 
 		void DrawGUI() override
@@ -119,31 +127,28 @@ namespace Talon
 				ImGui::EndMainMenuBar();
 			}
 
-			if (m_Viewports.size() == 1)
-				m_Viewports[0]->Draw(ImGuiWindowFlags_NoMove);
-			else
-			{
-				for (auto& vp : m_Viewports)
-					vp->Draw();
-			}
+			// Draw panel GUIs
+			m_GameView.Draw();
+			m_SceneView.Draw();
+			m_SceneHierarchy.Draw();
 		}
 
 		void Shutdown() override
 		{
-			for (auto& vp : m_Viewports)
-				delete vp;
 
-			m_Viewports.clear();
 		}
 
 		void ProcessEvents(Event& evt) override
 		{
-			for (auto& vp : m_Viewports)
-				vp->OnEvent(evt);
+			m_GameView.OnEvent(evt);
+			m_SceneView.OnEvent(evt);
+			m_SceneHierarchy.OnEvent(evt);
 		}
 
 	private:
-		std::vector<Viewport*> m_Viewports;
+		GameView m_GameView;
+		SceneView m_SceneView;
+		Hierarchy m_SceneHierarchy;
 
 		Entity m_Camera;
 		Entity m_Cube;

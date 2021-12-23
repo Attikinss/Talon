@@ -105,9 +105,10 @@ namespace Talon
 
 	}
 
-	Entity Scene::CreateEntity()
+	Entity Scene::CreateEntity(const std::string& name)
 	{
 		Entity entity(this, m_Registry.CreateEntity());
+		entity.AddComponent<EntityInfo>(name);
 		entity.AddComponent<Transform>();
 
 		return entity;

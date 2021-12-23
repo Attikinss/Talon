@@ -13,7 +13,7 @@ namespace Talon
 			
 		}
 
-		void Draw(ImGuiWindowFlags_ additionalFlags = ImGuiWindowFlags_::ImGuiWindowFlags_None) override
+		void Draw(ImGuiWindowFlags additionalFlags = ImGuiWindowFlags_None) override
 		{
 			if (m_Enabled)
 			{
