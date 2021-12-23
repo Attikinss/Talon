@@ -34,6 +34,10 @@ namespace Talon
 
 		EntityRegistry& GetRegistry() { return m_Registry; }
 
+		void AddToSelection(Entity selection);
+		const std::vector<Entity>& GetSelection() const { return m_Selection; }
+		void ClearSelection() { m_Selection.clear(); }
+
 		static Scene& GetCurrent() { return *s_CurrentScene; }
 		inline static Scene* s_CurrentScene = nullptr;
 
@@ -42,5 +46,6 @@ namespace Talon
 		bool m_IsCurrent = false;
 
 		EntityRegistry m_Registry;
+		std::vector<Entity> m_Selection;
 	};
 }

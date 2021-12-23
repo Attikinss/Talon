@@ -118,4 +118,11 @@ namespace Talon
 	{
 		m_Registry.DestroyEntity(entity.m_EntityHandle);
 	}
+
+	void Scene::AddToSelection(Entity selection)
+	{
+		// Only add entity if it's not already selected
+		if (std::find(m_Selection.begin(), m_Selection.end(), selection) == m_Selection.end())
+			m_Selection.push_back(selection);
+	}
 }
